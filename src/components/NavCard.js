@@ -9,19 +9,20 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     padding: '10px',
     boxSizing: 'border-box'
-  }
+  },
 }))
 
-export default function NavCard({ title, src }) {
+export default function NavCard(props) {
   const classes = useStyles()
 
   return (
     <Card className={classes.card} elevation={1}>
       <CardMedia>
         <img
-          src={src}
-          alt=""
+          src={props.src}
+          alt={props.id}
           width="100%"
+          style={props.style}
         />
       </CardMedia>
       <Typography
@@ -29,7 +30,7 @@ export default function NavCard({ title, src }) {
         align="center"
         className={classes.title}
       >
-        {title}
+        {props.title}
       </Typography>
     </Card>
   )

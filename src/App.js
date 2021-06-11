@@ -3,7 +3,8 @@ import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 
-import Home from 'pages/Home';
+// import Home from 'pages/Home';
+import Guidelines from 'pages/Guidelines';
 import Layout from 'components/Layout';
 
 
@@ -22,7 +23,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Layout>
-          <Home />
+          <Guidelines />
         </Layout>
       </div>
     </ThemeProvider>
