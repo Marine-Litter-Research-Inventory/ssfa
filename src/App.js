@@ -4,7 +4,8 @@ import { ThemeProvider } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 
 // import Home from 'pages/Home';
-import Guidelines from 'pages/Guidelines';
+// import Guidelines from 'pages/Guidelines';
+import About from 'pages/About';
 import Layout from 'components/Layout';
 
 
@@ -23,7 +24,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Layout>
-          <Guidelines />
+          <About />
         </Layout>
       </div>
     </ThemeProvider>
