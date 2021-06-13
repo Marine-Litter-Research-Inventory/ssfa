@@ -1,7 +1,8 @@
 import React from 'react';
-import { Typography, Container, Divider, Grid } from '@material-ui/core';
+import { Typography, Container, Divider, Grid, Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import NavCard from 'components/NavCard';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -30,22 +31,26 @@ const cards = [
   {
     id: 1,
     title: 'Sampling & Processing Guidelines',
-    src: '/images/1.jpg'
+    src: '/images/1.jpg',
+    path: '/guidelines'
   },
   {
     id: 2,
     title: 'Regional Report of Legal and Policy Efforts',
-    src: '/images/2.jpg'
+    src: '/images/2.jpg',
+    path: '/guidelines'
   },
   {
     id: 3,
     title: 'Understanding Marine Plastic Research in SE-EA',
-    src: '/images/3.jpg'
+    src: '/images/3.jpg',
+    path: '/guidelines'
   },
   {
     id: 4,
     title: 'Other Data Repositories & Infographics',
-    src: '/images/4.jpg'
+    src: '/images/4.jpg',
+    path: '/guidelines'
   },
 ]
 
@@ -82,7 +87,9 @@ export default function Home() {
           {cards.map(card => (
             <React.Fragment key={card.id}>
               <Grid item xs={12} sm={6} md={3}>
-                <NavCard title={card.title} src={card.src} />
+                <Link underline="none" component={RouterLink} to={card.path}>
+                  <NavCard title={card.title} src={card.src} />
+                </Link>
               </Grid>
             </React.Fragment>
           ))}
