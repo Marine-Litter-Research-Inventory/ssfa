@@ -42,8 +42,7 @@ const cards = [
   },
   {
     title: 'GESAMP:  Guidelines for the Monitoring and Assessment of Plastic Litter in the Ocean (2019)',
-    src: 'http://www.gesamp.org/site/templates/img/logo.png',
-    style: { backgroundColor: '#0a4a70', padding: 10, boxSizing: 'border-box' }
+    src: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.jep8mv76T_bvJNbuKFKY4gAAAA%26pid%3DApi&f=1',
   },
   {
     title: 'UNEP-IOC Guidelines on Survey and Monitoring of Marine Litter (2009)',

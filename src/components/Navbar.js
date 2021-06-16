@@ -91,7 +91,7 @@ export default function Navbar() {
               // align='center'
               style={{ flexGrow: 1 }}
             >
-              Marine Plastic Research <br />in Sotheast and East Asia
+              Marine Plastic Research <br />in Southeast and East Asia
             </Typography>
             <Button
               color="inherit"

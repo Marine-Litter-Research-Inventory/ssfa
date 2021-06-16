@@ -38,19 +38,19 @@ const cards = [
     id: 2,
     title: 'Regional Report of Legal and Policy Efforts',
     src: '/images/2.jpg',
-    path: '/guidelines'
+    path: '/regional'
   },
   {
     id: 3,
     title: 'Understanding Marine Plastic Research in SE-EA',
     src: '/images/3.jpg',
-    path: '/guidelines'
+    path: '/understanding'
   },
   {
     id: 4,
     title: 'Other Data Repositories & Infographics',
     src: '/images/4.jpg',
-    path: '/guidelines'
+    path: '/other'
   },
 ]
 

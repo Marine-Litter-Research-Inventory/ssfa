@@ -4,11 +4,16 @@ import { ThemeProvider } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ScrollToTop from 'components/ScrollToTop';
+import Layout from 'components/Layout';
 
 import Home from 'pages/Home';
 import Guidelines from 'pages/Guidelines';
 import About from 'pages/About';
-import Layout from 'components/Layout';
+import NotFound from 'pages/NotFound';
+import Understanding from 'pages/Understanding';
+import Regional from 'pages/Regional';
+import Other from 'pages/Other';
+import Map from 'pages/Map';
 
 
 let theme = createMuiTheme({
@@ -37,6 +42,21 @@ export default function App() {
               </Route>
               <Route exact path="/guidelines">
                 <Guidelines />
+              </Route>
+              <Route exact path="/understanding">
+                <Understanding />
+              </Route>
+              <Route exact path="/regional">
+                <Regional />
+              </Route>
+              <Route exact path="/other">
+                <Other />
+              </Route>
+              <Route exact path="/map">
+                <Map />
+              </Route>
+              <Route exact path="*">
+                <NotFound />
               </Route>
             </Switch>
           </Layout>
