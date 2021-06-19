@@ -1,6 +1,6 @@
 import React from 'react';
 import Masonry from 'react-masonry-css'
-import { Typography, Container, Divider } from '@material-ui/core';
+import { Typography, Container, Divider, Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import NavCard from 'components/NavCard';
 
@@ -38,25 +38,30 @@ const useStyles = makeStyles((theme) => ({
 const cards = [
   {
     title: 'CSIRO: Survey Methodology Handbook (2020) and other resources and factsheets',
-    src: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.inclusiveemployers.com.au%2Fwp-content%2Fuploads%2F2016%2F12%2FCSIRO-Logo.png&f=1&nofb=1'
+    src: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.inclusiveemployers.com.au%2Fwp-content%2Fuploads%2F2016%2F12%2FCSIRO-Logo.png&f=1&nofb=1',
+    path: 'https://research.csiro.au/marinedebris/resources/'
   },
   {
     title: 'GESAMP:  Guidelines for the Monitoring and Assessment of Plastic Litter in the Ocean (2019)',
     src: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.jep8mv76T_bvJNbuKFKY4gAAAA%26pid%3DApi&f=1',
+    path: 'http://www.gesamp.org/publications/guidelines-for-the-monitoring-and-assessment-of-plastic-litter-in-the-ocean '
   },
   {
     title: 'UNEP-IOC Guidelines on Survey and Monitoring of Marine Litter (2009)',
     src: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimages.deccanchronicle.com%2Fdc-Cover-h05edmoc1abv29uesh8d2688u7-20161126031220.Medi.jpeg&f=1&nofb=1',
+    path: 'https://wedocs.unep.org/xmlui/handle/20.500.11822/13604 ',
     style: { padding: 10, boxSizing: 'border-box' }
   },
   {
     title: 'Japan’s Guidelines for Harmonizing Ocean Surface Microplastic (2020)',
     src: 'https://www.env.go.jp/en/common/img/logo_en.png',
+    path: 'https://www.env.go.jp/en/water/marine_litter/method.html',
     style: { padding: 10, boxSizing: 'border-box', minHeight: 50, }
   },
   {
     title: 'NOAA: Guidelines and Recommendations',
     src: 'https://marinedebris.noaa.gov/sites/default/files/banner_background/MDP_web_banner_750_12.05.16.jpg',
+    path: 'https://marinedebris.noaa.gov/reports-and-technical-memos',
     style: { minHeight: 35, boxSizing: 'border-box' }
   },
 ]
@@ -116,7 +121,9 @@ export default function Guidelines() {
           columnClassName="my-masonry-grid_column">
           {cards.map((card, idx) => (
             <div key={idx}>
-              <NavCard title={card.title} src={card.src} style={card.style} />
+              <Link underline='none' href={card.path}>
+                <NavCard title={card.title} src={card.src} style={card.style} />
+              </Link>
             </div>
           ))}
         </Masonry>

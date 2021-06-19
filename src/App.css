@@ -23,3 +23,7 @@
   margin-bottom: 20px;
   justify-content: center;
 }
+
+path:hover {
+  fill: aqua;
+}

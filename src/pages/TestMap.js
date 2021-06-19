@@ -9,31 +9,19 @@ const height = 500;
 
 const projection = geoMercator()
   .fitSize([width, height], data)
-const path = geoPath(projection)
+const pathGenerator = geoPath().projection(projection)
 
 export default function Map() {
-  const [currentZoomState, setCurrentZoomState] = useState();
+  const svg = select('svg')
+  const g = svg.append('g')
 
-  // will be called initially and on every data change
-  useEffect(() => {
-    const svg = select('svg')
-    const g = select('g')
-    // zoom
-    const zoomBehavior = zoom()
-      .scaleExtent([2, 20])
-      .translateExtent([
-        [-10, -10],
-        [width, height]
-      ])
-      .on("zoom", (event) => {
-        g.attr('transform', event.transform)
-        setCurrentZoomState(event.transform)
-        console.log(event.transform)
-      });
+  svg.call(zoom().on('zoom', (event) => {
+    g.attr("transform", event.transform)
+  }))
 
-    svg.call(zoomBehavior)
-
-  }, [currentZoomState])
+  g.selectAll('path').data(data.features)
+    .enter().append('path')
+    .attr('d', pathGenerator)
 
   return (
     <>
@@ -58,11 +46,7 @@ export default function Map() {
             width={width}
             viewBox="0 0 400 450"
           >
-            <g fill='gray'>
-              {data.features.map((feature, idx) => (
-                <path key={idx} id={feature.properties.sov_a3} d={path(feature)} />
-              ))}
-            </g>
+
           </svg>
         </div>
       </Container>
