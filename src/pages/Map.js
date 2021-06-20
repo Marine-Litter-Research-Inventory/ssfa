@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { geoPath, geoMercator } from 'd3-geo';
-import { Typography, Container, makeStyles } from '@material-ui/core';
+import { Typography, Container } from '@material-ui/core';
 import { select, zoom } from 'd3';
 import data from 'data/geo.json';
 
@@ -8,32 +8,28 @@ const width = 360;
 const height = 500;
 
 const projection = geoMercator()
-  .fitSize([width, height], data)
+  .fitSize([2 * width, 2 * height], data)
+  .center([10, -30])
 const path = geoPath(projection)
 
 export default function Map() {
-  const [currentZoomState, setCurrentZoomState] = useState();
 
   // will be called initially and on every data change
   useEffect(() => {
-    const svg = select('svg')
-    const g = select('g')
-    // zoom
+
     const zoomBehavior = zoom()
-      .scaleExtent([2, 20])
+      .scaleExtent([0.7, 20])
       .translateExtent([
-        [-10, -10],
-        [width, height]
+        [-100, -100],
+        [width + 300, height + 50]
       ])
       .on("zoom", (event) => {
-        g.attr('transform', event.transform)
-        setCurrentZoomState(event.transform)
+        select("g").attr('transform', event.transform)
         console.log(event.transform)
       });
 
-    svg.call(zoomBehavior)
-
-  }, [currentZoomState])
+    select('svg').call(zoomBehavior)
+  }, [])
 
   return (
     <>
