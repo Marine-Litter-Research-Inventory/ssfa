@@ -4,24 +4,22 @@ import { Typography, Container } from '@material-ui/core';
 import { select, zoom } from 'd3';
 import data from 'data/geo.json';
 import { countryNameFormatter } from "components/utils/utils";
+import useWindowDimensions from "components/utils/useWindowDimensions";
 
 // Declared variables
 const SHEET_ID = process.env.REACT_APP_SHEET_ID //Google sheet id
 const countries = ["Brunei Darussalam", "Indonesia", "Cambodia", "Laos", "Myanmar", "Malaysia", "Philippines", "Singapore", "Thailand", "Vietnam", "China", "Japan", "Republic of Korea", "Democratic People's Republic of Korea", "Taiwan"] //List of country name
-const width = window.innerWidth
-const height = window.innerHeight * 0.7
 
 // Functions
-async function getQuantity(country) {
-  const res = await fetch('https://gsx2json.com/api?id=' + SHEET_ID + '&sheet=2&columns=false&countrystudied=' + country)
-  const data = await res.json()
-  return data.rows.length
-}
+
 
 // Component start
 export default function Map() {
   // States
   const [quantityList, setQuantityList] = useState({})
+  const [windowWidth, windowHeight] = useWindowDimensions()
+  const width = windowWidth
+  const height = windowHeight * 0.7
 
   // Function for tooltip beahviours
   const Tooltip = select("#map")
@@ -59,20 +57,23 @@ export default function Map() {
   // Fetching data
   useEffect(() => {
     let q = {}
-    countries.forEach((country) => {
-      getQuantity(country)
-        .then(length => q[country] = length)
+    countries.forEach(async (country) => {
+      const res = await fetch('https://gsx2json.com/api?id=' + SHEET_ID + '&sheet=2&columns=false&countrystudied=' + country)
+      const data = await res.json()
+      q[country] = data.rows.length
     })
     setQuantityList(q)
   }, [])
 
-  // Zoom behaviour
+  // Projection generation
   const path = geoPath(
     geoMercator()
-      .fitSize([width, height], data)
+      // .fitSize([width, height], data)
+      .fitHeight(height, data)
       .center([0, 0])
   )
 
+  // Zoom behaviour
   const zoomBehavior = zoom()
     .scaleExtent([1, 20])
     .translateExtent([

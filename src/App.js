@@ -5,6 +5,7 @@ import { blue } from '@material-ui/core/colors';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ScrollToTop from 'components/ScrollToTop';
 import Layout from 'components/Layout';
+import useFetch from 'components/utils/useFetch';
 
 import Home from 'pages/Home';
 import Guidelines from 'pages/Guidelines';
@@ -15,6 +16,7 @@ import Regional from 'pages/Regional';
 import Other from 'pages/Other';
 import Map from 'pages/Map';
 
+const SHEET_ID = process.env.REACT_APP_SHEET_ID
 
 let theme = createMuiTheme({
   palette: {
@@ -26,6 +28,8 @@ let theme = createMuiTheme({
 theme = responsiveFontSizes(theme)
 
 export default function App() {
+
+  useFetch('https://gsx2json.com/api?id=' + SHEET_ID + '&sheet=2')
 
   return (
     <ThemeProvider theme={theme}>
