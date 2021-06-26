@@ -29,7 +29,9 @@ theme = responsiveFontSizes(theme)
 
 export default function App() {
 
-  useFetch('https://gsx2json.com/api?id=' + SHEET_ID + '&sheet=2')
+  // Uncomment below for testing of caching
+  // localStorage.clear()
+  const { isDataChanged } = useFetch('https://gsx2json.com/api?id=' + SHEET_ID + '&sheet=2')
 
   return (
     <ThemeProvider theme={theme}>
@@ -57,7 +59,7 @@ export default function App() {
                 <Other />
               </Route>
               <Route exact path="/map">
-                <Map />
+                <Map isDataChanged={isDataChanged} />
               </Route>
               <Route exact path="*">
                 <NotFound />
