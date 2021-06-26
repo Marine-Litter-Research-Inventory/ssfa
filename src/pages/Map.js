@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { geoPath, geoMercator } from 'd3-geo';
 import { Typography, Container } from '@material-ui/core';
-import { select, zoom } from 'd3';
+import { select, zoom, zoomIdentity } from 'd3';
 import data from 'data/geo.json';
 import { countryNameFormatter } from "components/utils/utils";
 import useWindowDimensions from "components/utils/useWindowDimensions";
@@ -66,25 +66,31 @@ export default function Map() {
   }, [])
 
   // Projection generation
-  const path = geoPath(
-    geoMercator()
-      // .fitSize([width, height], data)
-      .fitHeight(height, data)
-      .center([0, 0])
-  )
+  const projection = geoMercator()
+    .fitExtent([[10, 10], [width, height]], data)
+
+  const path = geoPath().projection(projection)
+  // const path = geoPath(
+  //   geoMercator()
+  //     .fitExtent([[0, 0], [width, height]], data)
+  // )
 
   // Zoom behaviour
   const zoomBehavior = zoom()
     .scaleExtent([1, 20])
     .translateExtent([
-      [-50, -10],
+      [0, 0],
       [width, height]
     ])
     .on("zoom", (event) => {
-      select("g").attr('transform', event.transform)
-    });
+      select("g")
+        .attr('transform', event.transform)
+      console.log(event.target)
+    })
 
-  select('svg').call(zoomBehavior)
+  select('svg')
+    .call(zoomBehavior)
+  // .call(zoomBehavior.transform, zoomIdentity().translate(30, -80))
 
   // Tooltip behaviour
   select('g')
@@ -118,7 +124,7 @@ export default function Map() {
         <svg
           height={height}
           width={width}
-          viewBox="0 0 400 450"
+          viewBox={`0 0 ${width} ${height}`}
         >
           <g fill='lightskyblue'>
             {data.features.map((feature, idx) => (
