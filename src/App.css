@@ -24,6 +24,6 @@
   justify-content: center;
 }
 
-path:hover {
+div #map path:hover {
   fill: aquamarine;
 }
