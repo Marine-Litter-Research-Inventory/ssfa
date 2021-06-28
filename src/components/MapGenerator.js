@@ -65,7 +65,7 @@ export default function MapGenerator({ isDataChanged = false }) {
       .html(
         quantityList[countryName] !== undefined ?
           `There are ${quantityList[countryName]} papers about ${countryName}` :
-          'Loading'
+          `There are no papers about ${countryName}`
       )
       .style("left", (parseInt(window.innerWidth - 140) > parseInt(event.clientX + 40)) ? ((event.clientX + 40) + "px") : ((event.clientX - 160) + "px"))
       .style("top", (event.clientY) + "px"))
@@ -84,6 +84,21 @@ export default function MapGenerator({ isDataChanged = false }) {
           .attr('transform', event.transform)
       })
 
+    const clicked = (event, d) => {
+      const [[x0, y0], [x1, y1]] = path.bounds(d);
+      event.stopPropagation();
+      g.transition().style("fill", null);
+      d3.select(this).transition().style("fill", "aquamarine");
+      svg.transition().duration(750).call(
+        zoomBehavior.transform,
+        d3.zoomIdentity
+          .translate(width / 2, height / 2)
+          .scale(Math.min(8, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height)))
+          .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
+        d3.pointer(event, svg.node())
+      );
+    }
+
     const svg = d3.select('#map').append("svg")
       .attr('viewBox', [0, 0, width, height])
       .attr('width', width)
@@ -101,6 +116,7 @@ export default function MapGenerator({ isDataChanged = false }) {
       .attr("d", path)
       .attr("stroke", "white")
       .attr("stroke-width", 0.1)
+      .on("click", clicked)
 
     d3.select('g')
       .on("mouseover", mouseover)
