@@ -31,3 +31,18 @@ export function getQuantity(data) {
   })
   return list
 }
+
+export function getCountryOfInstitutions(data) {
+  let res = {}
+  // console.log("Input", data)
+  let countryStudiedArr = data.data.columns.countrystudied
+  // console.log("Country studied", countryStudiedArr)
+  let countryOfInstitutionArr = data.data.columns.countryofinstitution
+  // console.log("Country of Institutions", countryOfInstitutionArr)
+  for (let i = 0; i < data.data.rows.length; i++) {
+    res[countryStudiedArr[i]] = res[countryStudiedArr[i]] || []
+    if (!(res[countryStudiedArr[i]].includes(countryOfInstitutionArr[i])))
+      res[countryStudiedArr[i]].push(countryOfInstitutionArr[i])
+  }
+  return res
+}

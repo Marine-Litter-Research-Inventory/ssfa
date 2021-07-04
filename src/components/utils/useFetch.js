@@ -15,9 +15,9 @@ const useFetch = (url) => {
     const now = time.getTime()
     const abortCont = new AbortController();
 
-    const storage = JSON.parse(localStorage.getItem('data')) || {}
+    const storage = JSON.parse(localStorage.getItem("data")) || {}
+    // console.log("real storage data", storage)
 
-    console.log("storage data", storage)
     if (_.isEqual(storage, {}) || now > storage.expiry) {
       setTimeout(() => {
         fetch(url, { signal: abortCont.signal })
@@ -31,9 +31,9 @@ const useFetch = (url) => {
             setIsPending(false);
             setData(data);
             setError(null);
-            console.log("from storage", storage.data)
-            console.log("from fetching", data)
-            console.log("comparison result", _.isEqual(storage.data, data))
+            // console.log("from storage", storage.data)
+            // console.log("from fetching", data)
+            // console.log("comparison result", _.isEqual(storage.data, data))
             if (!_.isEqual(storage.data, data)) {
               console.log("is data changed", true)
               setIsDataChanged(true);

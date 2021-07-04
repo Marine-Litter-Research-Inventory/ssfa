@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { geoPath, geoMercator } from 'd3-geo';
 import * as d3 from 'd3';
 import data from 'data/geo.json';
-import { countryNameFormatter, getQuantity } from "components/utils/utils";
+import { countryNameFormatter, getQuantity, getCountryOfInstitutions } from "components/utils/utils";
 import useWindowDimensions from "components/utils/useWindowDimensions";
 
 //import for Material UI
@@ -12,26 +12,34 @@ import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
 
 export default function MapGenerator({ isDataChanged = false }) {
   // States
-  const [quantityList, setQuantityList] = useState({})
+  const [paperQuantityList, setPaperQuantityList] = useState({})
+  const [institutionOriginList, setInstitutionOriginList] = useState({})
   const [windowWidth, windowHeight] = useWindowDimensions()
   const width = windowWidth
   const height = windowHeight * 0.75
 
+  // Testing
+
   // Generating data if there is no prior values
   // Log from local storage if there is
   useEffect(() => {
-    let list = {}
+    let paperQuantity = {}
+    let institutionOrigin = {}
     if (isDataChanged) {
-      list = getQuantity(JSON.parse(localStorage.getItem('data')))
-      localStorage.setItem('quantityOfPapers', JSON.stringify(list))
+      paperQuantity = getQuantity(JSON.parse(localStorage.getItem('data')))
+      institutionOrigin = getCountryOfInstitutions(JSON.parse(localStorage.getItem('data')))
+      localStorage.setItem('quantityOfPapers', JSON.stringify(paperQuantity))
+      localStorage.setItem('quantityOfInstitutions', JSON.stringify(institutionOrigin))
       console.log('New quantity generation')
       // console.log(JSON.parse(localStorage.getItem('quantityOfPapers')))
     } else {
-      list = JSON.parse(localStorage.getItem('quantityOfPapers'))
-      console.log('Quanity from local storage')
+      paperQuantity = JSON.parse(localStorage.getItem('quantityOfPapers'))
+      institutionOrigin = JSON.parse(localStorage.getItem('quantityOfInstitutions'))
+      console.log('Quantity from local storage')
       // console.log(JSON.parse(localStorage.getItem('quantityOfPapers')))
     }
-    setQuantityList(list)
+    setPaperQuantityList(paperQuantity)
+    setInstitutionOriginList(institutionOrigin)
   }, [isDataChanged])
 
   // Function for tooltip beahviours
@@ -47,7 +55,7 @@ export default function MapGenerator({ isDataChanged = false }) {
       .style("border-radius", "5px")
       .style("padding", "5px")
       .style("position", "absolute")
-      .style("width", "120px")
+      .style("width", "200px")
 
     const mouseover = () => {
       Tooltip
@@ -61,14 +69,31 @@ export default function MapGenerator({ isDataChanged = false }) {
         .style("display", "none")
     }
 
+    const infoBox = (countryName) => {
+
+      let beautify = ''
+      for (let i = 0; i < institutionOriginList[countryName].length; i++) {
+        if (i < institutionOriginList[countryName].length - 1) {
+          beautify += institutionOriginList[countryName][i] + ', '
+        } else {
+          beautify += institutionOriginList[countryName][i] + '.'
+        }
+      }
+
+      const content = `There are ${paperQuantityList[countryName]} papers about ${countryName}`
+        + `<br/> The papers come from Institutions in ${beautify}`
+      return content
+    }
+
     const mousemove = (event, countryName) => (Tooltip
       .html(
-        quantityList[countryName] !== undefined ?
-          `There are ${quantityList[countryName]} papers about ${countryName}` :
+        paperQuantityList[countryName] !== undefined ?
+          infoBox(countryName) :
+          // `There are ${paperQuantityList[countryName]} papers about ${countryName}` :
           `There are no papers about ${countryName}`
       )
-      .style("left", (parseInt(window.innerWidth - 140) > parseInt(event.clientX + 40)) ? ((event.clientX + 40) + "px") : ((event.clientX - 160) + "px"))
-      .style("top", (event.clientY) + "px"))
+      .style("right", "0px")
+    )
 
     // Projection generation
     const projection = geoMercator()
@@ -136,7 +161,7 @@ export default function MapGenerator({ isDataChanged = false }) {
 
     d3.select("#re-center")
       .on("click", reset)
-  }, [width, height, quantityList])
+  }, [width, height, paperQuantityList, institutionOriginList])
 
   return (
     <>
