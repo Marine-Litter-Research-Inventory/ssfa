@@ -29,9 +29,16 @@ theme = responsiveFontSizes(theme)
 
 export default function App() {
 
+  // Uncomment for production only
+  // var console = {}
+  // console.log = function () { }
+  // window.console = console
+
   // Uncomment below for testing of caching
   // localStorage.clear()
   const { isDataChanged } = useFetch('https://gsx2json.com/api?id=' + SHEET_ID + '&sheet=2')
+
+
 
   return (
     <ThemeProvider theme={theme}>

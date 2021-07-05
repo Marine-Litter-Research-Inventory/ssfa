@@ -16,6 +16,7 @@ export function countryNameFormatter(name) {
   else
     countryName = name
 
+  console.log("🚀 ~ file: utils.js ~ line 21 ~ countryNameFormatter ~ countryName", countryName)
   return countryName
 }
 
@@ -29,20 +30,26 @@ export function getQuantity(data) {
   data.data.columns.countrystudied.forEach(country => {
     list[country] = list[country] + 1 || 1
   })
+  console.log("🚀 ~ file: utils.js ~ line 35 ~ getQuantity ~ list", list)
   return list
 }
 
 export function getCountryOfInstitutions(data) {
+  console.log("🚀 ~ file: utils.js ~ line 38 ~ getCountryOfInstitutions ~ data", data)
   let res = {}
-  // console.log("Input", data)
+
   let countryStudiedArr = data.data.columns.countrystudied
-  // console.log("Country studied", countryStudiedArr)
+  console.log("🚀 ~ file: utils.js ~ line 41 ~ getCountryOfInstitutions ~ countryStudiedArr", countryStudiedArr)
+
   let countryOfInstitutionArr = data.data.columns.countryofinstitution
-  // console.log("Country of Institutions", countryOfInstitutionArr)
+  console.log("🚀 ~ file: utils.js ~ line 43 ~ getCountryOfInstitutions ~ countryOfInstitutionArr", countryOfInstitutionArr)
+
   for (let i = 0; i < data.data.rows.length; i++) {
     res[countryStudiedArr[i]] = res[countryStudiedArr[i]] || []
     if (!(res[countryStudiedArr[i]].includes(countryOfInstitutionArr[i])))
       res[countryStudiedArr[i]].push(countryOfInstitutionArr[i])
   }
+
+  console.log("🚀 ~ file: utils.js ~ line 55 ~ getCountryOfInstitutions ~ res", res)
   return res
 }

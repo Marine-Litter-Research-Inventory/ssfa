@@ -8,7 +8,7 @@ const useFetch = (url) => {
   const [isDataChanged, setIsDataChanged] = useState(false);
 
   // const ttl = 86400000
-  const ttl = 300000
+  const ttl = 100000
 
   useEffect(() => {
     const time = new Date()
@@ -16,7 +16,7 @@ const useFetch = (url) => {
     const abortCont = new AbortController();
 
     const storage = JSON.parse(localStorage.getItem("data")) || {}
-    // console.log("real storage data", storage)
+    console.log("🚀 ~ file: useFetch.js ~ line 19 ~ useEffect ~ storage", storage)
 
     if (_.isEqual(storage, {}) || now > storage.expiry) {
       setTimeout(() => {
@@ -31,9 +31,7 @@ const useFetch = (url) => {
             setIsPending(false);
             setData(data);
             setError(null);
-            // console.log("from storage", storage.data)
-            // console.log("from fetching", data)
-            // console.log("comparison result", _.isEqual(storage.data, data))
+            console.log("🚀 ~ file: useFetch.js ~ line 36 ~ setTimeout ~ !_.isEqual(storage.data, data)", !_.isEqual(storage.data, data))
             if (!_.isEqual(storage.data, data)) {
               console.log("is data changed", true)
               setIsDataChanged(true);
@@ -42,7 +40,7 @@ const useFetch = (url) => {
               setIsDataChanged(false);
             }
             localStorage.setItem("data", JSON.stringify({ data: data, expiry: now + ttl }))
-            console.log("From fetching")
+            console.log("Data was fetched")
           })
           .catch(err => {
             if (err.name === 'AbortError') {
@@ -58,13 +56,13 @@ const useFetch = (url) => {
       setIsDataChanged(false);
       setError(null);
       setIsPending(false);
-      console.log("Did not fetch")
+      console.log("Data was not fetched")
     }
     setData(JSON.parse(localStorage.getItem('data')))
     // abort the fetch
     return () => abortCont.abort();
   }, [url])
-  // console.log(data)
+  console.log("🚀 ~ file: useFetch.js ~ line 68 ~ useFetch ~ data", data)
   return { data, isPending, error, isDataChanged };
 }
 
