@@ -1,7 +1,7 @@
 // import "components/Navbar.css";
+import React, { useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, IconButton, Drawer, Hidden, Button, Typography, List, ListItem, ListItemIcon, ListItemText, Box } from '@material-ui/core';
-import React, { useState } from "react";
 import { Link as RouterLink } from 'react-router-dom';
 
 import MenuIcon from '@material-ui/icons/Menu';
@@ -21,12 +21,9 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     color: 'white',
   },
-  // toolbar: {
-  //   backgroundImage: ``,
-  //   backgroundPosition: '20px',
-  //   backgroundSize: 'contain',
-  //   backgroundRepeat: 'no-repeat',
-  // }
+  toolbar: {
+    overflow: 'hidden',
+  }
 }));
 
 export default function Navbar() {

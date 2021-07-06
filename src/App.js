@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core';
@@ -37,8 +38,6 @@ export default function App() {
   // Uncomment below for testing of caching
   // localStorage.clear()
   const { isDataChanged } = useFetch('https://gsx2json.com/api?id=' + SHEET_ID + '&sheet=2')
-
-
 
   return (
     <ThemeProvider theme={theme}>

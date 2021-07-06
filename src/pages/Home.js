@@ -1,9 +1,8 @@
 import React from 'react';
-import { Typography, Container, Divider, Grid, Link } from '@material-ui/core';
+import { Typography, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import NavCard from 'components/NavCard';
-import { Link as RouterLink } from 'react-router-dom';
 import AboutSection from 'components/AboutSection';
+import ResourceSection from 'components/ResourceSection';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -22,38 +21,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const cards = [
-  {
-    id: 1,
-    title: 'Sampling & Processing Guidelines',
-    src: '/images/1.jpg',
-    path: '/guidelines'
-  },
-  {
-    id: 2,
-    title: 'Regional Report of Legal and Policy Efforts',
-    src: '/images/2.jpg',
-    path: '/regional'
-  },
-  {
-    id: 3,
-    title: 'Understanding Marine Plastic Research in SE-EA',
-    src: '/images/3.jpg',
-    path: '/understanding'
-  },
-  {
-    id: 4,
-    title: 'Other Data Repositories & Infographics',
-    src: '/images/4.jpg',
-    path: '/other'
-  },
-]
-
 export default function Home() {
   const classes = useStyles()
 
   return (
-    <>
+    <div>
       <div style={{ backgroundColor: '#6FBFF5' }}>
         <Typography
           variant='h2'
@@ -74,22 +46,11 @@ export default function Home() {
           </svg>
         </div>
       </div>
-      <Container maxWidth='md' style={{ position: 'relative' }}>
+      <Container maxWidth='md'>
         <AboutSection />
-        <Divider />
-        <br /><br />
-        <Grid container spacing={2}>
-          {cards.map(card => (
-            <React.Fragment key={card.id}>
-              <Grid item xs={12} sm={6} md={3}>
-                <Link underline="none" component={RouterLink} to={card.path}>
-                  <NavCard title={card.title} src={card.src} />
-                </Link>
-              </Grid>
-            </React.Fragment>
-          ))}
-        </Grid>
       </Container>
-    </>
+      <br /><br />
+      <ResourceSection />
+    </div>
   )
 }

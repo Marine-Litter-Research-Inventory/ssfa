@@ -5,6 +5,11 @@
   text-decoration: none;
 }
 
+/* html, */
+body {
+  overflow-x: hidden;
+}
+
 .my-masonry-grid {
   display: -webkit-box; /* Not needed if autoprefixing */
   display: -ms-flexbox; /* Not needed if autoprefixing */
@@ -28,6 +33,7 @@ div #map path:hover {
   fill: aquamarine;
 }
 
+/* Title section wave */
 .custom-shape-divider-top-1625571579 {
   position: absolute;
   top: 0;
@@ -47,4 +53,25 @@ div #map path:hover {
 
 .custom-shape-divider-top-1625571579 .shape-fill {
   fill: #6fbff5;
+}
+
+/* Resource section wave */
+.custom-shape-divider-top-1625586722 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-top-1625586722 svg {
+  position: relative;
+  display: block;
+  width: calc(174% + 1.3px);
+  height: 70px;
+}
+
+.custom-shape-divider-top-1625586722 .shape-fill {
+  fill: #ffffff;
 }

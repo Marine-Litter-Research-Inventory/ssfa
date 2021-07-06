@@ -91,7 +91,7 @@ export default function AboutSection() {
       <br /><br />
       <Grid
         container
-        spacing={5}
+        // spacing={5}
         justify="center"
         alignItems='center'
       >
@@ -103,7 +103,6 @@ export default function AboutSection() {
           </React.Fragment>
         ))}
       </Grid>
-      <br /><br />
     </>
   )
 }
