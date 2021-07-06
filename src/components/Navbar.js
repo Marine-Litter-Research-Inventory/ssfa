@@ -115,7 +115,6 @@ export default function Navbar() {
               Map
             </Button>
           </Hidden>
-
         </Toolbar>
       </AppBar>
       <Toolbar />

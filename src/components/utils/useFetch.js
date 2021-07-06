@@ -8,7 +8,7 @@ const useFetch = (url) => {
   const [isDataChanged, setIsDataChanged] = useState(false);
 
   // const ttl = 86400000
-  const ttl = 100000
+  const ttl = 300000
 
   useEffect(() => {
     const time = new Date()
@@ -33,10 +33,8 @@ const useFetch = (url) => {
             setError(null);
             console.log("🚀 ~ file: useFetch.js ~ line 36 ~ setTimeout ~ !_.isEqual(storage.data, data)", !_.isEqual(storage.data, data))
             if (!_.isEqual(storage.data, data)) {
-              console.log("is data changed", true)
               setIsDataChanged(true);
             } else {
-              console.log("is data changed", false)
               setIsDataChanged(false);
             }
             localStorage.setItem("data", JSON.stringify({ data: data, expiry: now + ttl }))
