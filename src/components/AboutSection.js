@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Grid, Button } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -91,13 +91,13 @@ export default function AboutSection() {
       <br /><br />
       <Grid
         container
-        // spacing={5}
+        spacing={4}
         justify="center"
         alignItems='center'
       >
         {logos.map((logo, idx) => (
           <React.Fragment key={idx}>
-            <Grid item xs={5} sm={3} md={3}>
+            <Grid item xs={5} sm={4} md={3}>
               <img src={logo.src} alt={logo.alt} style={logo.style} />
             </Grid>
           </React.Fragment>

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { createTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -19,7 +19,7 @@ import Map from 'pages/Map';
 
 const SHEET_ID = process.env.REACT_APP_SHEET_ID
 
-let theme = createMuiTheme({
+let theme = createTheme({
   palette: {
     primary: blue,
     divider: 'rgba(0, 0, 0, 0.3)',

@@ -1,6 +1,6 @@
 // import "components/Navbar.css";
 import React, { useState } from "react";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 import { AppBar, Toolbar, IconButton, Drawer, Hidden, Button, Typography, List, ListItem, ListItemIcon, ListItemText, Box } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 

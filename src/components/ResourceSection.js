@@ -2,7 +2,7 @@ import { Container, Grid, Link, Typography } from "@material-ui/core"
 import React from "react"
 import NavCard from "./NavCard"
 import { Link as RouterLink } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 const cards = [
   {
