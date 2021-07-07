@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Grid, Button } from "@material-ui/core";
+import { Typography, Grid, Button, Container } from "@material-ui/core";
 import { makeStyles } from '@material-ui/styles';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -58,51 +58,54 @@ export default function AboutSection() {
 
   return (
     <>
-      <Typography
-        variant='h2'
-        component='h1'
-        align='center'
-        className={classes.title}
-      >
-        About
-      </Typography>
-      <Typography
-        variant='body1'
-        align='justify'
-        className={classes.body}
-      >
-        Welcome to the (temporary) resource page for marine plastic researchers in Southeast and East Asia.
-        <br /><br />
-        This temporary resource site is designed to provide resources on research on marine plastic pollution to researchers in Southeast and East Asia (SE-EA), pending the development of an research inventory and resource platform to that effect. The development of this  on-line tool, which  will further support the regional node of the Global Partnership for Marine Litter (GMPL), is being led by the Coordinating Body for the Seas of East Asia (COBSEA).
-        <br /><br />
-      </Typography>
-      <div style={{ textAlign: 'center' }}>
-        <Button
-          variant="outlined"
-          color="primary"
-          size="small"
-          component={RouterLink}
-          to='/about'
-        // style={{  }}
+      <Container maxWidth='md'>
+        <Typography
+          variant='h2'
+          component='h1'
+          align='center'
+          className={classes.title}
         >
-          Learn more about us
-        </Button>
-      </div>
+          About
+        </Typography>
+        <Typography
+          variant='body1'
+          align='justify'
+          className={classes.body}
+        >
+          Welcome to the (temporary) resource page for marine plastic researchers in Southeast and East Asia.
+          <br /><br />
+          This temporary resource site is designed to provide resources on research on marine plastic pollution to researchers in Southeast and East Asia (SE-EA), pending the development of an research inventory and resource platform to that effect. The development of this  on-line tool, which  will further support the regional node of the Global Partnership for Marine Litter (GMPL), is being led by the Coordinating Body for the Seas of East Asia (COBSEA).
+          <br /><br />
+        </Typography>
+        <div style={{ textAlign: 'center' }}>
+          <Button
+            variant="outlined"
+            color="primary"
+            size="small"
+            component={RouterLink}
+            to='/about'
+          // style={{  }}
+          >
+            Learn more about us
+          </Button>
+        </div>
+        <br /><br />
+        <Grid
+          container
+          gap={5}
+          justifyContent="center"
+          alignItems='center'
+        >
+          {logos.map((logo, idx) => (
+            <React.Fragment key={idx}>
+              <Grid item xs={5} sm={3} md={3}>
+                <img src={logo.src} alt={logo.alt} style={logo.style} />
+              </Grid>
+            </React.Fragment>
+          ))}
+        </Grid>
+      </Container>
       <br /><br />
-      <Grid
-        container
-        spacing={4}
-        justify="center"
-        alignItems='center'
-      >
-        {logos.map((logo, idx) => (
-          <React.Fragment key={idx}>
-            <Grid item xs={5} sm={4} md={3}>
-              <img src={logo.src} alt={logo.alt} style={logo.style} />
-            </Grid>
-          </React.Fragment>
-        ))}
-      </Grid>
     </>
   )
 }

@@ -3,15 +3,15 @@ import { Typography, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import AboutSection from 'components/AboutSection';
 import ResourceSection from 'components/ResourceSection';
+import MapSection from 'components/MapSection';
 
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: 'bold',
     maxWidth: 900,
-    margin: 'auto',
-    // padding: `${theme.mixins.toolbar.minHeight}px 20px`,
     padding: `40px 20px`,
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    display: 'block'
   },
   body: {
     maxwidth: 900,
@@ -32,7 +32,7 @@ export default function Home() {
           component='h1'
           align='center'
           className={classes.title}
-          style={{ color: 'ghostWhite' }}
+          style={{ color: 'ghostWhite', margin: '0 auto' }}
         >
           Marine Plastic Research in  Southeast and East Asia
         </Typography>
@@ -46,11 +46,9 @@ export default function Home() {
           </svg>
         </div>
       </div>
-      <Container maxWidth='md'>
-        <AboutSection />
-      </Container>
-      <br /><br />
+      <AboutSection />
       <ResourceSection />
+      <MapSection />
     </div>
   )
 }

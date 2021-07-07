@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     maxWidth: 900,
     margin: 'auto',
-    padding: `${theme.mixins.toolbar.minHeight}px 20px`,
+    // padding: `${theme.mixins.toolbar.minHeight}px 20px`,
     boxSizing: 'border-box',
   },
   body: {

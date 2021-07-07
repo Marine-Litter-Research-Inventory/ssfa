@@ -94,6 +94,7 @@ export default function ResourceSection() {
           ))}
         </Grid>
       </Container>
+      <br /><br />
     </div>
   )
 }
