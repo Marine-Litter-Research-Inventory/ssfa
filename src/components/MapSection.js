@@ -62,7 +62,7 @@ export default function MapSection() {
           </Button>
         </div>
       </Container>
-      <br /><br />
+      <br />
     </div>
   )
 }

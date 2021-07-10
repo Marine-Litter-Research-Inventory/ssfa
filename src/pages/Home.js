@@ -1,9 +1,10 @@
 import React from 'react';
-import { Typography, Container } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import AboutSection from 'components/AboutSection';
 import ResourceSection from 'components/ResourceSection';
 import MapSection from 'components/MapSection';
+import ContributeSection from 'components/ContributeSection';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -49,6 +50,7 @@ export default function Home() {
       <AboutSection />
       <ResourceSection />
       <MapSection />
+      <ContributeSection />
     </div>
   )
 }

@@ -81,7 +81,6 @@ export default function AboutSection() {
           <Button
             variant="outlined"
             color="primary"
-            size="small"
             component={RouterLink}
             to='/about'
           // style={{  }}
