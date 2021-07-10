@@ -2,7 +2,7 @@ import React from 'react';
 import Masonry from 'react-masonry-css'
 import { Typography, Container, Divider, Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import NavCard from 'components/NavCard';
+import NavCard from 'components/Navigation Bar/NavCard';
 
 const useStyles = makeStyles((theme) => ({
   background: {

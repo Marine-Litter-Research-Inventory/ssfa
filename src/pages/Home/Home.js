@@ -1,10 +1,10 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import AboutSection from 'components/AboutSection';
-import ResourceSection from 'components/ResourceSection';
-import MapSection from 'components/MapSection';
-import ContributeSection from 'components/ContributeSection';
+import AboutSection from 'pages/Home/AboutSection';
+import ResourceSection from 'pages/Home/ResourceSection';
+import MapSection from 'pages/Home/MapSection';
+import ContributeSection from 'pages/Home/ContributeSection';
 
 const useStyles = makeStyles((theme) => ({
   title: {

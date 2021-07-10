@@ -8,7 +8,7 @@ import ScrollToTop from 'components/ScrollToTop';
 import Layout from 'components/Layout';
 import useFetch from 'components/utils/useFetch';
 
-import Home from 'pages/Home';
+import Home from 'pages/Home/Home';
 import Guidelines from 'pages/Guidelines';
 import About from 'pages/About';
 import NotFound from 'pages/NotFound';
