@@ -1,4 +1,5 @@
 // import React, { useEffect, useState } from "react";
+import React from 'react';
 import { Typography, Container } from '@material-ui/core';
 import MapGenerator from 'components/MapGenerator';
 
@@ -11,7 +12,6 @@ export default function Map({ isDataChanged = false }) {
           component='h2'
           style={{
             margin: 'auto',
-            maxwidth: 900,
             boxSizing: 'border-box',
             padding: 24,
             fontWeight: 'bold',
