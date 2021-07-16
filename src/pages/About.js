@@ -88,8 +88,7 @@ export default function About() {
         <Grid
           container
           spacing={5}
-          justify="center"
-          alignItems='center'
+          justifyContent="center"
         >
           {logos.map((logo, idx) => (
             <React.Fragment key={idx}>
