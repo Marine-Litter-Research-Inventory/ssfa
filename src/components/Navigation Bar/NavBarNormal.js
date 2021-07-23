@@ -12,7 +12,7 @@ export default function NavBarNormal() {
           color='inherit'
           style={{ flexGrow: 1 }}
         >
-          Marine Plastic Research <br />in Southeast and East Asia
+          Marine Litter Research Inventory <br />in East Asian Seas
         </Typography>
         <Button
           color="inherit"

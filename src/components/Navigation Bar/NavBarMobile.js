@@ -45,7 +45,7 @@ export default function NavBarMobile() {
         <Typography
           align="center"
         >
-          Marine Plastic Research
+          Marine Litter Research Inventory
         </Typography>
         <Drawer
           anchor='top'

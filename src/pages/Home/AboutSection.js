@@ -43,12 +43,12 @@ const logos = [
   },
   {
     src: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimages.deccanchronicle.com%2Fdc-Cover-h05edmoc1abv29uesh8d2688u7-20161126031220.Medi.jpeg&f=1&nofb=1',
-    alt: 'COBSEA logo',
+    alt: 'UNEP logo',
     style: { width: '100%' },
   },
   {
     src: 'https://scontent-xsp1-3.xx.fbcdn.net/v/t31.18172-8/10517932_943339989026844_5663893844953495730_o.jpg?_nc_cat=109&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=OpDCpQ5F1d8AX_GP6Dq&_nc_ht=scontent-xsp1-3.xx&oh=163fd0ee9ee797d35483238f93d3448d&oe=60E99E01',
-    alt: 'COBSEA logo',
+    alt: 'StJohn logo',
     style: { maxHeight: 80, margin: 'auto', display: 'block' },
   },
 ]

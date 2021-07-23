@@ -35,7 +35,7 @@ export default function Home() {
           className={classes.title}
           style={{ color: 'ghostWhite', margin: '0 auto' }}
         >
-          Marine Plastic Research in  Southeast and East Asia
+          Marine Litter Research Inventory in East Asian Seas
         </Typography>
       </div>
       <div style={{ position: 'relative', height: 60 }}>
