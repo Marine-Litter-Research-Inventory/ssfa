@@ -31,7 +31,7 @@ const useFetch = (url) => {
             setIsPending(false);
             setData(data);
             setError(null);
-            console.log("🚀 ~ file: useFetch.js ~ line 36 ~ setTimeout ~ !_.isEqual(storage.data, data)", !_.isEqual(storage.data, data))
+            console.log("🚀 ~ file: useFetch.js ~ line 34 ~ setTimeout ~ !_.isEqual(storage.data, data)", !_.isEqual(storage.data, data))
             if (!_.isEqual(storage.data, data)) {
               setIsDataChanged(true);
             } else {
@@ -49,7 +49,7 @@ const useFetch = (url) => {
               setError(err.message);
             }
           })
-      }, []);
+      })
     } else {
       setIsDataChanged(false);
       setError(null);
@@ -57,10 +57,10 @@ const useFetch = (url) => {
       console.log("Data was not fetched")
     }
     setData(JSON.parse(localStorage.getItem('data')))
+    console.log("🚀 ~ file: useFetch.js ~ line 60 ~ useEffect ~ data", JSON.parse(localStorage.getItem('data')))
     // abort the fetch
     return () => abortCont.abort();
   }, [url])
-  console.log("🚀 ~ file: useFetch.js ~ line 68 ~ useFetch ~ data", data)
   return { data, isPending, error, isDataChanged };
 }
 

@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: 'bold',
     maxWidth: 900,
-    margin: 'auto',
     // @ts-ignore
     padding: `${theme.mixins.toolbar.minHeight}px 20px`,
     boxSizing: 'border-box',
@@ -71,6 +70,7 @@ export default function About() {
           component='h1'
           align='center'
           className={classes.title}
+          style={{ margin: '0 auto' }}
         >
           About this Resource Site
         </Typography>
