@@ -2,7 +2,7 @@ import React from 'react';
 import Masonry from 'react-masonry-css'
 import { Typography, Container, Divider, Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import NavCard from 'components/Navigation Bar/NavCard';
+import NavCard from 'components/NavCard';
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     maxWidth: 900,
     margin: 'auto',
-    padding: `${theme.mixins.toolbar.minHeight}px 20px`,
+    // padding: `${theme.mixins.toolbar.minHeight}px 20px`,
     boxSizing: 'border-box',
   },
   body: {

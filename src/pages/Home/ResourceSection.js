@@ -1,6 +1,6 @@
 import { Container, Grid, Link, Typography } from "@material-ui/core"
 import React from "react"
-import NavCard from "../../components/Navigation Bar/NavCard"
+import NavCard from "components/NavCard"
 import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 
@@ -8,25 +8,25 @@ const cards = [
   {
     id: 1,
     title: 'Sampling & Processing Guidelines',
-    src: '/images/1.jpg',
+    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Sampling.jpg?raw=true',
     path: '/guidelines'
   },
   {
     id: 2,
     title: 'Regional Report of Legal and Policy Efforts',
-    src: '/images/2.jpg',
+    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Regional.jpg?raw=true',
     path: '/regional'
   },
   {
     id: 3,
     title: 'Understanding Marine Plastic Research in SE-EA',
-    src: '/images/3.jpg',
+    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Understanding.jpg?raw=true',
     path: '/understanding'
   },
   {
     id: 4,
     title: 'Other Data Repositories & Infographics',
-    src: '/images/4.jpg',
+    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Other.jpg?raw=true',
     path: '/other'
   },
 ]

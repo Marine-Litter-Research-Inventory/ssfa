@@ -1,7 +1,8 @@
 // import for d3 tools
 import React, { useEffect, useState } from "react";
-import { geoPath, geoMercator } from 'd3-geo';
+import { geoPath, geoEqualEarth } from 'd3-geo';
 import * as d3 from 'd3';
+// @ts-ignore
 import data from 'data/geo.json';
 import { countryNameFormatter, getQuantity, getCountryOfInstitutions } from "components/utils/utils";
 import useWindowDimensions from "components/utils/useWindowDimensions";
@@ -96,7 +97,7 @@ export default function MapGenerator({ isDataChanged = false }) {
     )
 
     // Projection generation
-    const projection = geoMercator()
+    const projection = geoEqualEarth()
       .fitExtent([[10, 10], [width, height]], data)
     const path = geoPath().projection(projection)
 
