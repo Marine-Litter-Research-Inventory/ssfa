@@ -12,9 +12,6 @@ import Home from 'pages/Home/Home';
 import Guidelines from 'pages/Guidelines';
 import About from 'pages/About';
 import NotFound from 'pages/NotFound';
-import Understanding from 'pages/Understanding';
-import Regional from 'pages/Regional';
-import Other from 'pages/Other';
 import Map from 'pages/Map';
 
 const SHEET_ID = process.env.REACT_APP_SHEET_ID
@@ -54,15 +51,6 @@ export default function App() {
               </Route>
               <Route exact path="/guidelines">
                 <Guidelines />
-              </Route>
-              <Route exact path="/understanding">
-                <Understanding />
-              </Route>
-              <Route exact path="/regional">
-                <Regional />
-              </Route>
-              <Route exact path="/other">
-                <Other />
               </Route>
               <Route exact path="/map">
                 <Map isDataChanged={isDataChanged} />

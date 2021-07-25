@@ -11,24 +11,24 @@ const cards = [
     src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Sampling.jpg?raw=true',
     path: '/guidelines'
   },
-  {
-    id: 2,
-    title: 'Regional Report of Legal and Policy Efforts',
-    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Regional.jpg?raw=true',
-    path: '/regional'
-  },
-  {
-    id: 3,
-    title: 'Understanding Marine Plastic Research in SE-EA',
-    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Understanding.jpg?raw=true',
-    path: '/understanding'
-  },
-  {
-    id: 4,
-    title: 'Other Data Repositories & Infographics',
-    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Other.jpg?raw=true',
-    path: '/other'
-  },
+  // {
+  //   id: 2,
+  //   title: 'Regional Report of Legal and Policy Efforts',
+  //   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Regional.jpg?raw=true',
+  //   path: '/regional'
+  // },
+  // {
+  //   id: 3,
+  //   title: 'Understanding Marine Plastic Research in SE-EA',
+  //   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Understanding.jpg?raw=true',
+  //   path: '/understanding'
+  // },
+  // {
+  //   id: 4,
+  //   title: 'Other Data Repositories & Infographics',
+  //   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Other.jpg?raw=true',
+  //   path: '/other'
+  // },
 ]
 
 const useStyles = makeStyles((theme) => ({
@@ -93,6 +93,9 @@ export default function ResourceSection() {
             </React.Fragment>
           ))}
         </Grid>
+        <Typography>
+          Regional report of legal and policy efforts
+        </Typography>
       </Container>
       <br /><br />
     </div>

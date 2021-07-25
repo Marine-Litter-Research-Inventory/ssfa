@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { Typography, Container, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
@@ -28,34 +29,40 @@ const useStyles = makeStyles((theme) => ({
 
 const logos = [
   {
-    src: 'https://cil.nus.edu.sg/wp-content/uploads/2017/07/CIL-logo-new200px.png',
+    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/CIL-logo-new200px.png',
     alt: 'CIL logo',
     style: { width: '100%' },
   },
   {
-    src: 'https://www.nus.edu.sg/images/default-source/base/logo.png',
+    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/NUS.png',
     alt: 'NUS logo',
     style: { width: '100%' },
   },
   {
-    src: 'https://www.tmsi.nus.edu.sg/wp-content/uploads/2019/07/logo.png',
+    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/TMSI.png',
     alt: 'TMSI logo',
     style: { width: '100%' },
   },
   {
-    src: 'https://www.unep.org/themes/custom/cobsea/img/cobsea-logo-coloured-270.png',
+    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/cobsea-logo-coloured-270.png',
     alt: 'COBSEA logo',
     style: { width: '100%' },
   },
   {
-    src: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimages.deccanchronicle.com%2Fdc-Cover-h05edmoc1abv29uesh8d2688u7-20161126031220.Medi.jpeg&f=1&nofb=1',
+    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/download.png',
     alt: 'UNEP logo',
     style: { width: '100%' },
   },
   {
-    src: 'https://scontent-xsp1-3.xx.fbcdn.net/v/t31.18172-8/10517932_943339989026844_5663893844953495730_o.jpg?_nc_cat=109&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=OpDCpQ5F1d8AX_GP6Dq&_nc_ht=scontent-xsp1-3.xx&oh=163fd0ee9ee797d35483238f93d3448d&oe=60E99E01',
+    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/SEA-circular_RGB_badge-color-min1.png',
+    alt: 'SeaCircular logo',
+    style: { width: 'auto', height: 80 },
+  },
+  {
+    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/SJINML_Logo.png',
     alt: 'StJohn logo',
-    style: { maxHeight: 140, margin: 'auto', display: 'block' },
+    grid: [11, 6, 6],
+    style: { width: '100%' },
   },
 ]
 
@@ -98,13 +105,15 @@ export default function About() {
         <br />
         <Grid
           container
-          spacing={5}
+          gap={5}
           justifyContent="center"
+          alignItems='center'
+          align='center'
         >
           {logos.map((logo, idx) => (
             <React.Fragment key={idx}>
-              <Grid item xs={9} sm={3} md={3}>
-                <img src={logo.src} alt={logo.alt} style={logo.style} />
+              <Grid item xs={logo.grid ? logo.grid[0] : 5} sm={logo.grid ? logo.grid[1] : 3} md={logo.grid ? logo.grid[2] : 3} >
+                <img src={logo.src + '?raw=true'} alt={logo.alt} style={logo.style} />
               </Grid>
             </React.Fragment>
           ))}
