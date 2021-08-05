@@ -1,6 +1,6 @@
 // import for d3 tools
 import React, { useEffect, useState } from "react";
-import { geoPath, geoEqualEarth } from 'd3-geo';
+import { geoPath, geoConicEqualArea } from 'd3-geo';
 import * as d3 from 'd3';
 // @ts-ignore
 import data from 'data/geo.json';
@@ -97,7 +97,8 @@ export default function MapGenerator({ isDataChanged = false }) {
     )
 
     // Projection generation
-    const projection = geoEqualEarth()
+    const projection = geoConicEqualArea()
+      .rotate([0, 50])
       .fitExtent([[10, 10], [width, height]], data)
     const path = geoPath().projection(projection)
 
@@ -126,7 +127,7 @@ export default function MapGenerator({ isDataChanged = false }) {
     }
 
     const svg = d3.select('#map').append("svg")
-      .attr('viewBox', [0, 0, width, height])
+      // .attr('viewBox', [0, 0, width, height])
       .attr('width', width)
       .attr('height', height)
       .call(zoomBehavior)
@@ -166,7 +167,10 @@ export default function MapGenerator({ isDataChanged = false }) {
 
   return (
     <>
-      <div style={{ border: '1px solid blue', overflow: 'auto', boxSizing: 'border-box', height: { height } }}>
+      <div style={{
+        border: '1px solid blue', overflow: 'auto', boxSizing: 'border-box',
+        // height: { height } 
+      }}>
         <div id="map">
         </div>
         <Box style={{ textAlign: 'center' }}>

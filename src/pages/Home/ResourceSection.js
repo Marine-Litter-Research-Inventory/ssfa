@@ -1,34 +1,41 @@
-import { Container, Grid, Link, Typography } from "@material-ui/core"
-import React from "react"
-import NavCard from "components/NavCard"
-import { Link as RouterLink } from 'react-router-dom';
+import React, { useState } from "react"
+import { Container, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from '@material-ui/styles';
 
-const cards = [
-  {
-    id: 1,
-    title: 'Sampling & Processing Guidelines',
-    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Sampling.jpg?raw=true',
-    path: '/guidelines'
-  },
-  // {
-  //   id: 2,
-  //   title: 'Regional Report of Legal and Policy Efforts',
-  //   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Regional.jpg?raw=true',
-  //   path: '/regional'
-  // },
-  // {
-  //   id: 3,
-  //   title: 'Understanding Marine Plastic Research in SE-EA',
-  //   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Understanding.jpg?raw=true',
-  //   path: '/understanding'
-  // },
-  // {
-  //   id: 4,
-  //   title: 'Other Data Repositories & Infographics',
-  //   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Other.jpg?raw=true',
-  //   path: '/other'
-  // },
+import AnimatedSVG from 'components/AnimatedSVG';
+
+// const cards = [
+//   {
+//     id: 1,
+//     title: 'Sampling & Processing Guidelines',
+//     src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Sampling.jpg?raw=true',
+//     path: '/guidelines'
+//   },
+// {
+//   id: 2,
+//   title: 'Regional Report of Legal and Policy Efforts',
+//   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Regional.jpg?raw=true',
+//   path: '/regional'
+// },
+// {
+//   id: 3,
+//   title: 'Understanding Marine Plastic Research in SE-EA',
+//   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Understanding.jpg?raw=true',
+//   path: '/understanding'
+// },
+// {
+//   id: 4,
+//   title: 'Other Data Repositories & Infographics',
+//   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Other.jpg?raw=true',
+//   path: '/other'
+// },
+// ]
+
+const icons = [
+  { src: 'bottle.svg', alt: 'Plastic Bottle', screen: 1 },
+  { src: 'bag.svg', alt: 'Plastic Bag', screen: 2 },
+  { src: 'can.svg', alt: 'Beverage Can', screen: 3 },
+  { src: 'cup.svg', alt: 'Plastic Cup', screen: 4 },
 ]
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     maxWidth: 900,
     margin: 'auto',
-    // padding: `${theme.mixins.toolbar.minHeight}px 20px`,
     padding: `40px 20px`,
     boxSizing: 'border-box',
     color: 'ghostWhite'
@@ -48,10 +54,16 @@ const useStyles = makeStyles((theme) => ({
     padding: '0 24px',
     color: 'ghostWhite'
   },
+  gridContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 }))
 
 export default function ResourceSection() {
   const classes = useStyles()
+  const [screen, setScreen] = useState(1)
 
   return (
     <div style={{ backgroundColor: '#6fbff5' }}>
@@ -82,20 +94,17 @@ export default function ResourceSection() {
           Here you can find all the resources you need about marine plastic research in Southeast and East Asia
           <br /><br />
         </Typography>
-        <Grid container spacing={2}>
-          {cards.map(card => (
-            <React.Fragment key={card.id}>
-              <Grid item xs={12} sm={6} md={3}>
-                <Link underline="none" component={RouterLink} to={card.path}>
-                  <NavCard title={card.title} src={card.src} />
-                </Link>
-              </Grid>
-            </React.Fragment>
+        <Grid container justifyContent="space-evenly">
+          {icons.map((icon, idx) => (
+            <Grid item xs={2} key={idx} className={classes.gridContainer}>
+              <AnimatedSVG
+                src={icon.src}
+                alt={icon.alt}
+                onClick={() => setScreen(icon.screen)}
+              />
+            </Grid>
           ))}
         </Grid>
-        <Typography>
-          Regional report of legal and policy efforts
-        </Typography>
       </Container>
       <br /><br />
     </div>
