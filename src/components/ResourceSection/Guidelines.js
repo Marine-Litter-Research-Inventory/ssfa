@@ -51,8 +51,7 @@ export default function Guidelines() {
         className={classes.body}
       >
         A number of different guidelines have been developed around the world for the sampling of plastic debris found in the marine environment to improve the comparability of the data and the establishment of pollution baselines and management targets. These have been developed by marine scientists but in different context; some at the request of intergovernmental bodies and others by the research community. They also have different substantive scope, such as a particular focus on the sampling of microplastics or of surface waters.
-
-        Links to the guidelines that are the most frequently used in the region can be found below.
+        <br />
       </Typography>
       <Typography
         variant='h5'

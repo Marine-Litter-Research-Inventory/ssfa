@@ -4,6 +4,9 @@ import { makeStyles } from '@material-ui/styles';
 
 import AnimatedSVG from 'components/AnimatedSVG';
 import Guidelines from 'components/ResourceSection/Guidelines';
+import Understanding from "components/ResourceSection/Understanding";
+import Other from "components/ResourceSection/Other";
+import Regional from "components/ResourceSection/Regional";
 
 const icons = [
   { src: 'bottle.svg', alt: 'Plastic Bottle', screen: 1 },
@@ -83,6 +86,9 @@ export default function ResourceSection() {
           ))}
         </Grid>
         {screen === 1 ? <Guidelines /> : null}
+        {screen === 2 ? <Understanding /> : null}
+        {screen === 3 ? <Other /> : null}
+        {screen === 4 ? <Regional /> : null}
       </Container>
       <br /><br />
     </div>
