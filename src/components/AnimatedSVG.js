@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline-block',
   },
   animation: {
-    animation: '$wobble 1s 2',
+    animation: '$wobble 1s 1',
   },
   "@keyframes wobble": {
     "25%": {

@@ -3,33 +3,7 @@ import { Container, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from '@material-ui/styles';
 
 import AnimatedSVG from 'components/AnimatedSVG';
-
-// const cards = [
-//   {
-//     id: 1,
-//     title: 'Sampling & Processing Guidelines',
-//     src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Sampling.jpg?raw=true',
-//     path: '/guidelines'
-//   },
-// {
-//   id: 2,
-//   title: 'Regional Report of Legal and Policy Efforts',
-//   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Regional.jpg?raw=true',
-//   path: '/regional'
-// },
-// {
-//   id: 3,
-//   title: 'Understanding Marine Plastic Research in SE-EA',
-//   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Understanding.jpg?raw=true',
-//   path: '/understanding'
-// },
-// {
-//   id: 4,
-//   title: 'Other Data Repositories & Infographics',
-//   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Other.jpg?raw=true',
-//   path: '/other'
-// },
-// ]
+import Guidelines from 'components/ResourceSection/Guidelines';
 
 const icons = [
   { src: 'bottle.svg', alt: 'Plastic Bottle', screen: 1 },
@@ -58,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'white',
+    borderRadius: '2rem',
+    overflow: 'hidden',
   }
 }))
 
@@ -91,10 +68,10 @@ export default function ResourceSection() {
           align='justify'
           className={classes.body}
         >
-          Here you can find all the resources you need about marine plastic research in Southeast and East Asia
+          Click on the icons below to find all the resources you need about marine litter research in East Asian Sea.
           <br /><br />
         </Typography>
-        <Grid container justifyContent="space-evenly">
+        <Grid container columns={10} justifyContent="space-evenly">
           {icons.map((icon, idx) => (
             <Grid item xs={2} key={idx} className={classes.gridContainer}>
               <AnimatedSVG
@@ -105,6 +82,7 @@ export default function ResourceSection() {
             </Grid>
           ))}
         </Grid>
+        {screen === 1 ? <Guidelines /> : null}
       </Container>
       <br /><br />
     </div>
