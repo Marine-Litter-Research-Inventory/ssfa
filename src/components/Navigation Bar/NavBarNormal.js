@@ -35,6 +35,13 @@ export default function NavBarNormal() {
         >
           Map
         </Button>
+        <Button
+          color="inherit"
+          component={RouterLink}
+          to='/infographic'
+        >
+          Infographic
+        </Button>
       </Hidden>
     </>
   )

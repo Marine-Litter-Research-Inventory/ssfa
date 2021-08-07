@@ -9,10 +9,10 @@ import Layout from 'components/Layout';
 import useFetch from 'components/utils/useFetch';
 
 import Home from 'pages/Home/Home';
-import Guidelines from 'pages/Guidelines';
 import About from 'pages/About';
 import NotFound from 'pages/NotFound';
 import Map from 'pages/Map';
+import Infographic from 'pages/Infographic';
 
 const SHEET_ID = process.env.REACT_APP_SHEET_ID
 
@@ -49,11 +49,11 @@ export default function App() {
               <Route exact path="/about">
                 <About />
               </Route>
-              <Route exact path="/guidelines">
-                <Guidelines />
-              </Route>
               <Route exact path="/map">
                 <Map isDataChanged={isDataChanged} />
+              </Route>
+              <Route exact path="/infographic">
+                <Infographic />
               </Route>
               <Route exact path="*">
                 <NotFound />

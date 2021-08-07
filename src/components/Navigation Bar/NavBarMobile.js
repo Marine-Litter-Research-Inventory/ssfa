@@ -3,6 +3,8 @@ import { IconButton, Drawer, Hidden, List, ListItem, ListItemIcon, ListItemText,
 import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
@@ -78,6 +80,14 @@ export default function NavBarMobile() {
               >
                 <ListItemIcon><MapIcon className={classes.logo} /></ListItemIcon>
                 <ListItemText primary='Map' />
+              </ListItem>
+              <ListItem
+                button
+                component={RouterLink}
+                to='/infographic'
+              >
+                <ListItemIcon><EqualizerIcon className={classes.logo} /></ListItemIcon>
+                <ListItemText primary='Infographic' />
               </ListItem>
             </Box>
           </List>
