@@ -1,6 +1,10 @@
 import React from 'react';
 import { styled } from '@material-ui/system';
-import { List, ListItem, ListItemIcon, ListItemText, Divider, ButtonBase } from '@material-ui/core';
+import { List, ListItemIcon, ListItemText, Divider, ListItemButton } from '@material-ui/core';
+
+import BarChartIcon from '@material-ui/icons/BarChart';
+import BubbleChartIcon from '@material-ui/icons/BubbleChart';
+import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 
 const DrawerBox = styled('div')({
   backgroundColor: 'cornflowerblue',
@@ -9,42 +13,45 @@ const DrawerBox = styled('div')({
   overflowX: 'scroll',
 })
 
-const InfoItem = ({ icon, text, secondaryText, onClick }) => {
+const InfoItem = ({ icon, text, secondaryText, onClick, active }) => {
   return (
-    <>
-      <ButtonBase
-        onClick={onClick}
-        sx={{ width: '100%' }}
-      >
-        <ListItem>
-          <ListItemIcon>
-            {icon}
-          </ListItemIcon>
-          <ListItemText
-            primary={text}
-            secondary={secondaryText}
-            primaryTypographyProps={{ color: 'ghostwhite' }}
-            secondaryTypographyProps={{ color: 'antiquewhite' }}
-          />
-        </ListItem>
-      </ButtonBase>
-      <Divider sx={{ borderColor: 'ghostwhite' }} />
-    </>
+    <ListItemButton
+      onClick={onClick}
+    >
+      <ListItemIcon>
+        {icon !== 0 ?
+          (icon === 1 ?
+            <BubbleChartIcon fontSize='large' sx={{ color: active ? 'springgreen' : 'ghostwhite' }} />
+            : <DonutLargeIcon fontSize='large' sx={{ color: active ? 'springgreen' : 'ghostwhite' }} />)
+          : <BarChartIcon fontSize='large' sx={{ color: active ? 'springgreen' : 'ghostwhite' }} />
+        }
+      </ListItemIcon>
+      <ListItemText
+        primary={text}
+        secondary={secondaryText}
+        primaryTypographyProps={{ color: 'ghostwhite' }}
+        secondaryTypographyProps={{ color: 'antiquewhite' }}
+      />
+    </ListItemButton>
   )
 }
 
-export default function CustomizedDrawer({ lists }) {
+export default function CustomizedDrawer({ lists, onClick, pos }) {
+
   return (
     <DrawerBox>
       <List>
         {lists.map((list, idx) => (
-          <InfoItem
-            key={idx}
-            icon={list.icon}
-            text={list.text}
-            secondaryText={list.secondaryText}
-            onClick={list.onClick}
-          />
+          <React.Fragment key={idx}>
+            <InfoItem
+              active={pos === idx}
+              icon={list.icon}
+              text={list.text}
+              secondaryText={list.secondaryText}
+              onClick={() => onClick(idx)}
+            />
+            <Divider sx={{ borderColor: 'ghostwhite' }} />
+          </React.Fragment>
         ))}
       </List>
     </DrawerBox>

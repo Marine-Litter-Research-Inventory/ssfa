@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import { SwipeableDrawer } from '@material-ui/core';
 import { styled } from '@material-ui/system';
 
+import BarChart from 'components/Chart/BarChart';
+
 import CustomizedDrawer from 'components/CustomizedDrawer';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import BubbleChartIcon from '@material-ui/icons/BubbleChart';
-import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 
 const pullerHeight = 80
 const pullerWidth = 30
-
 
 export default function Infographic() {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,21 +17,22 @@ export default function Infographic() {
 
   const lists = [
     {
-      icon: <BarChartIcon fontSize='large' sx={{ color: 'ghostwhite' }} />, text: 'Number of paper overtime',
-      secondaryText: 'per country',
-      onClick: () => setGraph(0)
+      icon: 0,
+      text: 'Number of paper overtime',
+      secondaryText: 'per country'
     },
     {
-      icon: <BubbleChartIcon fontSize='large' sx={{ color: 'ghostwhite' }} />, text: 'Something',
-      secondaryText: 'per something else',
-      onClick: () => setGraph(1)
+      icon: 1,
+      text: 'Something',
+      secondaryText: 'per something else'
     },
     {
-      icon: <DonutLargeIcon fontSize='large' sx={{ color: 'ghostwhite' }} />, text: 'Something',
-      secondaryText: 'per something else',
-      onClick: () => setGraph(2)
+      icon: 2,
+      text: 'Something',
+      secondaryText: 'per something else'
     },
   ]
+
 
   const Puller = styled('div')({
     top: `calc(${window.innerHeight}px / 2 - ${pullerHeight}px)`,
@@ -55,6 +54,7 @@ export default function Infographic() {
     return (
       <SwipeableDrawer
         anchor="left"
+        variant='persistent'
         open={isOpen}
         onOpen={() => setIsOpen(true)}
         onClose={() => setIsOpen(false)}
@@ -73,7 +73,7 @@ export default function Infographic() {
         >
           <ArrowLeftIcon fontSize='large' sx={{ color: 'ghostwhite' }} />
         </Puller>
-        <CustomizedDrawer lists={lists} />
+        <CustomizedDrawer lists={lists} onClick={setGraph} pos={graph} />
       </SwipeableDrawer>
     )
   }
@@ -91,6 +91,7 @@ export default function Infographic() {
         <ArrowRightIcon fontSize='large' sx={{ color: 'ghostwhite' }} />
       </Puller>
       <DrawerComponent />
+      {[0, 1, 2, 3, 4, 5].map((idx) => <BarChart key={idx} index={idx} pos={graph} />)}
     </div >
   )
 }
