@@ -1,28 +1,10 @@
-import { Typography, Button, Container } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
 import React from "react";
+import { Typography, Button, Container } from "@material-ui/core";
 import MapIcon from '@material-ui/icons/Map';
 import { Link } from 'react-router-dom';
+import { styled } from '@material-ui/system';
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    fontWeight: 'bold',
-    maxWidth: 900,
-    padding: `40px 20px`,
-    boxSizing: 'border-box',
-    display: 'block'
-  },
-  body: {
-    maxwidth: 900,
-    margin: 'auto',
-    boxSizing: 'border-box',
-    padding: '0 24px',
-  },
-}))
-
-export default function MapSection() {
-  const classes = useStyles()
-
+const Wave = () => {
   return (
     <div style={{ position: 'relative', }}>
       <div className="custom-shape-divider-top-1625571579">
@@ -32,25 +14,38 @@ export default function MapSection() {
           <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" className="shape-fill"></path>
         </svg>
       </div>
-      <div style={{ height: 70 }} />
-      <Typography
-        variant='h2'
-        component='h1'
-        align='center'
-        className={classes.title}
-        style={{ margin: '0 auto' }}
-      >
+    </div>
+  )
+}
+
+const SubHeader = styled(Typography)({
+  fontWeight: 'bold',
+  margin: 'auto',
+  padding: `40px 20px`,
+  boxSizing: 'border-box',
+  textAlign: 'center',
+})
+
+const Body = styled(Typography)({
+  margin: 'auto',
+  boxSizing: 'border-box',
+  padding: '0 20px'
+})
+
+export default function MapSection() {
+
+  return (
+    <div>
+      <Wave />
+      <div id='spacer' style={{ height: 70 }} />
+      <SubHeader variant='h2'>
         Map
-      </Typography>
+      </SubHeader>
       <Container maxWidth='md'>
-        <Typography
-          variant='body1'
-          align='justify'
-          className={classes.body}
-        >
+        <Body variant='body1' align='center'>
           Navigate through our interactive map to learn more about our research effort and available resources.
           <br /><br />
-        </Typography>
+        </Body>
         <div style={{ textAlign: 'center' }}>
           <Button
             variant="outlined"

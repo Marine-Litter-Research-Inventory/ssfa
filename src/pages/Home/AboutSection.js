@@ -1,25 +1,8 @@
 // @ts-nocheck
 import React from 'react';
 import { Typography, Grid, Button, Container } from "@material-ui/core";
-import { makeStyles } from '@material-ui/styles';
 import { Link as RouterLink } from 'react-router-dom';
-
-const useStyles = makeStyles((theme) => ({
-  title: {
-    fontWeight: 'bold',
-    maxWidth: 900,
-    margin: 'auto',
-    // padding: `${theme.mixins.toolbar.minHeight}px 20px`,
-    padding: `40px 20px`,
-    boxSizing: 'border-box'
-  },
-  body: {
-    maxwidth: 900,
-    margin: 'auto',
-    boxSizing: 'border-box',
-    padding: '0 24px',
-  },
-}))
+import { styled } from '@material-ui/system';
 
 const logos = [
   {
@@ -60,42 +43,46 @@ const logos = [
   },
 ]
 
+const SubHeader = styled(Typography)({
+  fontWeight: 'bold',
+  margin: 'auto',
+  padding: `40px 20px`,
+  boxSizing: 'border-box',
+  textAlign: 'center',
+})
+
+const Body = styled(Typography)({
+  margin: 'auto',
+  boxSizing: 'border-box',
+  padding: '0 20px',
+  marginBottom: 20,
+})
+
+
 export default function AboutSection() {
-  const classes = useStyles()
 
   return (
-    <>
+    <div>
       <Container maxWidth='md'>
-        <Typography
-          variant='h2'
-          component='h1'
-          align='center'
-          className={classes.title}
-        >
+        <SubHeader variant='h2'>
           About
-        </Typography>
-        <Typography
-          variant='body1'
-          align='justify'
-          className={classes.body}
-        >
+        </SubHeader>
+        <Body variant='body1' align='justify'>
           Welcome to the (temporary) resource page for marine plastic researchers in Southeast and East Asia.
           <br /><br />
           This temporary resource site is designed to provide resources on research on marine plastic pollution to researchers in Southeast and East Asia (SE-EA), pending the development of an research inventory and resource platform to that effect. The development of this  on-line tool, which  will further support the regional node of the Global Partnership for Marine Litter (GMPL), is being led by the Coordinating Body for the Seas of East Asia (COBSEA).
           <br /><br />
-        </Typography>
-        <div style={{ textAlign: 'center' }}>
+        </Body>
+        <div style={{ textAlign: 'center', marginBottom: 60 }}>
           <Button
             variant="outlined"
             color="primary"
             component={RouterLink}
             to='/about'
-          // style={{  }}
           >
             Learn more about us
           </Button>
         </div>
-        <br /><br />
         <Grid
           container
           gap={5}
@@ -113,6 +100,6 @@ export default function AboutSection() {
         </Grid>
       </Container>
       <br /><br />
-    </>
+    </div>
   )
 }

@@ -1,48 +1,35 @@
 import React from "react";
-import { Hidden, Button, Typography } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
+
+const lists = [
+  { text: 'Home', route: '/' },
+  { text: 'About', route: '/about' },
+  { text: 'Map', route: '/map' },
+  { text: 'Infographic', route: '/infographic' },
+]
 
 export default function NavBarNormal() {
   return (
     <>
-      <Hidden only='xs'>
-        <Typography
-          variant='body1'
-          component='h1'
-          color='inherit'
-          style={{ flexGrow: 1 }}
-        >
-          Marine Litter Research Inventory <br />in East Asian Seas
-        </Typography>
+      <Typography
+        variant='body1'
+        component='h1'
+        color='inherit'
+        style={{ flexGrow: 1 }}
+      >
+        Marine Litter Research Inventory <br />in East Asian Seas
+      </Typography>
+      {lists.map((list, idx) => (
         <Button
+          key={idx}
           color="inherit"
           component={RouterLink}
-          to='/'
+          to={list.route}
         >
-          Home
+          {list.text}
         </Button>
-        <Button
-          color="inherit"
-          component={RouterLink}
-          to='/about'
-        >
-          About
-        </Button>
-        <Button
-          color="inherit"
-          component={RouterLink}
-          to='/map'
-        >
-          Map
-        </Button>
-        <Button
-          color="inherit"
-          component={RouterLink}
-          to='/infographic'
-        >
-          Infographic
-        </Button>
-      </Hidden>
+      ))}
     </>
   )
 }

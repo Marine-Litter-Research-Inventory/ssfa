@@ -1,6 +1,7 @@
 import React from 'react';
 import { IconButton, List, ListItem, ListItemText, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import { styled } from '@material-ui/system';
 
 import LinkRoundedIcon from '@material-ui/icons/LinkRounded';
 import { Divider } from '@material-ui/core';
@@ -29,23 +30,24 @@ const links4 = [
   { title: 'Plastics Pollution Policy Inventory by Nicholas Institute for Environmental Policy Solutions, Duke University', href: 'https://nicholasinstitute.duke.edu/plastics-policy-inventory/search' },
 ]
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    color: 'ghostWhite',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    padding: '1.8rem',
-  },
-  subtitle: {
-    color: 'ghostWhite',
-    fontWeight: 'bold',
-    padding: '1rem',
-  },
+const useStyles = makeStyles({
   link: {
     color: 'antiqueWhite',
-
   },
-}))
+})
+
+const Header = styled(Typography)({
+  color: 'ghostWhite',
+  fontWeight: 'bold',
+  textAlign: 'center',
+  padding: '2rem',
+})
+
+const SubHeader = styled(Typography)({
+  color: 'ghostWhite',
+  fontWeight: 'bold',
+  padding: '1rem',
+})
 
 const CustomizedList = ({ classes, links }) => (
   <List>
@@ -74,45 +76,31 @@ export default function Other() {
 
   return (
     <div>
-      <Typography
-        variant='h4'
-        className={classes.title}
-      >
+      <Header variant='h4' >
         Other Data Repositories & Infographics
-      </Typography>
-      <Typography
-        variant='h5'
-        className={classes.subtitle}
-      >
+      </Header>
+
+      <SubHeader variant='h5'>
         Global data repositories of marine plastic surveys and monitoring
-      </Typography>
+      </SubHeader>
       <CustomizedList classes={classes} links={links1} />
       <CustomizedDivider />
 
-      <Typography
-        variant='h5'
-        className={classes.subtitle}
-      >
+      <SubHeader variant='h5'>
         Resources for NGOs and civil society initiatives with infographics
-      </Typography>
+      </SubHeader>
       <CustomizedList classes={classes} links={links2} />
       <CustomizedDivider />
 
-      <Typography
-        variant='h5'
-        className={classes.subtitle}
-      >
+      <SubHeader variant='h5'>
         UN Resource Platform: GPML
-      </Typography>
+      </SubHeader>
       <CustomizedList classes={classes} links={links3} />
       <CustomizedDivider />
 
-      <Typography
-        variant='h5'
-        className={classes.subtitle}
-      >
+      <SubHeader variant='h5'>
         Global literature repositories
-      </Typography>
+      </SubHeader>
       <CustomizedList classes={classes} links={links4} />
       <CustomizedDivider />
 

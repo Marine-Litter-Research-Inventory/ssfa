@@ -1,53 +1,36 @@
 import React from 'react';
-import { //List, ListItem, ListItemText, 
-  Typography, Button, Box
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Typography, Button, Box } from '@material-ui/core';
+import { styled } from '@material-ui/system';
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    color: 'ghostWhite',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    padding: '2rem',
-  },
-  body: {
-    color: 'ghostWhite',
-    textAlign: 'justify',
-    padding: '1rem',
-  },
-  subtitle: {
-    color: 'ghostWhite',
-    fontWeight: 'bold',
-    padding: '1rem',
-  },
-  link: {
-    color: 'antiqueWhite',
+const Header = styled(Typography)({
+  color: 'ghostWhite',
+  fontWeight: 'bold',
+  textAlign: 'center',
+  padding: '2rem',
+})
 
-  },
-  button: {
-    backgroundColor: 'ghostWhite',
-  }
-}))
+const SubHeader = styled(Typography)({
+  color: 'ghostWhite',
+  fontWeight: 'bold',
+  padding: '1rem',
+})
+
+const Body = styled(Typography)({
+  color: 'ghostWhite',
+  textAlign: 'justify',
+  padding: '1rem',
+})
 
 export default function Understanding() {
-  const classes = useStyles();
 
   return (
     <div>
-      <Typography
-        variant='h4'
-        className={classes.title}
-      >
+      <Header variant='h4'>
         Understanding Marine Plastic Research in SE-EA
-      </Typography>
-      <Typography
-        variant='h5'
-        align='center'
-        className={classes.subtitle}
-      >
+      </Header>
+      <SubHeader variant='h5' align='center'>
         Inventory of scientific research on marine plastics in the region
-      </Typography>
+      </SubHeader>
       <br />
       <Box style={{ textAlign: 'center' }}>
         <Button
@@ -62,22 +45,13 @@ export default function Understanding() {
         </Button>
       </Box>
       <br /><br />
-      <Typography
-        variant='h5'
-        className={classes.subtitle}
-      >
+      <SubHeader variant='h5' align='center'>
         Anatomy of research on marine plastics in Southeast and East Asia - Towards a regional approach (Webinar Series Summary)
-      </Typography>
-      <Typography
-        variant='h6'
-        className={classes.subtitle}
-      >
+      </SubHeader>
+      <SubHeader variant='h6'>
         Session 1: Field sampling for marine plastics - good practices and current constraints
-      </Typography>
-      <Typography
-        variant='body1'
-        className={classes.body}
-      >
+      </SubHeader>
+      <Body variant='body1'>
         Participants shared practices and constraints faced in field sampling operations for marine plastic debris through the following approaches:
         <br /><br />
         - Questionnaires sent to participants before and during the meeting,
@@ -103,7 +77,7 @@ export default function Understanding() {
         - General disconnect between government knowledge/understanding at local and national levels, and on-going research;
         <br />
         - Many expressed their enthusiasm to participate in the upcoming webinars and continue the regional discussion.
-      </Typography>
+      </Body>
       {/* 
       <List>
         {links.map((link, idx) => (
