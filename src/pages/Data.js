@@ -11,7 +11,7 @@ import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 const pullerHeight = 80
 const pullerWidth = 30
 
-export default function Infographic() {
+export default function Data() {
   const [isOpen, setIsOpen] = useState(false)
   const [graph, setGraph] = useState(0)
 

@@ -1,34 +1,31 @@
 import React, { useState } from "react";
-import { IconButton, Drawer, List, ListItemButton, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
+import { IconButton, Drawer, List, ListItemButton, ListItemText, Typography } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import { styled } from '@material-ui/system';
 
 import MenuIcon from '@material-ui/icons/Menu';
-import HomeIcon from '@material-ui/icons/Home';
-import InfoIcon from '@material-ui/icons/Info';
-import MapIcon from '@material-ui/icons/Map';
-import EqualizerIcon from '@material-ui/icons/Equalizer';
+
 
 const lists = [
   {
     text: 'Home',
     route: '/',
-    icon: <HomeIcon sx={{ color: 'white' }} />
   },
   {
     text: 'About',
     route: '/about',
-    icon: <InfoIcon sx={{ color: 'white' }} />
+  },
+  {
+    text: 'Resources',
+    route: '/resources',
   },
   {
     text: 'Map',
     route: '/map',
-    icon: <MapIcon sx={{ color: 'white' }} />
   },
   {
-    text: 'Infographic',
-    route: '/infographic',
-    icon: <EqualizerIcon sx={{ color: 'white' }} />
+    text: 'Data & Analytics',
+    route: '/data',
   },
 ]
 
@@ -38,15 +35,17 @@ const StyledList = styled(List)({
   color: 'white',
 })
 
-const CustomizedItem = ({ icon, route, text }) => {
+const CustomizedItem = ({ route, text }) => {
   return (
     <ListItemButton
       component={RouterLink}
       alignItems="center"
       to={route}
     >
-      <ListItemIcon sx={{ marginLeft: 95 / 8 }} >{icon}</ListItemIcon>
-      <ListItemText primary={text} />
+      <ListItemText
+        primary={text}
+        sx={{ textAlign: 'center' }}
+      />
     </ListItemButton>
   )
 }
@@ -79,7 +78,6 @@ export default function NavBarMobile() {
               key={index}
               text={list.text}
               route={list.route}
-              icon={list.icon}
             />
           ))}
         </StyledList>

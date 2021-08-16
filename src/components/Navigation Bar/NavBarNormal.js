@@ -5,8 +5,9 @@ import { Link as RouterLink } from 'react-router-dom';
 const lists = [
   { text: 'Home', route: '/' },
   { text: 'About', route: '/about' },
+  { text: 'Resources', route: '/resources' },
   { text: 'Map', route: '/map' },
-  { text: 'Infographic', route: '/infographic' },
+  { text: 'Data & Analytics', route: '/data' },
 ]
 
 export default function NavBarNormal() {

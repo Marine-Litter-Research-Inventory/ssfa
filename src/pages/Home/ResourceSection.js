@@ -1,6 +1,7 @@
 import React, { useState } from "react"
-import { Container, Grid, Typography } from "@material-ui/core"
+import { Container, Grid, Typography, Button } from "@material-ui/core"
 import { styled } from '@material-ui/system';
+import { Link as RouterLink } from 'react-router-dom';
 
 import AnimatedSVG from 'components/AnimatedSVG';
 import Guidelines from 'components/ResourceSection/Guidelines';
@@ -30,7 +31,8 @@ const Wave = () => {
 }
 
 const Wrapper = styled('div')({
-  backgroundColor: '#6fbff5'
+  backgroundColor: '#6fbff5',
+  textAlign: 'center',
 })
 
 const SubHeader = styled(Typography)({
@@ -59,6 +61,12 @@ const StyledGrid = styled(Grid)({
   overflow: 'hidden',
 })
 
+const CustomButton = styled(Button)({
+  color: 'ghostWhite',
+  borderColor: 'ghostWhite',
+  marginBottom: '2rem'
+})
+
 export default function ResourceSection() {
   const [screen, setScreen] = useState(1)
 
@@ -71,7 +79,18 @@ export default function ResourceSection() {
           Resources
         </SubHeader>
         <Body variant='body1' align='center'>
-          Click on the icons below to find all the resources you need about marine litter research in East Asian Sea.
+          Click on the button below to be redirected to the resources page.
+        </Body>
+        <CustomButton
+          // @ts-ignore
+          component={RouterLink}
+          variant='outlined'
+          to='/resources'
+        >
+          Go to resources page!
+        </CustomButton>
+        <Body variant='body1' align='center'>
+          Or alternatively, click on the icons below to find a summary of all the resources you need about marine litter research in East Asian Sea.
         </Body>
         <Grid container columns={10} justifyContent="space-evenly">
           {icons.map((icon, idx) => (

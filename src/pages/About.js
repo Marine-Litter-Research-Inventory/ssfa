@@ -65,6 +65,10 @@ const Header = styled(Typography)(({ theme }) => ({
   backgroundColor: '#6FBFF5'
 }))
 
+const Subheader = styled(Typography)({
+  fontWeight: 'bold',
+})
+
 const Body = styled(Typography)({
   margin: 'auto',
   marginBottom: 30,
@@ -82,7 +86,7 @@ export default function About() {
       <Wave />
 
       <Container maxWidth='md' sx={{ marginBottom: 5 }}>
-        <Body variant='body1'>
+        <Body variant='body1' align='justify'>
           This temporary resource site is designed to provide resources on research on marine plastic pollution to researchers in Southeast and East Asia (SE-EA), pending the development of an research inventory and resource platform to that effect. The development of this  on-line tool, which  will further support the regional node of the Global Partnership for Marine Litter (GMPL), is being led by the Coordinating Body for the Seas of East Asia (COBSEA).
           <br /><br />
           This initiative takes place in the wider context of a series of research projects undertaken by the Policy-Science Research Team of the National University of Singapore (NUS) with a view to strengthen the overall understanding of marine plastic research in SE-EA, the state of knowledge, as well as practices and issues faced. In this context, NUS and COBSEA/UNEP have undertaken two successive projects. The first one concluded with the online publication of an inventory of marine plastic research in SE-EA in Auguste 2020. The current project started on 1 January 2021.
@@ -104,6 +108,14 @@ export default function About() {
             </React.Fragment>
           ))}
         </Grid>
+        <br /><br />
+        <br /><br />
+        <Subheader variant='h3' align='center'>
+          Methodology
+        </Subheader>
+        <Body variant='body1' align='justify'>
+          (To be continued)
+        </Body>
       </Container>
     </>
   )
