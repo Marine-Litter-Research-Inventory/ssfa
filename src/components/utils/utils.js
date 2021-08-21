@@ -34,6 +34,10 @@ export function getQuantity(data) {
   return list
 }
 
+/**
+ * 
+ *
+*/
 export function getCountryOfInstitutions(data) {
   console.log("🚀 ~ file: utils.js ~ line 38 ~ getCountryOfInstitutions ~ data", data)
   let res = {}

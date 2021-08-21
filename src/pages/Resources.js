@@ -470,7 +470,7 @@ export default function Resources() {
           Webinar series (March - June 2021)
         </SubHeader>
         <SubHeader variant='h5'>
-          Anatomy of research on marine plastics in Southeast and East Asia - Towards a regional approach
+          Anatomy of research on marine plastics in South East and East Asian seas - Towards a regional approach
         </SubHeader>
         <Body>
           Four-part webinar series is currently ongoing, with the first being held in March 2021, with participants from Southeast and East Asia. The webinar series creates a conducive virtual environment for small-group discussions on various topics within regional marine research. Organised by SJINML, NUS-CIL, the webinar aims to develop a regional research network, as well as contributing effectively to policy-making.
