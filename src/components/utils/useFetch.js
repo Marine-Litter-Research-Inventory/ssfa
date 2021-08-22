@@ -22,7 +22,7 @@ const useFetch = (url) => {
     const now = time.getTime()
     const abortCont = new AbortController();
 
-    const storage = textToJson(getFromStorage("data")) || {}
+    const storage = textToJson(getFromStorage("data")) === null ? {} : textToJson(getFromStorage("data"))
     if (compareObject(storage, {}) || now > storage.expiry) {
       setTimeout(() => {
         fetch(url, { signal: abortCont.signal })
@@ -64,7 +64,6 @@ const useFetch = (url) => {
       console.log("Data was not fetched")
     }
     setData(textToJson(getFromStorage('data')))
-    setColumnValue()
     // abort the fetch
     return () => abortCont.abort();
   }, [url])

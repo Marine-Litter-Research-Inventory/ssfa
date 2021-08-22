@@ -35,7 +35,33 @@ export default function App() {
 
   // Uncomment below for testing of caching
   // localStorage.clear()
-  const { isDataChanged } = useFetch('https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=published')
+  const { isPending } = useFetch('https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=published')
+
+  const content = isPending ?
+    <h1>
+      Please wait while we load the data for the website
+    </h1>
+    :
+    <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route exact path="/about">
+        <About />
+      </Route>
+      <Route exact path="/resources">
+        <Resources />
+      </Route>
+      <Route exact path="/map">
+        {/* <Map isDataChanged={isDataChanged} /> */}
+      </Route>
+      <Route exact path="/data">
+        <Data />
+      </Route>
+      <Route exact path="*">
+        <NotFound />
+      </Route>
+    </Switch>
 
   return (
     <ThemeProvider theme={theme}>
@@ -43,26 +69,7 @@ export default function App() {
         <ScrollToTop />
         <div className="App">
           <Layout>
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/about">
-                <About />
-              </Route>
-              <Route exact path="/resources">
-                <Resources />
-              </Route>
-              <Route exact path="/map">
-                <Map isDataChanged={isDataChanged} />
-              </Route>
-              <Route exact path="/data">
-                <Data />
-              </Route>
-              <Route exact path="*">
-                <NotFound />
-              </Route>
-            </Switch>
+            {content}
           </Layout>
         </div>
       </Router>
