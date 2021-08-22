@@ -4,6 +4,7 @@ import _ from 'lodash';
 import {
   InputLabel, Select, MenuItem, OutlinedInput, Checkbox, FormControl, TextField,
   Chip, Box, Button,
+  TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody,
 } from '@material-ui/core';
 
 import { getQuantity } from 'components/utils/utils';
@@ -210,6 +211,47 @@ const DurationSelector = ({ duration, setDuration }) => {
   )
 }
 
+const CustomTable = ({ dataSet, varName, valueName }) => {
+  function formatData(name, value) {
+    return { name, value }
+  }
+
+  let rows = []
+  _.forEach(dataSet, (value, key) => {
+    rows.push(formatData(key, value))
+  })
+  rows = _.sortBy(rows, ["value"]).reverse()
+
+  return (
+    <TableContainer
+      component={Paper}
+      style={{
+        backgroundColor: '#6FBFF5',
+        width: '95%',
+        margin: "auto",
+      }}
+    >
+      <Table>
+        <TableHead>
+          <TableRow style={{ backgroundColor: '#2196f3' }}>
+            <TableCell align="center" style={{ color: 'ghostWhite' }}>{varName}</TableCell>
+            <TableCell align="center" style={{ color: 'ghostWhite' }}>{valueName}</TableCell>
+          </TableRow>
+        </TableHead>
+
+        <TableBody>
+          {rows.map((row, idx) => (
+            <TableRow key={idx}>
+              <TableCell align="center">{row.name}</TableCell>
+              <TableCell align="center">{row.value}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  )
+}
+
 export default function BarChart({ selectorLabel }) {
   const [duration, setDuration] = React.useState({ start: 2000, end: 3000 })
   const [dataSet, setDataSet] = React.useState(getQuantity(2000, 3000))
@@ -250,6 +292,11 @@ export default function BarChart({ selectorLabel }) {
           varNames={varNames}
           varX={varX}
           setVarX={setVarX}
+        />
+        <CustomTable
+          dataSet={dataSet}
+          varName="Country"
+          valueName="Number of paper"
         />
       </div>
     </div>
