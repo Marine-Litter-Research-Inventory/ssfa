@@ -4,7 +4,11 @@ import { geoPath, geoConicEqualArea } from 'd3-geo';
 import * as d3 from 'd3';
 // @ts-ignore
 import data from 'data/geo.json';
-import { countryNameFormatter, getQuantity, getCountryOfInstitutions } from "components/utils/utils";
+import {
+  countryNameFormatter,
+  getQuantity,
+  getCountryOfInstitutions
+} from "components/utils/utils";
 import useWindowDimensions from "components/utils/useWindowDimensions";
 
 //import for Material UI
@@ -32,7 +36,6 @@ export default function MapGenerator({ isDataChanged = false }) {
       localStorage.setItem('quantityOfPapers', JSON.stringify(paperQuantity))
       localStorage.setItem('quantityOfInstitutions', JSON.stringify(institutionOrigin))
       console.log('New quantity generation')
-      // console.log(JSON.parse(localStorage.getItem('quantityOfPapers')))
     } else {
       paperQuantity = JSON.parse(localStorage.getItem('quantityOfPapers'))
       institutionOrigin = JSON.parse(localStorage.getItem('quantityOfInstitutions'))

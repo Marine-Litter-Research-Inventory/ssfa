@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import * as d3 from 'd3';
 import _ from 'lodash';
-
 import {
-  InputLabel, Select, MenuItem, OutlinedInput, Checkbox, FormControl,
-  Chip, Box,
+  InputLabel, Select, MenuItem, OutlinedInput, Checkbox, FormControl, TextField,
+  Chip, Box, Button,
 } from '@material-ui/core';
 
+import { getQuantity } from 'components/utils/utils';
 import useWindowDimensions from 'components/utils/useWindowDimensions';
 
 const ChartComponent = ({ varX, dataSet }) => {
@@ -120,7 +120,7 @@ const DataSelector = ({ varX, setVarX, varNames, label }) => {
   }
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 300 }}>
+    <FormControl sx={{ m: 1, minWidth: 300, maxWidth: 900, padding: "1rem" }}>
       <InputLabel id="selector-label" sx={{ fontSize: 20 }}>{label}</InputLabel>
       <Select
         labelId="selector-label"
@@ -158,7 +158,67 @@ const DataSelector = ({ varX, setVarX, varNames, label }) => {
   )
 }
 
-export default function BarChart({ dataSet, selectorLabel }) {
+const DurationSelector = ({ duration, setDuration }) => {
+  const [form, setForm] = React.useState(duration)
+
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    setForm({
+      ...form,
+      [name]: Number(value)
+    })
+  }
+
+  return (
+    <form
+      onSubmit={(event) => {
+        event.preventDefault()
+        setDuration(form)
+        console.log('form:', form)
+      }}
+    >
+      <FormControl
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}
+      >
+        <TextField
+          label="From"
+          name="start"
+          variant="outlined"
+          onChange={handleChange}
+          sx={{ width: 120, margin: "1rem" }}
+        />
+        <TextField
+          label="To"
+          name="end"
+          variant="outlined"
+          onChange={handleChange}
+          sx={{ width: 120, margin: "1rem" }}
+        />
+      </FormControl>
+      <Button
+        type="submit"
+        variant="outlined"
+      >
+        Search
+      </Button>
+    </form>
+  )
+}
+
+export default function BarChart({ selectorLabel }) {
+  const [duration, setDuration] = React.useState({ start: 2000, end: 3000 })
+  const [dataSet, setDataSet] = React.useState(getQuantity(2000, 3000))
+
+  useEffect(() => {
+    setDataSet(getQuantity(duration.start, duration.end))
+    // setDataSet(getQuantity(2001, 2001))
+  }, [duration])
+
   let varNames = []
   _.forEach(dataSet, (value, key) => {
     varNames.push(key)
@@ -175,11 +235,16 @@ export default function BarChart({ dataSet, selectorLabel }) {
       />
       <div
         style={{
-          maxWidth: 360,
-          margin: '20px auto',
+          maxWidth: 900,
+          margin: '30px auto',
           textAlign: 'center'
         }}
       >
+        <DurationSelector
+          duration={duration}
+          setDuration={setDuration}
+        />
+        <br />
         <DataSelector
           label={selectorLabel}
           varNames={varNames}

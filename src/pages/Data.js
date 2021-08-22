@@ -11,22 +11,6 @@ import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 const pullerHeight = 80
 const pullerWidth = 30
 
-const paperQuantity = {
-  "Indonesia": 65,
-  "Malaysia": 36,
-  "Myanmar": 3,
-  "Philippines": 15,
-  "Republic of Korea": 67,
-  "China": 129,
-  "Brunei Darussalam": 2,
-  "Cambodia": 3,
-  "Japan": 30,
-  "Laos": 1,
-  "Singapore": 9,
-  "Thailand": 9,
-  "Vietnam": 8
-}
-
 const lists = [
   {
     icon: 0,
@@ -152,7 +136,7 @@ export default function Data() {
         Here you can find the data and analytics for Marine Litter Reserach effort in South East and East Asian seas. You can select the data you want to visualize on the left.
       </Body>
 
-      <BarChart dataSet={paperQuantity} selectorLabel="Countries" />
+      <BarChart selectorLabel="Countries" />
     </div >
   )
 }

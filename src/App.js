@@ -35,7 +35,7 @@ export default function App() {
 
   // Uncomment below for testing of caching
   // localStorage.clear()
-  const { isDataChanged } = useFetch('https://gsx2json.com/api?id=' + SHEET_ID + '&sheet=2')
+  const { isDataChanged } = useFetch('https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=published')
 
   return (
     <ThemeProvider theme={theme}>
