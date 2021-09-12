@@ -91,37 +91,28 @@ export function countryNameFormatter(name) {
 export function getQuantity(start, end) {
   const data = textToJson(getFromStorage('data'))
   const position = textToJson(getFromStorage('position'))
+  const location = textToJson(getFromStorage('location'))
   let duration = []
   for (let i = start; i <= end; i++)
     duration.push(i)
 
-  let list = {
-    "Indonesia": 0,
-    "Malaysia": 0,
-    "Myanmar": 0,
-    "Philippines": 0,
-    "Republic of Korea": 0,
-    "China": 0,
-    "Brunei Darussalam": 0,
-    "Cambodia": 0,
-    "Japan": 0,
-    "Laos": 0,
-    "Singapore": 0,
-    "Thailand": 0,
-    "Vietnam": 0,
-    "Taiwan": 0,
-    "Vietnam and ASEAN": 0,
-  }
+  let list = {}
+  location.forEach(loc => {
+    list[loc] = 0
+  })
 
   data.data.table.rows.forEach((row, idx) => {
     if (row.c[position["Year Published"]] !== null && row.c[position["Location/Territory studied"]] !== null) {
       if (duration.includes(row.c[position["Year Published"]].v)) {
-        list[row.c[position["Location/Territory studied"]].v.trim()] += 1
+        let string = row.c[position["Location/Territory studied"]].v.split(';')
+        string.forEach(country => {
+          list[country.trim()] += 1
+        })
       }
     }
   })
 
-  console.log('list:', list)
+  // console.log('list:', list)
   return list
 }
 
@@ -147,4 +138,48 @@ export function getCountryOfInstitutions(data) {
 
   console.log("🚀 ~ file: utils.js ~ line 55 ~ getCountryOfInstitutions ~ res", res)
   return res
+}
+
+export function getAuthorCount(country) {
+  const data = textToJson(getFromStorage('data'))
+  const position = textToJson(getFromStorage('position'))
+  const result = {}
+
+  data.data.table.rows.forEach(row => {
+    if (row.c[position["Location/Territory studied"]] !== null && row.c[position["Author(s)"]] !== null)
+      if (row.c[position["Location/Territory studied"]].v.trim() === country) {
+        let list = row.c[position["Author(s)"]].v.trim().split(";")
+        list.forEach(raw_author => {
+          let author = raw_author.trim().substring(1, raw_author.length - 2)
+          if (isNaN(result[author]))
+            result[author] = 1
+          else
+            result[author] += 1
+        })
+      }
+  })
+
+  let out = []
+  _.forEach(result, (value, key) => {
+    out.push({ value: value, text: key })
+  })
+  out = _.sortBy(out, (item) => { return item.value }).reverse()
+
+  return out
+}
+
+export function setLocationStudied() {
+  const data = textToJson(getFromStorage('data'))
+  const position = textToJson(getFromStorage('position'))
+  let location = []
+  data.data.table.rows.forEach(row => {
+    if (row.c[position["Location/Territory studied"]] !== null) {
+      let countries = row.c[position["Location/Territory studied"]].v.split(';')
+      countries.forEach(country => {
+        if (!location.includes(country.trim()))
+          location.push(country.trim())
+      })
+    }
+  })
+  setToStorage('location', jsonToText(location))
 }

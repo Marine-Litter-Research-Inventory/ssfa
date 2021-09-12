@@ -35,7 +35,7 @@ export default function App() {
 
   // Uncomment below for testing of caching
   // localStorage.clear()
-  const { isPending } = useFetch('https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=published')
+  const { isPending, isDataChanged } = useFetch('https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=published')
 
   const content = isPending ?
     <h1>
@@ -53,7 +53,7 @@ export default function App() {
         <Resources />
       </Route>
       <Route exact path="/map">
-        {/* <Map isDataChanged={isDataChanged} /> */}
+        <Map isDataChanged={isDataChanged} />
       </Route>
       <Route exact path="/data">
         <Data />

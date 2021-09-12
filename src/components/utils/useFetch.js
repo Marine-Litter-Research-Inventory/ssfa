@@ -6,6 +6,7 @@ import {
   setToStorage,
   compareObject,
   setColumnValue,
+  setLocationStudied,
 } from 'components/utils/utils';
 
 const useFetch = (url) => {
@@ -45,6 +46,7 @@ const useFetch = (url) => {
 
             setToStorage("data", jsonToText({ data: data, expiry: now + ttl }))
             setColumnValue()
+            setLocationStudied()
             console.log("Data was fetched")
           })
           .catch(err => {
