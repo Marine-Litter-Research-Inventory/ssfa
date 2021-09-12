@@ -4,6 +4,7 @@ import { styled } from '@material-ui/system';
 
 import BarChart from 'components/Chart/BarChart';
 import WordCloudChart from 'components/Chart/WordCloud';
+import DonutChart from 'components/Chart/DonutChart';
 
 import CustomizedDrawer from 'components/CustomizedDrawer';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
@@ -84,7 +85,7 @@ export default function Data() {
   const charts = [
     <BarChart selectorLabel="Location/Territory studied" />,
     <WordCloudChart />,
-
+    <DonutChart />,
   ]
 
   const DrawerComponent = () => {

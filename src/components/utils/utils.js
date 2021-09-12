@@ -183,3 +183,39 @@ export function setLocationStudied() {
   })
   setToStorage('location', jsonToText(location))
 }
+
+export function getPlasticQuantity() {
+  const data = textToJson(getFromStorage('data'))
+  const position = textToJson(getFromStorage('position'))
+
+  let list = {}
+
+  data.data.table.rows.forEach(row => {
+    if (row.c[position["Plastic Characterisation_Polymers Found"]] !== null) {
+      let plastic_types = row.c[position["Plastic Characterisation_Polymers Found"]].v.split(';')
+      plastic_types.forEach(plastic_type => {
+        if (plastic_type.trim() !== "NA") {
+          if (isNaN(list[plastic_type.trim()]))
+            list[plastic_type.trim()] = 1
+          else
+            list[plastic_type.trim()] += 1
+        }
+      })
+    }
+  })
+
+  let temp = []
+  _.forEach(list, (value, key) => {
+    temp.push({ value: value, key: key })
+  })
+
+  temp = _.sortBy(temp, (item) => { return item.value }).reverse()
+
+  let result = {}
+  for (let i = 0; i < 10; i++) {
+    result[temp[i].key] = temp[i].value
+  }
+
+  console.log(result)
+  return result
+}
