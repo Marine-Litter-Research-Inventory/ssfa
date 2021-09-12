@@ -3,6 +3,7 @@ import { SwipeableDrawer, Typography } from '@material-ui/core';
 import { styled } from '@material-ui/system';
 
 import BarChart from 'components/Chart/BarChart';
+import WordCloudChart from 'components/Chart/WordCloud';
 
 import CustomizedDrawer from 'components/CustomizedDrawer';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
@@ -15,12 +16,12 @@ const lists = [
   {
     icon: 0,
     text: 'Number of paper overtime',
-    secondaryText: 'per country'
+    secondaryText: 'per Territories/Location studied'
   },
   {
     icon: 1,
-    text: 'Something',
-    secondaryText: 'per something else'
+    text: 'Prominent Authors',
+    secondaryText: 'per Territories/Location studied'
   },
   {
     icon: 2,
@@ -80,6 +81,11 @@ const Puller = styled('div')({
 export default function Data() {
   const [isOpen, setIsOpen] = useState(false)
   const [graph, setGraph] = useState(0)
+  const charts = [
+    <BarChart selectorLabel="Location/Territory studied" />,
+    <WordCloudChart />,
+
+  ]
 
   const DrawerComponent = () => {
     return (
@@ -136,7 +142,7 @@ export default function Data() {
         Here you can find the data and analytics for Marine Litter Reserach effort in South East and East Asian seas. You can select the data you want to visualize on the left.
       </Body>
 
-      <BarChart selectorLabel="Countries" />
+      {charts[graph]}
     </div >
   )
 }
