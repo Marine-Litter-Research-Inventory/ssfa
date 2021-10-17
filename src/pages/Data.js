@@ -16,18 +16,13 @@ const pullerWidth = 30
 const lists = [
   {
     icon: 0,
-    text: 'Number of paper overtime',
-    secondaryText: 'per Territories/Location studied'
+    text: 'Field Sampling_Compartment',
+    // secondaryText: 'per Territories/Location studied'
   },
   {
-    icon: 1,
-    text: 'Prominent Authors',
-    secondaryText: 'per Territories/Location studied'
-  },
-  {
-    icon: 2,
-    text: 'Something',
-    secondaryText: 'per something else'
+    icon: 0,
+    text: 'Plastic Sizes Examined',
+    // secondaryText: 'per Territories/Location studied'
   },
 ]
 
@@ -85,10 +80,19 @@ export default function Data() {
   const [graph, setGraph] = useState(0)
   const charts = [
     <ExperimentalChart
-      filterLabel="Filter by"
+      key={0}
+      filterLabel="Filter by Field Sampling_Compartment"
       filterValue="Field Sampling_Compartment"
       inclusive={["biota"]}
       targetList={["Water Body_General", "Fishing Gear Examined", "Plastic Sizes Examined"]}
+      countLabel="Count by"
+    />,
+    <ExperimentalChart
+      key={1}
+      filterLabel="Filter by Plastic Sizes Examined"
+      filterValue="Plastic Sizes Examined"
+      inclusive={[]}
+      targetList={["Adopted GESAMP Size"]}
       countLabel="Count by"
     />,
     <WordCloudChart />,

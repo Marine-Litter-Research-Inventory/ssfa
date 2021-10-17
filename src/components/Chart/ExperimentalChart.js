@@ -221,6 +221,8 @@ function countData(filterList, filter, target, inclusive = []) {
       res[item] = {}
   })
 
+  // console.log("Initialize data", res)
+
   rows.forEach(row => {
     row.c[position[filter]].v.split(";").forEach(item => {
       item = item.trim().toLowerCase()
@@ -287,7 +289,7 @@ export default function ExperimentalChart({ filterLabel, filterValue, inclusive,
         />
         <CustomTable
           dataSet={dataSet}
-          varName="Country"
+          varName={target}
           valueName="Number of paper"
         />
       </div>
