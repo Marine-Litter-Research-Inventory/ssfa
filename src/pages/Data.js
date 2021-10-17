@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SwipeableDrawer, Typography } from '@material-ui/core';
 import { styled } from '@material-ui/system';
 
-import BarChart from 'components/Chart/BarChart';
+import ExperimentalChart from 'components/Chart/ExperimentalChart';
 import WordCloudChart from 'components/Chart/WordCloud';
 import DonutChart from 'components/Chart/DonutChart';
 
@@ -30,6 +30,7 @@ const lists = [
     secondaryText: 'per something else'
   },
 ]
+
 const Wave = () => {
   return (
     <div style={{ position: 'relative', height: 60 }}>
@@ -83,7 +84,13 @@ export default function Data() {
   const [isOpen, setIsOpen] = useState(false)
   const [graph, setGraph] = useState(0)
   const charts = [
-    <BarChart selectorLabel="Location/Territory studied" />,
+    <ExperimentalChart
+      filterLabel="Filter by"
+      filterValue="Field Sampling_Compartment"
+      inclusive={["biota"]}
+      targetList={["Water Body_General", "Fishing Gear Examined", "Plastic Sizes Examined"]}
+      countLabel="Count by"
+    />,
     <WordCloudChart />,
     <DonutChart />,
   ]
