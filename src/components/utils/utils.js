@@ -143,14 +143,15 @@ export function getCountryOfInstitutions(data) {
 export function getAuthorCount(country) {
   const data = textToJson(getFromStorage('data'))
   const position = textToJson(getFromStorage('position'))
+  const rows = data.data.table.rows
   const result = {}
 
-  data.data.table.rows.forEach(row => {
+  rows.forEach(row => {
     if (row.c[position["Location/Territory studied"]] !== null && row.c[position["Author(s)"]] !== null)
       if (row.c[position["Location/Territory studied"]].v.trim() === country) {
         let list = row.c[position["Author(s)"]].v.trim().split(";")
         list.forEach(raw_author => {
-          let author = raw_author.trim().substring(1, raw_author.length - 2)
+          let author = raw_author.trim()
           if (isNaN(result[author]))
             result[author] = 1
           else

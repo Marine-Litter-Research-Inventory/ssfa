@@ -39,17 +39,18 @@ const Selection = ({ label, choices, setSelection }) => {
 
 export default function WordCloudChart() {
   const [dataSet, setDataSet] = React.useState([])
-
   const locations = textToJson(getFromStorage('location'))
+
+  console.log(dataSet)
 
   return (
     <Container maxWidth="md">
       <WordCloud
-        data={dataSet.slice(0, 35)}
+        data={dataSet.slice(0, 20)}
         font="Arial"
         fontStyle="italic"
         fontWeight="bold"
-        fontSize={(word) => Math.log2(word.value) * 20}
+        fontSize={(word) => Math.sqrt(word.value * 2) * 20}
         spiral="rectangular"
         // rotate={(word) => [0, 90][Math.floor(Math.random() * 2)]}
         rotate={0}

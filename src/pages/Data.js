@@ -4,7 +4,7 @@ import { styled } from '@material-ui/system';
 
 import ExperimentalChart from 'components/Chart/ExperimentalChart';
 import WordCloudChart from 'components/Chart/WordCloud';
-import DonutChart from 'components/Chart/DonutChart';
+// import DonutChart from 'components/Chart/DonutChart';
 
 import CustomizedDrawer from 'components/CustomizedDrawer';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
@@ -16,7 +16,7 @@ const pullerWidth = 30
 const lists = [
   {
     icon: 0,
-    text: 'Field Sampling_Compartment',
+    text: 'Field Sampling Compartment',
     // secondaryText: 'per Territories/Location studied'
   },
   {
@@ -24,6 +24,21 @@ const lists = [
     text: 'Plastic Sizes Examined',
     // secondaryText: 'per Territories/Location studied'
   },
+  {
+    icon: 0,
+    text: 'Water Body_General',
+    // secondaryText: 'per Territories/Location studied'
+  },
+  {
+    icon: 0,
+    text: 'Country of Research',
+    // secondaryText: 'per Territories/Location studied'
+  },
+  {
+    icon: 2,
+    text: 'Author Contribution Word Cloud',
+    secondaryText: 'per Country'
+  }
 ]
 
 const Wave = () => {
@@ -95,8 +110,23 @@ export default function Data() {
       targetList={["Adopted GESAMP Size"]}
       countLabel="Count by"
     />,
+    <ExperimentalChart
+      key={2}
+      filterLabel="Filter by Water Body_General"
+      filterValue="Water Body_General"
+      inclusive={[]}
+      targetList={["Fishing Gear Examined", "Plastic Sizes Examined"]}
+      countLabel="Count by"
+    />,
+    <ExperimentalChart
+      key={3}
+      filterLabel="Filter by Country of Research"
+      filterValue="Country of Research"
+      inclusive={[]}
+      targetList={["Fishing Gear Examined", "Plastic Sizes Examined"]}
+      countLabel="Count by"
+    />,
     <WordCloudChart />,
-    <DonutChart />,
   ]
 
   const DrawerComponent = () => {
