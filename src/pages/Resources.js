@@ -4,10 +4,10 @@ import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
   Card, CardContent,
   IconButton, List, ListItem, ListItemText,
-} from '@material-ui/core';
-import { styled } from '@material-ui/system';
+} from '@mui/material';
+import { styled } from '@mui/system';
 
-import LinkRoundedIcon from '@material-ui/icons/LinkRounded';
+import LinkRoundedIcon from '@mui/icons-material/LinkRounded';
 
 // Content Formatter
 const formatData = (date, session, description) => {

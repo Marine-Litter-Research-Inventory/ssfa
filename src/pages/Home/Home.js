@@ -1,9 +1,8 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
-import { styled } from '@material-ui/system';
+import { Typography } from '@mui/material';
+import { styled } from '@mui/system';
 
 import AboutSection from 'pages/Home/AboutSection';
-import ResourceSection from 'pages/Home/ResourceSection';
 import MapSection from 'pages/Home/MapSection';
 import ContributeSection from 'pages/Home/ContributeSection';
 
@@ -47,7 +46,6 @@ export default function Home() {
       </HeaderContainer>
       <Wave />
       <AboutSection />
-      <ResourceSection />
       <MapSection />
       <ContributeSection />
     </div>

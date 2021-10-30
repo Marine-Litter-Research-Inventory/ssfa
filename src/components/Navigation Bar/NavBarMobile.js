@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { IconButton, Drawer, List, ListItemButton, ListItemText, Typography } from '@material-ui/core';
+import { IconButton, Drawer, List, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { styled } from '@material-ui/system';
+import { styled } from '@mui/system';
+import { ListItemButton } from '@mui/material';
 
-import MenuIcon from '@material-ui/icons/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 const lists = [
@@ -16,8 +17,8 @@ const lists = [
     route: '/about',
   },
   {
-    text: 'Resources',
-    route: '/resources',
+    text: 'Fact Sheets',
+    route: '/fact',
   },
   {
     text: 'Map',
@@ -41,11 +42,9 @@ const CustomizedItem = ({ route, text }) => {
       component={RouterLink}
       alignItems="center"
       to={route}
+      sx={{ justifyContent: 'center' }}
     >
-      <ListItemText
-        primary={text}
-        sx={{ textAlign: 'center' }}
-      />
+      {text}
     </ListItemButton>
   )
 }

@@ -1,6 +1,6 @@
 // import "components/Navbar.css";
 import React from "react";
-import { AppBar, Toolbar, Hidden } from '@material-ui/core';
+import { AppBar, Toolbar, Hidden } from '@mui/material';
 
 import NavBarMobile from "./NavBarMobile";
 import NavBarNormal from "./NavBarNormal";

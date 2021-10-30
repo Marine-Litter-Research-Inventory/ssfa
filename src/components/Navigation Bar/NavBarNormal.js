@@ -1,11 +1,11 @@
 import React from "react";
-import { Button, Typography } from '@material-ui/core';
+import { Button, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 const lists = [
   { text: 'Home', route: '/' },
   { text: 'About', route: '/about' },
-  { text: 'Resources', route: '/resources' },
+  { text: 'Fact Sheets', route: '/fact' },
   { text: 'Map', route: '/map' },
   { text: 'Data & Analytics', route: '/data' },
 ]

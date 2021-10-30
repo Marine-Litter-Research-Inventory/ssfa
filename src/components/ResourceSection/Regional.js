@@ -1,6 +1,6 @@
 import React from 'react';
-import { Typography, Button, Box } from '@material-ui/core';
-import { styled } from '@material-ui/system';
+import { Typography, Button, Box } from '@mui/material';
+import { styled } from '@mui/system';
 
 const url = 'https://cil.nus.edu.sg/research/special-projects/#polllution-from-marine-plastics-in-the-seas-of-asean-plus-three'
 

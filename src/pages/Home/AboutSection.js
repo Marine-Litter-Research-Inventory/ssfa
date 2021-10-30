@@ -1,8 +1,8 @@
 // @ts-nocheck
 import React from 'react';
-import { Typography, Grid, Button, Container } from "@material-ui/core";
+import { Typography, Grid, Button, Container } from "@mui/material";
 import { Link as RouterLink } from 'react-router-dom';
-import { styled } from '@material-ui/system';
+import { styled } from '@mui/system';
 
 const logos = [
   {

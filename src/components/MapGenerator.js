@@ -12,8 +12,8 @@ import {
 import useWindowDimensions from "components/utils/useWindowDimensions";
 
 //import for Material UI
-import { IconButton, Box } from '@material-ui/core';
-import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
+import { IconButton, Box } from '@mui/material';
+import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 
 export default function MapGenerator({ isDataChanged = false }) {
   // States

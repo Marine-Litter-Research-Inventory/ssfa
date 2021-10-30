@@ -1,7 +1,7 @@
 // import React, { useEffect, useState } from "react";
 import React from 'react';
-import { Typography, Container } from '@material-ui/core';
-import { styled } from '@material-ui/system';
+import { Typography, Container } from '@mui/material';
+import { styled } from '@mui/system';
 
 import MapGenerator from 'components/MapGenerator';
 

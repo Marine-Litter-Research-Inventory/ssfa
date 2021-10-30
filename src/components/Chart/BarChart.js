@@ -5,7 +5,7 @@ import {
   InputLabel, Select, MenuItem, OutlinedInput, Checkbox, FormControl, TextField,
   Chip, Box, Button,
   TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody,
-} from '@material-ui/core';
+} from '@mui/material';
 
 import { getQuantity } from 'components/utils/utils';
 import useWindowDimensions from 'components/utils/useWindowDimensions';

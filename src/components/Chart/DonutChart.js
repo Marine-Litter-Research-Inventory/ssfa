@@ -1,6 +1,6 @@
 import React from 'react';
 import * as d3 from 'd3';
-import { Container } from '@material-ui/core';
+import { Container } from '@mui/material';
 
 import { getPlasticQuantity } from 'components/utils/utils';
 import useWindowDimensions from 'components/utils/useWindowDimensions';

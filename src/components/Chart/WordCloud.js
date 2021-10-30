@@ -4,7 +4,7 @@ import WordCloud from "react-d3-cloud";
 import {
   Box, InputLabel, MenuItem, FormControl, Select,
   Container
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   getAuthorCount,
   textToJson,
@@ -50,7 +50,7 @@ export default function WordCloudChart() {
         font="Arial"
         fontStyle="italic"
         fontWeight="bold"
-        fontSize={(word) => Math.sqrt(word.value * 2) * 20}
+        fontSize={(word) => 30}
         spiral="rectangular"
         // rotate={(word) => [0, 90][Math.floor(Math.random() * 2)]}
         rotate={0}

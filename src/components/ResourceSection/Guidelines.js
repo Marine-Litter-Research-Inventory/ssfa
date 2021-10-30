@@ -1,9 +1,8 @@
 import React from 'react';
-import { IconButton, List, ListItem, ListItemText, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import { styled } from '@material-ui/system';
+import { IconButton, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { styled } from '@mui/system';
 
-import LinkRoundedIcon from '@material-ui/icons/LinkRounded';
+import LinkRoundedIcon from '@mui/icons-material/LinkRounded';
 
 const links = [
   { title: 'CSIRO: Survey Methodology Handbook (2020) and other resources and factsheets', href: 'https://research.csiro.au/marinedebris/resources/' },
@@ -12,12 +11,6 @@ const links = [
   { title: 'NOAA: Guidelines and Recommendations', href: 'https://marinedebris.noaa.gov/reports-and-technical-memos' },
   { title: 'UNEP-IOC Guidelines on Survey and Monitoring of Marine Litter (2009)', href: 'https://wedocs.unep.org/xmlui/handle/20.500.11822/13604' },
 ]
-
-const useStyles = makeStyles({
-  link: {
-    color: 'antiqueWhite',
-  },
-})
 
 const Header = styled(Typography)({
   color: 'ghostWhite',
@@ -39,8 +32,6 @@ const Body = styled(Typography)({
 })
 
 export default function Guidelines() {
-  const classes = useStyles();
-
   return (
     <div>
       <Header variant='h4'>
@@ -57,13 +48,12 @@ export default function Guidelines() {
         {links.map((link, idx) => (
           <ListItem key={idx}>
             <ListItemText
-              className={classes.link}
               primary={link.title}
             />
             <IconButton
               href={link.href}
             >
-              <LinkRoundedIcon className={classes.link} />
+              <LinkRoundedIcon />
             </IconButton>
           </ListItem>
         ))}

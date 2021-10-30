@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import { createTheme, responsiveFontSizes } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/core';
-import { blue } from '@material-ui/core/colors';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material';
+import { blue } from '@mui/material/colors';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ScrollToTop from 'components/ScrollToTop';
 import Layout from 'components/Layout';
@@ -12,8 +12,9 @@ import Home from 'pages/Home/Home';
 import About from 'pages/About';
 import NotFound from 'pages/NotFound';
 import Map from 'pages/Map';
-import Data from 'pages/Data';
-import Resources from 'pages/Resources';
+import Data from 'pages/Data/Data';
+import DataChart from "pages/Data/DataChart";
+import Inventory from "pages/Data/Inventory";
 
 const SHEET_ID = process.env.REACT_APP_SHEET_ID
 
@@ -43,24 +44,13 @@ export default function App() {
     </h1>
     :
     <Switch>
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route exact path="/about">
-        <About />
-      </Route>
-      <Route exact path="/resources">
-        <Resources />
-      </Route>
-      <Route exact path="/map">
-        <Map isDataChanged={isDataChanged} />
-      </Route>
-      <Route exact path="/data">
-        <Data />
-      </Route>
-      <Route exact path="*">
-        <NotFound />
-      </Route>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/about" component={About} />
+      <Route exact path="/map" component={() => <Map isDataChanged={isDataChanged} />} />
+      <Route exact path="/data" component={Data} />
+      <Route exact path="/data/chart" component={DataChart} />
+      <Route exact path="/data/inventory" component={Inventory} />
+      <Route exact path="*" component={NotFound} />
     </Switch>
 
   return (

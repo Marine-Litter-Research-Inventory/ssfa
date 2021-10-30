@@ -1,6 +1,6 @@
-import React, { useState } from "react"
-import { Container, Grid, Typography, Button } from "@material-ui/core"
-import { styled } from '@material-ui/system';
+import React, { useState } from "react";
+import { Container, Grid, Typography, Button } from "@mui/material";
+import { styled } from '@mui/system';
 import { Link as RouterLink } from 'react-router-dom';
 
 import AnimatedSVG from 'components/AnimatedSVG';

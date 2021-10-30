@@ -1,8 +1,8 @@
 import React from "react";
-import { Typography, Button, Container } from "@material-ui/core";
-import MapIcon from '@material-ui/icons/Map';
+import { Typography, Button, Container } from "@mui/material";
+import MapIcon from '@mui/icons-material/Map';
 import { Link } from 'react-router-dom';
-import { styled } from '@material-ui/system';
+import { styled } from '@mui/system';
 
 const Wave = () => {
   return (

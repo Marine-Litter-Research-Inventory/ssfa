@@ -1,10 +1,8 @@
 import React from 'react';
-import { IconButton, List, ListItem, ListItemText, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import { styled } from '@material-ui/system';
+import { IconButton, List, ListItem, ListItemText, Typography, Divider } from '@mui/material';
+import { styled } from '@mui/system';
 
-import LinkRoundedIcon from '@material-ui/icons/LinkRounded';
-import { Divider } from '@material-ui/core';
+import LinkRoundedIcon from '@mui/icons-material/LinkRounded';
 
 const links1 = [
   { title: 'TIDES by Ocean Conservancy', href: 'https://www.coastalcleanupdata.org/' },
@@ -30,12 +28,6 @@ const links4 = [
   { title: 'Plastics Pollution Policy Inventory by Nicholas Institute for Environmental Policy Solutions, Duke University', href: 'https://nicholasinstitute.duke.edu/plastics-policy-inventory/search' },
 ]
 
-const useStyles = makeStyles({
-  link: {
-    color: 'antiqueWhite',
-  },
-})
-
 const Header = styled(Typography)({
   color: 'ghostWhite',
   fontWeight: 'bold',
@@ -49,18 +41,17 @@ const SubHeader = styled(Typography)({
   padding: '1rem',
 })
 
-const CustomizedList = ({ classes, links }) => (
+const CustomizedList = ({ links }) => (
   <List>
     {links.map((link, idx) => (
       <ListItem key={idx}>
         <ListItemText
-          className={classes.link}
           primary={link.title}
         />
         <IconButton
           href={link.href}
         >
-          <LinkRoundedIcon className={classes.link} />
+          <LinkRoundedIcon />
         </IconButton>
       </ListItem>
     ))}
@@ -72,7 +63,6 @@ const CustomizedDivider = () => (
 )
 
 export default function Other() {
-  const classes = useStyles();
 
   return (
     <div>
@@ -83,25 +73,25 @@ export default function Other() {
       <SubHeader variant='h5'>
         Global data repositories of marine plastic surveys and monitoring
       </SubHeader>
-      <CustomizedList classes={classes} links={links1} />
+      <CustomizedList links={links1} />
       <CustomizedDivider />
 
       <SubHeader variant='h5'>
         Resources for NGOs and civil society initiatives with infographics
       </SubHeader>
-      <CustomizedList classes={classes} links={links2} />
+      <CustomizedList links={links2} />
       <CustomizedDivider />
 
       <SubHeader variant='h5'>
         UN Resource Platform: GPML
       </SubHeader>
-      <CustomizedList classes={classes} links={links3} />
+      <CustomizedList links={links3} />
       <CustomizedDivider />
 
       <SubHeader variant='h5'>
         Global literature repositories
       </SubHeader>
-      <CustomizedList classes={classes} links={links4} />
+      <CustomizedList links={links4} />
       <CustomizedDivider />
 
     </div>

@@ -1,10 +1,10 @@
 import React from 'react';
-import { styled } from '@material-ui/system';
-import { List, ListItemIcon, ListItemText, Divider, ListItemButton } from '@material-ui/core';
+import { styled } from '@mui/system';
+import { List, ListItemIcon, ListItemButton, ListItemText, Divider } from '@mui/material';
 
-import BarChartIcon from '@material-ui/icons/BarChart';
-import BubbleChartIcon from '@material-ui/icons/BubbleChart';
-import DonutLargeIcon from '@material-ui/icons/DonutLarge';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import BubbleChartIcon from '@mui/icons-material/BubbleChart';
+import DonutLargeIcon from '@mui/icons-material/DonutLarge';
 
 const DrawerBox = styled('div')({
   backgroundColor: 'cornflowerblue',
@@ -29,8 +29,8 @@ const InfoItem = ({ icon, text, secondaryText, onClick, active }) => {
       <ListItemText
         primary={text}
         secondary={secondaryText}
-        primaryTypographyProps={{ color: 'ghostwhite' }}
-        secondaryTypographyProps={{ color: 'antiquewhite' }}
+      // primaryTypographyProps={{ color: 'ghostwhite' }}
+      // secondaryTypographyProps={{ color: 'antiquewhite' }}
       />
     </ListItemButton>
   )

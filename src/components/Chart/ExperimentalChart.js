@@ -4,7 +4,7 @@ import _ from 'lodash';
 import {
   InputLabel, Select, MenuItem, FormControl,
   TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody,
-} from '@material-ui/core';
+} from '@mui/material';
 
 import { getFromStorage, textToJson } from 'components/utils/utils';
 import useWindowDimensions from 'components/utils/useWindowDimensions';

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Typography, Button, Container } from "@material-ui/core";
+import { Typography, Button, Container } from "@mui/material";
 import { Link as RouterLink } from 'react-router-dom';
-import { styled } from '@material-ui/system';
+import { styled } from '@mui/system';
 
 
 const SubHeader = styled(Typography)({

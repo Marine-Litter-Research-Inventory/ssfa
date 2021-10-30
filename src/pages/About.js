@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react';
-import { Typography, Container, Grid } from '@material-ui/core';
-import { styled } from '@material-ui/system';
+import { Typography, Container, Grid } from '@mui/material';
+import { styled } from '@mui/system';
 
 const logos = [
   {
@@ -58,7 +58,7 @@ const Wave = () => {
 
 const Header = styled(Typography)(({ theme }) => ({
   fontWeight: 'bold',
-  padding: `${theme.mixins.toolbar.minHeight}px 20px`,
+  padding: `60px 20px`,
   boxSizing: 'border-box',
   color: 'ghostwhite',
   textAlign: 'center',

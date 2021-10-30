@@ -1,23 +1,22 @@
-import { Container, List, ListItem, Typography, Hidden, Grid } from "@material-ui/core";
+import { Container, List, ListItem, Typography, Hidden, Grid } from "@mui/material";
 import React from "react";
 import { Link as RouterLink } from 'react-router-dom';
-import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    fontWeight: 'bold',
-    maxWidth: 900,
-    padding: `40px 20px`,
-    boxSizing: 'border-box',
-    display: 'block'
-  },
-  link: {
-    color: 'ghostWhite'
-  },
-  copyright: {
-    color: 'ghostWhite',
-  }
-}))
+// const useStyles = makeStyles((theme) => ({
+//   title: {
+//     fontWeight: 'bold',
+//     maxWidth: 900,
+//     padding: `40px 20px`,
+//     boxSizing: 'border-box',
+//     display: 'block'
+//   },
+//   link: {
+//     color: 'ghostWhite'
+//   },
+//   copyright: {
+//     color: 'ghostWhite',
+//   }
+// }))
 
 const links = [
   { name: 'Sampling & Processing', to: '/guidelines' },
@@ -32,7 +31,6 @@ const contacts = [
 ]
 
 export default function Footer() {
-  const classes = useStyles()
 
   return (
     <>
@@ -61,7 +59,7 @@ export default function Footer() {
                   component={RouterLink}
                   dense
                   to={link.to}
-                  className={classes.link}
+                // className={classes.link}
                 >
                   <Typography
                     variant='subtitle2'
@@ -83,7 +81,7 @@ export default function Footer() {
                 <ListItem
                   key={idx}
                   dense
-                  className={classes.link}
+                // className={classes.link}
                 >
                   <Typography
                     variant='subtitle2'
@@ -111,7 +109,7 @@ export default function Footer() {
                       component={RouterLink}
                       dense
                       to={link.to}
-                      className={classes.link}
+                    // className={classes.link}
                     >
                       <Typography
                         variant='subtitle2'
@@ -134,7 +132,7 @@ export default function Footer() {
                     <ListItem
                       key={idx}
                       dense
-                      className={classes.link}
+                    // className={classes.link}
                     >
                       <Typography
                         variant='subtitle2'
@@ -151,7 +149,7 @@ export default function Footer() {
           <div style={{ height: 70 }} />
           <Typography
             variant='subtitle2'
-            className={classes.copyright}
+          // className={classes.copyright}
           >
             © SSFA
           </Typography>
