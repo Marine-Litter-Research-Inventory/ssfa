@@ -8,7 +8,7 @@ const Tiles = [
   { title: 'Science Stuff', link: 'chart' },
   { title: 'Non-Science Stuff', link: 'chart' },
   { title: 'Knowledge', link: 'chart' },
-  { title: 'The Inventory', link: 'inventory' },
+  { title: 'Data Extraction', link: 'extraction' },
   { title: 'Matadata & Methodology', link: 'chart' },
 ]
 

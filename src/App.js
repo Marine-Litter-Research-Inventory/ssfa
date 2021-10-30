@@ -14,7 +14,7 @@ import NotFound from 'pages/NotFound';
 import Map from 'pages/Map';
 import Data from 'pages/Data/Data';
 import DataChart from "pages/Data/DataChart";
-import Inventory from "pages/Data/Inventory";
+import DataExtraction from "pages/Data/DataExtraction";
 
 const SHEET_ID = process.env.REACT_APP_SHEET_ID
 
@@ -49,7 +49,7 @@ export default function App() {
       <Route exact path="/map" component={() => <Map isDataChanged={isDataChanged} />} />
       <Route exact path="/data" component={Data} />
       <Route exact path="/data/chart" component={DataChart} />
-      <Route exact path="/data/inventory" component={Inventory} />
+      <Route exact path="/data/extraction" component={DataExtraction} />
       <Route exact path="*" component={NotFound} />
     </Switch>
 

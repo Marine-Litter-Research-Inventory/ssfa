@@ -78,7 +78,6 @@ const Wave = () => {
 
 const Header = styled(Typography)(({ theme }) => ({
   fontWeight: 'bold',
-  // @ts-ignore
   padding: '60px 20px',
   boxSizing: 'border-box',
   color: 'ghostwhite',
