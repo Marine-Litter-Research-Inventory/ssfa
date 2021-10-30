@@ -7,6 +7,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ScrollToTop from 'components/ScrollToTop';
 import Layout from 'components/Layout';
 import useFetch from 'components/utils/useFetch';
+import { Provider } from 'react-redux';
+
+import store from 'app/store';
 
 import Home from 'pages/Home/Home';
 import About from 'pages/About';
