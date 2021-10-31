@@ -10040,6 +10040,11 @@ react-app-polyfill@^2.0.0:
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
 
+react-csv@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-csv/-/react-csv-2.0.3.tgz#f5d17a3c71107d9bcbe580049350200debdc042a"
+  integrity sha512-exyAdFLAxtuM4wNwLYrlKyPYLiJ7e0mv9tqPAd3kq+k1CiJFtznevR3yP0icv5q/y200w+lzNgi7TQn1Wrhu0w==
+
 react-d3-cloud@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-d3-cloud/-/react-d3-cloud-1.0.1.tgz#7fe2cfe8bd6d6230666a63177bced9656c408e2b"
