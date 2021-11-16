@@ -68,9 +68,7 @@ export default function AboutSection() {
           About
         </SubHeader>
         <Body variant='body1' align='justify'>
-          Welcome to the (temporary) resource page for marine plastic researchers in Southeast and East Asia.
-          <br /><br />
-          This temporary resource site is designed to provide resources on research on marine plastic pollution to researchers in Southeast and East Asia (SE-EA), pending the development of an research inventory and resource platform to that effect. The development of this  on-line tool, which  will further support the regional node of the Global Partnership for Marine Litter (GMPL), is being led by the Coordinating Body for the Seas of East Asia (COBSEA).
+          This website provides access to a Research Inventory of marine plastics coordinated by the National University of Singapore and completed in November 2021 with a view of supporting the development of a regional node of the Global Partnership for Marine Litter (GMPL) under the leadership of the Coordinating Body for the Seas of East Asia (COBSEA).
           <br /><br />
         </Body>
         <div style={{ textAlign: 'center', marginBottom: 60 }}>

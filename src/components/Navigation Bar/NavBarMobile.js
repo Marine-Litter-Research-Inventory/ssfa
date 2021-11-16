@@ -18,7 +18,7 @@ const lists = [
   },
   {
     text: 'Fact Sheets',
-    route: '/fact',
+    route: '/factsheets',
   },
   {
     text: 'Map',
@@ -27,6 +27,10 @@ const lists = [
   {
     text: 'Data & Analytics',
     route: '/data',
+  },
+  {
+    text: 'Feedback',
+    route: '/feedback',
   },
 ]
 

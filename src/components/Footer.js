@@ -1,39 +1,25 @@
-import { Container, List, ListItem, Typography, Hidden, Grid } from "@mui/material";
+import {
+  Container, Typography,
+  // List, ListItem, Hidden, Grid
+} from "@mui/material";
 import React from "react";
-import { Link as RouterLink } from 'react-router-dom';
 
-// const useStyles = makeStyles((theme) => ({
-//   title: {
-//     fontWeight: 'bold',
-//     maxWidth: 900,
-//     padding: `40px 20px`,
-//     boxSizing: 'border-box',
-//     display: 'block'
-//   },
-//   link: {
-//     color: 'ghostWhite'
-//   },
-//   copyright: {
-//     color: 'ghostWhite',
-//   }
-// }))
+// const links = [
+//   { name: 'Sampling & Processing', to: '/guidelines' },
+//   { name: 'Regional Legal and Policy Efforts', to: '/regional' },
+//   { name: 'Marine Plastic Research in SE-EA', to: '/understanding' },
+//   { name: 'Other Data Repositories & Infographics', to: '/other' },
+// ]
 
-const links = [
-  { name: 'Sampling & Processing', to: '/guidelines' },
-  { name: 'Regional Legal and Policy Efforts', to: '/regional' },
-  { name: 'Marine Plastic Research in SE-EA', to: '/understanding' },
-  { name: 'Other Data Repositories & Infographics', to: '/other' },
-]
-
-const contacts = [
-  { method: 'email', content: 'test@example.com' },
-  { method: 'phone', content: '+6512345678' },
-]
+// const contacts = [
+//   { method: 'email', content: 'test@example.com' },
+//   { method: 'phone', content: '+6512345678' },
+// ]
 
 export default function Footer() {
 
   return (
-    <>
+    <div style={{ width: '100%' }}>
       <div style={{ position: 'relative' }} >
         <div className="custom-shape-divider-top-1625586722">
           <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -43,118 +29,120 @@ export default function Footer() {
           </svg>
         </div>
       </div>
-      <div style={{ backgroundColor: '#6fbff5', minHeight: 280, paddingTop: 80 }}>
+      <div style={{ backgroundColor: '#6fbff5', minHeight: 180 }}>
         <Container maxWidth='md'>
-          <Hidden smUp>
-            <Typography
-              variant='h5'
-              style={{ color: 'ghostWhite' }}
-            >
-              Resources
-            </Typography>
-            <List>
-              {links.map((link, idx) => (
-                <ListItem
-                  key={idx}
-                  component={RouterLink}
-                  dense
-                  to={link.to}
-                // className={classes.link}
-                >
-                  <Typography
-                    variant='subtitle2'
-                  >
-                    {link.name}
-                  </Typography>
-                </ListItem>
-              ))}
-            </List>
-            <br />
-            <Typography
-              variant='h5'
-              style={{ color: 'ghostWhite' }}
-            >
-              Contact us
-            </Typography>
-            <List>
-              {contacts.map((contact, idx) => (
-                <ListItem
-                  key={idx}
-                  dense
-                // className={classes.link}
-                >
-                  <Typography
-                    variant='subtitle2'
-                  >
-                    {`${contact.method}: ${contact.content}`}
-                  </Typography>
-                </ListItem>
-              ))}
-            </List>
-          </Hidden>
-
-          <Hidden only='xs'>
-            <Grid container spacing={4}>
-              <Grid item sm={7}>
-                <Typography
-                  variant='h5'
-                  style={{ color: 'ghostWhite' }}
-                >
-                  Resources
-                </Typography>
-                <List>
-                  {links.map((link, idx) => (
-                    <ListItem
-                      key={idx}
-                      component={RouterLink}
-                      dense
-                      to={link.to}
-                    // className={classes.link}
-                    >
-                      <Typography
-                        variant='subtitle2'
-                      >
-                        {link.name}
-                      </Typography>
-                    </ListItem>
-                  ))}
-                </List>
-              </Grid>
-              <Grid item sm={5}>
-                <Typography
-                  variant='h5'
-                  style={{ color: 'ghostWhite' }}
-                >
-                  Contact us
-                </Typography>
-                <List>
-                  {contacts.map((contact, idx) => (
-                    <ListItem
-                      key={idx}
-                      dense
-                    // className={classes.link}
-                    >
-                      <Typography
-                        variant='subtitle2'
-                      >
-                        {`${contact.method}: ${contact.content}`}
-                      </Typography>
-                    </ListItem>
-                  ))}
-                </List>
-              </Grid>
-            </Grid>
-          </Hidden>
-
-          <div style={{ height: 70 }} />
+          <div style={{ height: 120 }} />
           <Typography
-            variant='subtitle2'
-          // className={classes.copyright}
+            variant="subtitle1"
+            sx={{
+              color: 'ghostWhite',
+            }}
           >
-            © SSFA
+            © Centre for International Law, National University of Singapore
           </Typography>
         </Container>
       </div>
-    </>
+    </div>
   )
 }
+
+// <Hidden smUp>
+//   <Typography
+//     variant='h5'
+//     style={{ color: 'ghostWhite' }}
+//   >
+//     Resources
+//   </Typography>
+//   <List>
+//     {links.map((link, idx) => (
+//       <ListItem
+//         key={idx}
+//         component={RouterLink}
+//         dense
+//         to={link.to}
+//       // className={classes.link}
+//       >
+//         <Typography
+//           variant='subtitle2'
+//         >
+//           {link.name}
+//         </Typography>
+//       </ListItem>
+//     ))}
+//   </List>
+//   <br />
+//   <Typography
+//     variant='h5'
+//     style={{ color: 'ghostWhite' }}
+//   >
+//     Contact us
+//   </Typography>
+//   <List>
+//     {contacts.map((contact, idx) => (
+//       <ListItem
+//         key={idx}
+//         dense
+//       // className={classes.link}
+//       >
+//         <Typography
+//           variant='subtitle2'
+//         >
+//           {`${contact.method}: ${contact.content}`}
+//         </Typography>
+//       </ListItem>
+//     ))}
+//   </List>
+// </Hidden>
+
+// <Hidden only='xs'>
+//   <Grid container spacing={4}>
+//     <Grid item sm={7}>
+//       <Typography
+//         variant='h5'
+//         style={{ color: 'ghostWhite' }}
+//       >
+//         Resources
+//       </Typography>
+//       <List>
+//         {links.map((link, idx) => (
+//           <ListItem
+//             key={idx}
+//             component={RouterLink}
+//             dense
+//             to={link.to}
+//           // className={classes.link}
+//           >
+//             <Typography
+//               variant='subtitle2'
+//             >
+//               {link.name}
+//             </Typography>
+//           </ListItem>
+//         ))}
+//       </List>
+//     </Grid>
+//     <Grid item sm={5}>
+//       <Typography
+//         variant='h5'
+//         style={{ color: 'ghostWhite' }}
+//       >
+//         Contact us
+//       </Typography>
+//       <List>
+//         {contacts.map((contact, idx) => (
+//           <ListItem
+//             key={idx}
+//             dense
+//           // className={classes.link}
+//           >
+//             <Typography
+//               variant='subtitle2'
+//             >
+//               {`${contact.method}: ${contact.content}`}
+//             </Typography>
+//           </ListItem>
+//         ))}
+//       </List>
+//     </Grid>
+//   </Grid>
+// </Hidden>

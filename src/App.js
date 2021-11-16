@@ -12,6 +12,8 @@ import Home from 'pages/Home/Home';
 import About from 'pages/About';
 import NotFound from 'pages/NotFound';
 import Map from 'pages/Map';
+import Feedback from 'pages/Feedback';
+import Factsheets from 'pages/Factsheets';
 import Data from 'pages/Data/Data';
 import DataChart from "pages/Data/DataChart";
 import DataExtraction from "pages/Data/DataExtraction";
@@ -46,10 +48,12 @@ export default function App() {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/about" component={About} />
+      <Route exact path="/factsheets" component={Factsheets} />
       <Route exact path="/map" component={() => <Map isDataChanged={isDataChanged} />} />
       <Route exact path="/data" component={Data} />
       <Route exact path="/data/chart" component={DataChart} />
       <Route exact path="/data/extraction" component={DataExtraction} />
+      <Route exact path="/feedback" component={Feedback} />
       <Route exact path="*" component={NotFound} />
     </Switch>
 

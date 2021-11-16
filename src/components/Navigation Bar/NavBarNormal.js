@@ -5,9 +5,10 @@ import { Link as RouterLink } from 'react-router-dom';
 const lists = [
   { text: 'Home', route: '/' },
   { text: 'About', route: '/about' },
-  { text: 'Fact Sheets', route: '/fact' },
+  { text: 'Fact Sheets', route: '/factsheets' },
   { text: 'Map', route: '/map' },
   { text: 'Data & Analytics', route: '/data' },
+  { text: 'Feedback', route: '/feedback' },
 ]
 
 export default function NavBarNormal() {
@@ -27,6 +28,7 @@ export default function NavBarNormal() {
           color="inherit"
           component={RouterLink}
           to={list.route}
+          sx={{ textAlign: 'center' }}
         >
           {list.text}
         </Button>
