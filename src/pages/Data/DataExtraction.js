@@ -8,10 +8,12 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import TablePagination from '@mui/material/TablePagination';
+import Highlighter from "react-highlight-words";
 import {
   Container, Link, Typography,
-  FormControl, InputLabel, Select, MenuItem, OutlinedInput, Box, Chip, Checkbox,
-  InputBase,
+  // FormControl, InputLabel, Select, MenuItem, OutlinedInput, Checkbox,
+  Box, Chip,
+  InputBase, IconButton,
 } from "@mui/material";
 import { styled, alpha } from '@mui/system';
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
@@ -22,21 +24,23 @@ import SearchIcon from '@mui/icons-material/Search';
 import { getFromStorage, textToJson } from 'components/utils/utils';
 
 const initColumns = [
-  { text: 'Citation', id: 'citation', align: 'left' },
   { text: 'Title', id: 'title', align: 'left' },
-  { text: 'Link', id: 'link', align: 'left' },
-  { text: 'Authors', id: 'authors', align: 'left' },
   { text: 'Translated titles', id: 'translated', align: 'left' },
-  { text: 'Research Group', id: 'research_group', align: 'left', width: 250 },
-  { text: 'Methodologies Used', id: 'methodologies', align: 'left' },
-  { text: 'Water Body_General', id: 'water_body_general', align: 'left' },
-  { text: 'Compartments', id: 'compartments', align: 'left' },
-  { text: 'Key Findings', id: 'key_findings', align: 'left', width: 450 },
+  { text: 'Authors', id: 'authors', align: 'left' },
   { text: 'Research Topics', id: 'research_topics', align: 'left', width: 350 },
+  { text: 'Aim of Research', id: 'aim', align: 'left', width: 350 },
+  { text: 'Coastal or Offshore', id: 'coastal', align: 'left' },
+  { text: 'Location/Territory studied', id: 'location_studied', align: 'left' },
+  { text: 'Water Body_General', id: 'water_body_general', align: 'left' },
+  { text: 'Key Findings', id: 'key_findings', align: 'left', width: 450 },
+  { text: 'Methodologies Used', id: 'methodologies', align: 'left' },
+  { text: 'Geographic scale', id: 'geographic_scale', align: 'left' },
+  { text: 'Compartments', id: 'compartments', align: 'left' },
   { text: 'Plastic characterisation/polymer', id: 'polymer', align: 'left' },
   { text: 'Year Published', id: 'year_published', align: 'left' },
-  { text: 'Geographic scale', id: 'geographic_scale', align: 'left' },
-  { text: 'Location/Territory studied', id: 'location_studied', align: 'left' },
+  { text: 'Research Group', id: 'research_group', align: 'left', width: 250 },
+  { text: 'Citation', id: 'citation', align: 'left' },
+  { text: 'Link', id: 'link', align: 'left' },
 ]
 
 const repoLink = "https://docs.google.com/spreadsheets/d/1yRLGaQk3-9UlopftPr5e8F-X3pKkjwLlZWcTwai6_Ds/edit#gid=177125452"
@@ -59,21 +63,23 @@ function dataFormatting() {
   rows.forEach(item => {
     let row = item.c
     res.push({
-      citation: row[position["Citation"]]?.v,
       title: row[position['Title']]?.v,
-      link: <Link href={row[position['Link to source']]?.v}>Link</Link>,
-      authors: row[position['Author(s)']]?.v,
       translated: row[position['Translated Title']]?.v,
-      research_group: row[position['Research Group(s)']]?.v,
-      methodologies: row[33]?.v,
-      water_body_general: row[position['Water Body_General']]?.v,
-      compartments: row[position['Field Sampling_Compartment']]?.v,
-      key_findings: row[49]?.v,
+      authors: row[position['Author(s)']]?.v,
       research_topics: row[position['Research Topics']]?.v,
+      aim: row[position["Aim of Research"]]?.v,
+      coastal: row[position["Coastal or Offshore"]]?.v,
+      location_studied: row[position['Location/Territory studied']]?.v,
+      water_body_general: row[position['Water Body_General']]?.v,
+      key_findings: row[position["Key Findings"]]?.v,
+      methodologies: row[position['Methodologies Used ']]?.v,
+      geographic_scale: row[position['Geographical Scale']]?.v,
+      compartments: row[position['Field Sampling_Compartment']]?.v,
       polymer: row[position['Plastic Characterisation_Polymer']]?.v,
       year_published: row[position['Year Published']]?.v,
-      geographic_scale: row[position['Geographical Scale']]?.v,
-      location_studied: row[position['Location/Territory studied']]?.v,
+      research_group: row[position['Research Group(s)']]?.v,
+      citation: row[position["Citation"]]?.v,
+      link: <Link href={row[position['Link to source']]?.v}>Link</Link>,
     })
   })
   return [res, exp]
@@ -123,15 +129,15 @@ const Search = styled('div')(({ theme }) => ({
   },
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
+// const SearchIconWrapper = styled('div')(({ theme }) => ({
+//   padding: theme.spacing(0, 2),
+//   height: '100%',
+//   position: 'absolute',
+//   pointerEvents: 'none',
+//   display: 'flex',
+//   alignItems: 'center',
+//   justifyContent: 'center',
+// }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
@@ -172,49 +178,103 @@ const handleSort = (rows, column, dir) => {
   });
 };
 
-const DataSelector = ({ varX, setVarX, varNames, label }) => {
+// const DataSelector = ({ varX, setVarX, varNames, label }) => {
 
-  const handleChange = (event) => {
-    const { target: { value } } = event
-    setVarX(typeof value === 'string' ? value.split(",") : value)
+//   const handleChange = (event) => {
+//     const { target: { value } } = event
+//     setVarX(typeof value === 'string' ? value.split(",") : value)
+//   }
+
+//   return (
+//     <FormControl sx={{ m: 1, minWidth: 300, maxWidth: 900, padding: "1rem" }}>
+//       <InputLabel id="selector-label" sx={{ fontSize: 20 }}>{label}</InputLabel>
+//       <Select
+//         labelId="selector-label"
+//         multiple
+//         value={varX}
+//         onChange={handleChange}
+//         input={<OutlinedInput sx={{ fontSize: 20 }} label={label} />}
+//         renderValue={(selected) => (
+//           <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+//             {selected.map((value) => (
+//               <Chip color="primary" key={value} label={value} sx={{ m: '2px' }} />
+//             ))}
+//           </Box>
+//         )}
+//         MenuProps={{
+//           PaperProps: {
+//             style: {
+//               maxHeight: "35%",
+//               width: "100%"
+//             },
+//           },
+//         }}
+//       >
+//         {varNames.map((name) => (
+//           <MenuItem
+//             key={name}
+//             value={name}
+//           >
+//             <Checkbox checked={varX.indexOf(name) > -1} />
+//             {name}
+//           </MenuItem>
+//         ))}
+//       </Select>
+//     </FormControl>
+//   )
+// }
+
+const DataChoice = ({ varNames, label, setHeader }) => {
+  let arr = []
+  for (let i = 0; i < varNames.length; i++)
+    arr.push(true)
+  let [state, setState] = React.useState(arr)
+
+  const handleClick = (idx) => {
+    let temp = []
+    state.forEach((e, i) => {
+      if (i === idx)
+        temp.push(!e)
+      else
+        temp.push(e)
+    })
+    setState(temp)
   }
 
+  React.useEffect(() => {
+    let temp = varNames.filter((val, idx) => { return state[idx] })
+    setHeader(temp)
+  }, [state, setHeader, varNames])
+
   return (
-    <FormControl sx={{ m: 1, minWidth: 300, maxWidth: 900, padding: "1rem" }}>
-      <InputLabel id="selector-label" sx={{ fontSize: 20 }}>{label}</InputLabel>
-      <Select
-        labelId="selector-label"
-        multiple
-        value={varX}
-        onChange={handleChange}
-        input={<OutlinedInput sx={{ fontSize: 20 }} label={label} />}
-        renderValue={(selected) => (
-          <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-            {selected.map((value) => (
-              <Chip color="primary" key={value} label={value} sx={{ m: '2px' }} />
-            ))}
-          </Box>
-        )}
-        MenuProps={{
-          PaperProps: {
-            style: {
-              maxHeight: "35%",
-              width: "100%"
-            },
-          },
-        }}
+    <Box
+      sx={{
+        border: "1px solid #6FBFF5",
+        borderRadius: "1rem",
+        backgroundColor: "rgba(33, 150, 243, 0.15)",
+        marginBottom: "1rem",
+        padding: "1rem",
+      }}
+    >
+      <Typography
+        variant="h6"
+        sx={{ marginBottom: "1rem" }}
       >
-        {varNames.map((name) => (
-          <MenuItem
-            key={name}
-            value={name}
-          >
-            <Checkbox checked={varX.indexOf(name) > -1} />
-            {name}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+        {label}
+      </Typography>
+      {varNames.map((value, idx) => (
+        <Chip
+          id={idx}
+          key={value}
+          label={value}
+          sx={{
+            backgroundColor: state[idx] ? "#6FBFF5" : "lightgray",
+            m: '2px'
+          }}
+          onClick={() => handleClick(idx)}
+        />
+      ))}
+    </Box>
   )
 }
 
@@ -232,7 +292,8 @@ export default function Inventory() {
   const [order, setOrder] = React.useState(
     new Array(columns.length).fill(null).map((n, i) => i)
   );
-  const [search, setSearch] = React.useState('');
+  const [search, setSearch] = React.useState([""]);
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   React.useEffect(() => {
     let newColumns = initColumns.filter(col => header.includes(col.text))
@@ -242,17 +303,16 @@ export default function Inventory() {
 
   React.useEffect(() => {
     setDisplayRows(initRows.filter(row => {
-      let res = false;
+      let check = false;
       for (const key in row) {
         if (row[key] ?? false)
-          if (row[key].toString().toLowerCase().includes(search.toLowerCase())) {
-            res = true;
-            break;
-          }
+          for (let i = 0; i < search.length; i++)
+            if (row[key].toString().toLowerCase().includes(search[i].toLowerCase()))
+              check = true;
+        if (check) break
       }
-      return res
+      return check
     }))
-    // console.log("rows: ", rows)
   }, [search, initRows])
 
   const onReorderEnd = React.useCallback(
@@ -272,8 +332,12 @@ export default function Inventory() {
   };
 
   const handleSearch = (event) => {
-    setSearch(event.target.value);
-    // console.log(event.target.value);
+    setSearchTerm(event.target.value);
+  }
+
+  const handleRequest = () => {
+    let arr = searchTerm.split(' ')
+    setSearch(arr);
   }
 
   const handleChangePage = (event, newPage) => {
@@ -288,7 +352,7 @@ export default function Inventory() {
   return (
     <div>
       <Header variant='h2' align='center'>
-        Data & Analytics
+        Data Extraction
       </Header>
       <Wave />
       <div style={{ marginTop: 80 }} />
@@ -309,20 +373,21 @@ export default function Inventory() {
           You can drag and drop the header of the table to arrange the data the way you like.
         </Body>
         <div style={{ display: 'inline-block', marginBottom: '1rem' }}>
-          <DataSelector
+          <DataChoice
             label="Display Columns"
             varNames={choices}
-            varX={header}
-            setVarX={setHeader}
+            setHeader={setHeader}
           />
           <Search>
-            <SearchIconWrapper>
+            <IconButton
+              onClick={handleRequest}
+            >
               <SearchIcon />
-            </SearchIconWrapper>
+            </IconButton>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              value={search}
+              value={searchTerm}
               onChange={handleSearch}
             />
           </Search>
@@ -369,7 +434,11 @@ export default function Inventory() {
                           scope="row"
                           style={{ height: 40, overflow: "hidden" }}
                         >
-                          {row[columns[colIdx].id]}
+                          <Highlighter
+                            searchWords={search}
+                            autoEscape={true}
+                            textToHighlight={row[columns[colIdx].id]}
+                          />,
                         </TableCell>
                       ))}
                     </TableRow>
