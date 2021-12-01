@@ -1,15 +1,8 @@
 import React from 'react';
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import TableSortLabel from "@mui/material/TableSortLabel";
-import TablePagination from '@mui/material/TablePagination';
+import { useSelector, useDispatch } from 'react-redux';
 import Highlighter from "react-highlight-words";
 import {
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel, TablePagination,
   Container, Link, Typography,
   // FormControl, InputLabel, Select, MenuItem, OutlinedInput, Checkbox,
   Box, Chip,
@@ -21,69 +14,13 @@ import { CSVLink } from "react-csv";
 
 import SearchIcon from '@mui/icons-material/Search';
 
-import { getFromStorage, textToJson } from 'components/utils/utils';
-
-const initColumns = [
-  { text: 'Title', id: 'title', align: 'left' },
-  { text: 'Translated titles', id: 'translated', align: 'left' },
-  { text: 'Authors', id: 'authors', align: 'left' },
-  { text: 'Research Topics', id: 'research_topics', align: 'left', width: 350 },
-  { text: 'Aim of Research', id: 'aim', align: 'left', width: 350 },
-  { text: 'Coastal or Offshore', id: 'coastal', align: 'left' },
-  { text: 'Location/Territory studied', id: 'location_studied', align: 'left' },
-  { text: 'Water Body_General', id: 'water_body_general', align: 'left' },
-  { text: 'Key Findings', id: 'key_findings', align: 'left', width: 450 },
-  { text: 'Methodologies Used', id: 'methodologies', align: 'left' },
-  { text: 'Geographic scale', id: 'geographic_scale', align: 'left' },
-  { text: 'Compartments', id: 'compartments', align: 'left' },
-  { text: 'Plastic characterisation/polymer', id: 'polymer', align: 'left' },
-  { text: 'Year Published', id: 'year_published', align: 'left' },
-  { text: 'Research Group', id: 'research_group', align: 'left', width: 250 },
-  { text: 'Citation', id: 'citation', align: 'left' },
-  { text: 'Link', id: 'link', align: 'left' },
-]
-
-const repoLink = "https://docs.google.com/spreadsheets/d/1yRLGaQk3-9UlopftPr5e8F-X3pKkjwLlZWcTwai6_Ds/edit#gid=177125452"
-
-function dataFormatting() {
-  let data = textToJson(getFromStorage('data'))
-  let position = textToJson(getFromStorage('position'))
-  let rows = data.data.table.rows
-  let res = []
-  let exp = []
-  rows.forEach(item => {
-    let row = item.c
-    let temp = {}
-    for (const key in position) {
-      temp[key] = row[position[key]]?.v
-    }
-    exp.push(temp)
-  })
-
-  rows.forEach(item => {
-    let row = item.c
-    res.push({
-      title: row[position['Title']]?.v,
-      translated: row[position['Translated Title']]?.v,
-      authors: row[position['Author(s)']]?.v,
-      research_topics: row[position['Research Topics']]?.v,
-      aim: row[position["Aim of Research"]]?.v,
-      coastal: row[position["Coastal or Offshore"]]?.v,
-      location_studied: row[position['Location/Territory studied']]?.v,
-      water_body_general: row[position['Water Body_General']]?.v,
-      key_findings: row[position["Key Findings"]]?.v,
-      methodologies: row[position['Methodologies Used ']]?.v,
-      geographic_scale: row[position['Geographical Scale']]?.v,
-      compartments: row[position['Field Sampling_Compartment']]?.v,
-      polymer: row[position['Plastic Characterisation_Polymer']]?.v,
-      year_published: row[position['Year Published']]?.v,
-      research_group: row[position['Research Group(s)']]?.v,
-      citation: row[position["Citation"]]?.v,
-      link: <Link href={row[position['Link to source']]?.v}>Link</Link>,
-    })
-  })
-  return [res, exp]
-}
+import {
+  setSearchDisplay,
+  setSearchKeywords,
+  setDataRows,
+  setActiveColumns,
+  setColumnOrder,
+} from 'app/slice/dataExtraction';
 
 const Wave = () => {
   return (
@@ -224,7 +161,9 @@ const handleSort = (rows, column, dir) => {
 //   )
 // }
 
-const DataChoice = ({ varNames, label, setHeader }) => {
+const DataChoice = ({ varNames, label }) => {
+  let dispatch = useDispatch()
+
   let arr = []
   for (let i = 0; i < varNames.length; i++)
     arr.push(true)
@@ -243,8 +182,8 @@ const DataChoice = ({ varNames, label, setHeader }) => {
 
   React.useEffect(() => {
     let temp = varNames.filter((val, idx) => { return state[idx] })
-    setHeader(temp)
-  }, [state, setHeader, varNames])
+    dispatch(setActiveColumns(temp))
+  }, [state, dispatch, varNames])
 
   return (
     <Box
@@ -280,40 +219,49 @@ const DataChoice = ({ varNames, label, setHeader }) => {
 
 
 export default function Inventory() {
-  const [res, exp] = dataFormatting()
-  const [initRows] = React.useState(res)
-  const [displayRows, setDisplayRows] = React.useState(res)
-  const [header, setHeader] = React.useState(initColumns.map(col => col.text))
-  const [columns, setColumns] = React.useState(initColumns)
-  const [choices] = React.useState(initColumns.map(col => col.text))
-  const [page, setPage] = React.useState(0)
+  const dispatch = useDispatch()
+  const {
+    activeColumns,
+    columnHeaders,
+    columnOrder,
+    columnTitles,
+    data,
+    databaseLink,
+    dataRows,
+    exportedData,
+    searchDisplay,
+    searchKeywords,
+  } = useSelector(state => state.dataExtraction)
+
+  // const [columnOrder, setColumns] = React.useState(columnHeaders)
+
+  const [order, setOrder] = React.useState(
+    new Array(columnOrder.length).fill(null).map((n, i) => i)
+  );
+
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [sort, setSort] = React.useState({ column: {}, dir: 1 });
-  const [order, setOrder] = React.useState(
-    new Array(columns.length).fill(null).map((n, i) => i)
-  );
-  const [search, setSearch] = React.useState([""]);
-  const [searchTerm, setSearchTerm] = React.useState("");
+  const [page, setPage] = React.useState(0)
 
   React.useEffect(() => {
-    let newColumns = initColumns.filter(col => header.includes(col.text))
-    setColumns(newColumns)
+    let newColumns = columnHeaders.filter(col => activeColumns.includes(col.text))
+    dispatch(setColumnOrder(newColumns))
     setOrder(new Array(newColumns.length).fill(null).map((n, i) => i))
-  }, [header])
+  }, [activeColumns, columnHeaders, dispatch])
 
   React.useEffect(() => {
-    setDisplayRows(initRows.filter(row => {
+    dispatch(setDataRows(data.filter(row => {
       let check = false;
       for (const key in row) {
         if (row[key] ?? false)
-          for (let i = 0; i < search.length; i++)
-            if (row[key].toString().toLowerCase().includes(search[i].toLowerCase()))
+          for (let i = 0; i < searchKeywords.length; i++)
+            if (row[key].toString().toLowerCase().includes(searchKeywords[i].toLowerCase()))
               check = true;
         if (check) break
       }
       return check
-    }))
-  }, [search, initRows])
+    })))
+  }, [searchKeywords, data, dispatch])
 
   const onReorderEnd = React.useCallback(
     ({ oldIndex, newIndex }, e) => {
@@ -327,18 +275,9 @@ export default function Inventory() {
 
   const onHeaderClick = (column) => () => {
     const dir = column.id === sort.column.id ? sort.dir * -1 : 1;
-    setSort({ column, dir });
-    setDisplayRows(handleSort(displayRows, sort.column, sort.dir));
+    setSort({ column, dir })
+    dispatch(setDataRows(handleSort(dataRows, sort.column, sort.dir)))
   };
-
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-  }
-
-  const handleRequest = () => {
-    let arr = searchTerm.split(' ')
-    setSearch(arr);
-  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -359,12 +298,12 @@ export default function Inventory() {
       <Container sx={{ textAlign: 'center' }}>
         <Body variant='body1' align='center'>
           Here is a smaller version of the data table that provide you with crucial information. To access the full table, click this link below. <br />
-          <Link href={repoLink}>Link</Link>
+          <Link href={databaseLink}>Link</Link>
           <br />
           or click the button below to download the full table in csv.
           <br />
           <CSVLink
-            data={exp}
+            data={exportedData}
             filename={"Masterlist of Literature Articles.csv"}
           >
             Link
@@ -372,26 +311,26 @@ export default function Inventory() {
           <br />
           You can drag and drop the header of the table to arrange the data the way you like.
         </Body>
+        {/* Table options */}
         <div style={{ display: 'inline-block', marginBottom: '1rem' }}>
           <DataChoice
             label="Display Columns"
-            varNames={choices}
-            setHeader={setHeader}
+            varNames={columnTitles}
           />
+          {/* Search Bar */}
           <Search>
-            <IconButton
-              onClick={handleRequest}
-            >
+            <IconButton onClick={() => dispatch(setSearchKeywords(searchDisplay))}>
               <SearchIcon />
             </IconButton>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              value={searchTerm}
-              onChange={handleSearch}
+              value={searchDisplay}
+              onChange={(event) => dispatch(setSearchDisplay(event.target.value))}
             />
           </Search>
         </div>
+        {/* Table */}
         <Paper>
           <TableContainer sx={{ maxHeight: 600 }}>
             <Table size="small" stickyHeader aria-label="simple table">
@@ -404,18 +343,18 @@ export default function Inventory() {
                     key={colIdx}
                     value={
                       <TableCell
-                        onClick={onHeaderClick(columns[colIdx])}
+                        onClick={onHeaderClick(columnOrder[colIdx])}
                         style={{
-                          minWidth: columns[colIdx].width,
+                          minWidth: columnOrder[colIdx].width,
                           backgroundColor: '#6fbff5',
                           border: '0.01rem solid white',
                         }}
                       >
                         <TableSortLabel
-                          active={columns[colIdx].id === sort.column.id}
+                          active={columnOrder[colIdx].id === sort.column.id}
                           direction={sort.dir === 1 ? "asc" : "desc"}
                         >
-                          {columns[colIdx].text}
+                          {columnOrder[colIdx].text}
                         </TableSortLabel>
                       </TableCell>
                     }
@@ -423,21 +362,21 @@ export default function Inventory() {
                 ))}
               </SortableHead>
               <TableBody>
-                {displayRows
+                {dataRows
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, idx) => (
                     <TableRow key={idx} hover style={{ height: 40 }}>
                       {order.map((colIdx, i) => (
                         <TableCell
-                          key={columns[colIdx].id}
+                          key={columnOrder[colIdx].id}
                           component="th"
                           scope="row"
                           style={{ height: 40, overflow: "hidden" }}
                         >
                           <Highlighter
-                            searchWords={search}
+                            searchWords={searchKeywords}
                             autoEscape={true}
-                            textToHighlight={row[columns[colIdx].id]}
+                            textToHighlight={row[columnOrder[colIdx].id] ?? ''}
                           />,
                         </TableCell>
                       ))}
@@ -448,7 +387,7 @@ export default function Inventory() {
           </TableContainer>
           <TablePagination
             rowsPerPageOptions={[10, 25]}
-            count={displayRows.length}
+            count={dataRows.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -458,7 +397,7 @@ export default function Inventory() {
         <Body variant='body1' align='center'>
           You can download your filtered table here <br />
           <CSVLink
-            data={displayRows}
+            data={dataRows}
             filename={"Filtered_Masterlist of Literature Articles.csv"}
           >
             Link

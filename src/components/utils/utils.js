@@ -59,7 +59,6 @@ export function setColumnValue() {
   data.data.table.cols.forEach((col, idx) => {
     columns[col.label] = idx
   })
-  // console.log('columns:', columns)
   setToStorage('position', jsonToText(columns))
 }
 

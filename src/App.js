@@ -4,9 +4,12 @@ import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useSelector } from "react-redux"
+
 import ScrollToTop from 'components/ScrollToTop';
 import Layout from 'components/Layout';
 import useFetch from 'components/utils/useFetch';
+
 
 import Home from 'pages/Home/Home';
 import About from 'pages/About';
@@ -18,8 +21,6 @@ import Data from 'pages/Data/Data';
 import DataChart from "pages/Data/DataChart";
 import DataExtraction from "pages/Data/DataExtraction";
 
-const SHEET_ID = process.env.REACT_APP_SHEET_ID
-
 let theme = createTheme({
   palette: {
     primary: blue,
@@ -30,7 +31,11 @@ let theme = createTheme({
 theme = responsiveFontSizes(theme)
 
 export default function App() {
-
+  const {
+    isPending,
+    isDataChanged,
+    databaseLink,
+  } = useSelector(state => state.rootData)
   // Uncomment for production only
   // var console = {}
   // console.log = function () { }
@@ -38,7 +43,7 @@ export default function App() {
 
   // Uncomment below for testing of caching
   // localStorage.clear()
-  const { isPending, isDataChanged } = useFetch('https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=published')
+  useFetch(databaseLink)
 
   const content = isPending ?
     <h1>

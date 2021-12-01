@@ -1,4 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+  setData,
+  setPosition,
+  setIsPending,
+  setError,
+  setIsDataChanged
+} from 'app/slice/rootData'
 import {
   textToJson,
   jsonToText,
@@ -6,71 +14,54 @@ import {
   setToStorage,
   compareObject,
   setColumnValue,
-  setLocationStudied,
 } from 'components/utils/utils';
 
-const useFetch = (url) => {
-  const [data, setData] = useState(null);
-  const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState(null);
-  const [isDataChanged, setIsDataChanged] = useState(false);
+// Time to live
+// const ttl = 86400000 // 24 hours
+const ttl = 300000
 
-  // const ttl = 86400000
-  const ttl = 300000
+const useFetch = (url) => {
+  const dispatch = useDispatch()
 
   useEffect(() => {
+    // Get the user current time
     const time = new Date()
     const now = time.getTime()
     const abortCont = new AbortController();
 
-    const storage = textToJson(getFromStorage("data")) === null ? {} : textToJson(getFromStorage("data"))
-    if (compareObject(storage, {}) || now > storage.expiry) {
-      setTimeout(() => {
-        fetch(url, { signal: abortCont.signal })
-          .then(res => {
-            // error coming back from server
-            if (!res.ok) throw Error('Error fetching data')
-            return res.text();
-          })
-          .then(text => {
-            const data = textToJson(text.substr(47).slice(0, -2))
-            setIsPending(false);
-            setData(data);
-            setError(null);
+    // Check previous data if existed
+    const storage = textToJson(getFromStorage("data")) ?? { expiry: -1, data: null }
 
-            //Check whether data is the same as old data
-            if (compareObject(storage.data, data))
-              setIsDataChanged(true);
-            else
-              setIsDataChanged(false);
+    if (now > storage.expiry) {
+      fetch(url, { signal: abortCont.signal })
+        .then(res => {
+          if (!res.ok) throw Error('Error fetching data')
+          return res.text();
+        })
+        .then(text => {
+          const data = textToJson(text.substr(47).slice(0, -2))
+          dispatch(setIsDataChanged(!compareObject(storage.data, data)))
+          setToStorage("data", jsonToText({ data: data, expiry: now + ttl }))
 
-            setToStorage("data", jsonToText({ data: data, expiry: now + ttl }))
-            setColumnValue()
-            setLocationStudied()
-            console.log("Data was fetched")
-          })
-          .catch(err => {
-            if (err.name === 'AbortError')
-              console.log('fetch aborted')
-            else {
-              // auto catches network / connection error
-              setIsPending(false);
-              setError(err.message);
-            }
-          })
-      })
+          // Set position of all the data
+          setColumnValue()
+          dispatch(setIsPending(false))
+          console.log("Data was fetched")
+        })
+        .catch(err => {
+          // auto catches network / connection error
+          dispatch(setIsPending(false))
+          dispatch(setError(err.message))
+        })
     } else {
-      setIsDataChanged(false);
-      setError(null);
-      setIsPending(false);
       console.log("Data was not fetched")
+      dispatch(setIsPending(false))
     }
-    setData(textToJson(getFromStorage('data')))
+    dispatch(setData(textToJson(getFromStorage("data"))))
+    dispatch(setPosition(textToJson(getFromStorage("position"))))
     // abort the fetch
     return () => abortCont.abort();
-  }, [url])
-  console.log("The current value of data is: ", data)
-  return { data, isPending, error, isDataChanged };
+  }, [url, dispatch])
 }
 
 export default useFetch;
