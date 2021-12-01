@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material';
-import { blue } from '@mui/material/colors';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useSelector } from "react-redux"
 
@@ -23,9 +22,17 @@ import DataExtraction from "pages/Data/DataExtraction";
 
 let theme = createTheme({
   palette: {
-    primary: blue,
+    primary: {
+      main: "#f8e6dc",
+    },
+    secondary: {
+      main: "#dceef8"
+    },
     divider: 'rgba(0, 0, 0, 0.3)',
   },
+  typography: {
+    fontFamily: "Lato",
+  }
 })
 
 theme = responsiveFontSizes(theme)

@@ -3,7 +3,8 @@ import { IconButton, Drawer, List, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { styled } from '@mui/system';
 import { ListItemButton } from '@mui/material';
-
+import { useSelector, useDispatch } from "react-redux";
+import { setRoute } from "app/slice/routeState";
 import MenuIcon from '@mui/icons-material/Menu';
 
 
@@ -11,14 +12,6 @@ const lists = [
   {
     text: 'Home',
     route: '/',
-  },
-  {
-    text: 'About',
-    route: '/about',
-  },
-  {
-    text: 'Fact Sheets',
-    route: '/factsheets',
   },
   {
     text: 'Map',
@@ -29,24 +22,39 @@ const lists = [
     route: '/data',
   },
   {
+    text: 'Fact Sheets',
+    route: '/factsheets',
+  },
+  {
     text: 'Feedback',
     route: '/feedback',
   },
+  {
+    text: 'About',
+    route: '/about',
+  },
 ]
 
-const StyledList = styled(List)({
+const StyledList = styled(List)(({ theme }) => ({
   width: '100%',
-  backgroundColor: '#2196f3',
-  color: 'white',
-})
+  backgroundColor: theme.palette.primary.main,
+}))
 
-const CustomizedItem = ({ route, text }) => {
+const CustomizedItem = ({ link, text }) => {
+  const dispatch = useDispatch()
+  const { route } = useSelector(state => state.routeState)
+
   return (
     <ListItemButton
       component={RouterLink}
       alignItems="center"
-      to={route}
-      sx={{ justifyContent: 'center' }}
+      to={link}
+      onClick={() => dispatch(setRoute(text))}
+      style={{
+        justifyContent: 'center',
+        backgroundColor: route === text ? '#dceef8' : '#f8e6dc',
+        fontWeight: 'bold',
+      }}
     >
       {text}
     </ListItemButton>
@@ -67,9 +75,18 @@ export default function NavBarMobile() {
         <MenuIcon />
       </IconButton>
       <div id='spacer' style={{ width: 10 }} />
-      <Typography align="center" >
-        Marine Litter Research Inventory
+      <Typography align="center" style={{ flexGrow: 1, fontWeight: 'bold' }}>
+        Marine Plastic Research Inventory
       </Typography>
+      <img
+        src="https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/Dugong%201.png?raw=true"
+        alt="Site logo"
+        width={40}
+        style={{
+          borderRadius: '30%',
+          margin: '0 auto',
+        }}
+      />
       <Drawer
         anchor='top'
         open={state}
@@ -80,7 +97,7 @@ export default function NavBarMobile() {
             <CustomizedItem
               key={index}
               text={list.text}
-              route={list.route}
+              link={list.route}
             />
           ))}
         </StyledList>
