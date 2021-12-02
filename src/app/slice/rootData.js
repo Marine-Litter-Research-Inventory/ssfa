@@ -8,6 +8,7 @@ const rootData = createSlice({
     error: null,
     isDataChanged: false,
     position: {},
+    lastUpdated: JSON.parse(localStorage.getItem("data")).time ?? "unknown",
     databaseLink: 'https://docs.google.com/spreadsheets/d/1yRLGaQk3-9UlopftPr5e8F-X3pKkjwLlZWcTwai6_Ds/gviz/tq?tqx=out:json&sheet=published',
   },
   reducers: {
@@ -26,6 +27,9 @@ const rootData = createSlice({
     setIsDataChanged: (state, action) => {
       state.isDataChanged = action.payload;
     },
+    setLastUpdated: (state, action) => {
+      state.lastUpdated = action.payload;
+    }
   }
 })
 
@@ -34,6 +38,7 @@ export const {
   setPosition,
   setIsPending,
   setError,
-  setIsDataChanged
+  setIsDataChanged,
+  setLastUpdated
 } = rootData.actions
 export default rootData.reducer

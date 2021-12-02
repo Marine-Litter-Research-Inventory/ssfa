@@ -28,6 +28,18 @@ let theme = createTheme({
     secondary: {
       main: "#dceef8"
     },
+    error: {
+      main: "#c53655",
+    },
+    warning: {
+      main: "#cf5500",
+    },
+    info: {
+      main: "#89bc00",
+    },
+    success: {
+      main: "#34bd6f"
+    },
     divider: 'rgba(0, 0, 0, 0.3)',
   },
   typography: {

@@ -5,7 +5,8 @@ import {
   setPosition,
   setIsPending,
   setError,
-  setIsDataChanged
+  setIsDataChanged,
+  setLastUpdated,
 } from 'app/slice/rootData'
 import {
   textToJson,
@@ -41,11 +42,14 @@ const useFetch = (url) => {
         .then(text => {
           const data = textToJson(text.substr(47).slice(0, -2))
           dispatch(setIsDataChanged(!compareObject(storage.data, data)))
-          setToStorage("data", jsonToText({ data: data, expiry: now + ttl }))
+          setToStorage("data", jsonToText({ data: data, expiry: now + ttl, time: time }))
 
           // Set position of all the data
           setColumnValue()
           dispatch(setIsPending(false))
+          dispatch(setData(textToJson(getFromStorage("data"))))
+          dispatch(setPosition(textToJson(getFromStorage("position"))))
+          dispatch(setLastUpdated(time))
           console.log("Data was fetched")
         })
         .catch(err => {
@@ -56,9 +60,10 @@ const useFetch = (url) => {
     } else {
       console.log("Data was not fetched")
       dispatch(setIsPending(false))
+      dispatch(setData(textToJson(getFromStorage("data"))))
+      dispatch(setPosition(textToJson(getFromStorage("position"))))
+      dispatch(setLastUpdated(storage.time))
     }
-    dispatch(setData(textToJson(getFromStorage("data"))))
-    dispatch(setPosition(textToJson(getFromStorage("position"))))
     // abort the fetch
     return () => abortCont.abort();
   }, [url, dispatch])

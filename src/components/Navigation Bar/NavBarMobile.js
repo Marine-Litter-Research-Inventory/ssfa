@@ -50,9 +50,10 @@ const CustomizedItem = ({ link, text }) => {
       alignItems="center"
       to={link}
       onClick={() => dispatch(setRoute(text))}
+      color={route === text ? '#dceef8' : '#f8e6dc'}
       style={{
         justifyContent: 'center',
-        backgroundColor: route === text ? '#dceef8' : '#f8e6dc',
+        // backgroundColor: route === text ? '#dceef8' : '#f8e6dc',
         fontWeight: 'bold',
       }}
     >

@@ -1,3 +1,12 @@
+:root {
+  --primary: #f8e6dc;
+  --secondary: #dceef8;
+  --error: #c53655;
+  --warning: #cf5500;
+  --info: #89bc00;
+  --success: #34bd6f;
+}
+
 /* base styles */
 * {
   margin: 0;
@@ -53,7 +62,7 @@ div #map path:hover {
 }
 
 .custom-shape-divider-top-1625571579 .shape-fill {
-  fill: #6fbff5;
+  fill: var(--primary);
 }
 
 /* Resource section wave */
