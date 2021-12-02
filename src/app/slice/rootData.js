@@ -8,7 +8,7 @@ const rootData = createSlice({
     error: null,
     isDataChanged: false,
     position: {},
-    lastUpdated: JSON.parse(localStorage.getItem("data")).time ?? "unknown",
+    lastUpdated: JSON.parse(localStorage.getItem("data")).time.toString() ?? "unknown",
     databaseLink: 'https://docs.google.com/spreadsheets/d/1yRLGaQk3-9UlopftPr5e8F-X3pKkjwLlZWcTwai6_Ds/gviz/tq?tqx=out:json&sheet=published',
   },
   reducers: {

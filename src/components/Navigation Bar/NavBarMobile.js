@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { IconButton, Drawer, List, Typography } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { styled } from '@mui/system';
 import { ListItemButton } from '@mui/material';
-import { useSelector, useDispatch } from "react-redux";
-import { setRoute } from "app/slice/routeState";
 import MenuIcon from '@mui/icons-material/Menu';
 
 
@@ -40,20 +38,15 @@ const StyledList = styled(List)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
 }))
 
-const CustomizedItem = ({ link, text }) => {
-  const dispatch = useDispatch()
-  const { route } = useSelector(state => state.routeState)
-
+const CustomizedItem = ({ route, text, location }) => {
   return (
     <ListItemButton
       component={RouterLink}
       alignItems="center"
-      to={link}
-      onClick={() => dispatch(setRoute(text))}
-      color={route === text ? '#dceef8' : '#f8e6dc'}
+      to={route}
       style={{
         justifyContent: 'center',
-        // backgroundColor: route === text ? '#dceef8' : '#f8e6dc',
+        backgroundColor: route === location.pathname ? '#c8a464' : '#f8e6dc',
         fontWeight: 'bold',
       }}
     >
@@ -64,6 +57,7 @@ const CustomizedItem = ({ link, text }) => {
 
 export default function NavBarMobile() {
   const [state, setState] = useState(false)
+  const location = useLocation();
 
   return (
     <>
@@ -80,7 +74,7 @@ export default function NavBarMobile() {
         Marine Plastic Research Inventory
       </Typography>
       <img
-        src="https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/Dugong%201.png?raw=true"
+        src="https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/Dugong%203.png?raw=true"
         alt="Site logo"
         width={40}
         style={{
@@ -98,7 +92,8 @@ export default function NavBarMobile() {
             <CustomizedItem
               key={index}
               text={list.text}
-              link={list.route}
+              route={list.route}
+              location={location}
             />
           ))}
         </StyledList>

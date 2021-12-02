@@ -49,7 +49,7 @@ const useFetch = (url) => {
           dispatch(setIsPending(false))
           dispatch(setData(textToJson(getFromStorage("data"))))
           dispatch(setPosition(textToJson(getFromStorage("position"))))
-          dispatch(setLastUpdated(time))
+          dispatch(setLastUpdated(time.toString()))
           console.log("Data was fetched")
         })
         .catch(err => {
@@ -62,7 +62,7 @@ const useFetch = (url) => {
       dispatch(setIsPending(false))
       dispatch(setData(textToJson(getFromStorage("data"))))
       dispatch(setPosition(textToJson(getFromStorage("position"))))
-      dispatch(setLastUpdated(storage.time))
+      dispatch(setLastUpdated(storage.time.toString()))
     }
     // abort the fetch
     return () => abortCont.abort();

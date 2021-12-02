@@ -1,8 +1,6 @@
 import React from "react";
 import { Button, Typography } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import { useSelector, useDispatch } from "react-redux";
-import { setRoute } from "app/slice/routeState";
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 
 const lists = [
   { text: 'Home', route: '/' },
@@ -14,13 +12,12 @@ const lists = [
 ]
 
 export default function NavBarNormal() {
-  const dispatch = useDispatch();
-  const { route } = useSelector(state => state.routeState);
+  const location = useLocation()
 
   return (
     <>
       <img
-        src="https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/Dugong%201.png?raw=true"
+        src="https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/Dugong%203.png?raw=true"
         alt="Site logo"
         width={50}
         style={{
@@ -44,15 +41,15 @@ export default function NavBarNormal() {
       {lists.map((list, idx) => (
         <Button
           key={idx}
-          color="inherit"
+          color="quaternary"
           component={RouterLink}
           to={list.route}
           sx={{
             textAlign: 'center',
             fontWeight: 'bold',
+            color: list.route === location.pathname ? "white" : "black",
           }}
-          onClick={() => dispatch(setRoute(list.text))}
-          variant={list.text === route ? "contained" : "text"}
+          variant={list.route === location.pathname ? "contained" : "text"}
         >
           {list.text}
         </Button>

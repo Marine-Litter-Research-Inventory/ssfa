@@ -26,7 +26,13 @@ let theme = createTheme({
       main: "#f8e6dc",
     },
     secondary: {
-      main: "#dceef8"
+      main: "#9c4a55"
+    },
+    tertiary: {
+      main: "#4f563f"
+    },
+    quaternary: {
+      main: "#c8a464"
     },
     error: {
       main: "#c53655",

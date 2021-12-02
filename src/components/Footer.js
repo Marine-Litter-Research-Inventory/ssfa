@@ -35,13 +35,13 @@ export default function Footer() {
               arrow
             >
               <InfoOutlinedIcon
-                color="info"
-                fontSize="large"
+                color="tertiary"
+                fontSize="medium"
                 style={{ marginRight: 10 }}
               />
             </Tooltip>
             <Typography
-              variant="subtitle1"
+              variant="subtitle2"
               component="span"
             >
               We welcome any feedback. Feel free to send us a message via the Feedback tab.
