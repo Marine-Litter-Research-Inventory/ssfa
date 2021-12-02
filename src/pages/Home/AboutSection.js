@@ -75,7 +75,7 @@ export default function AboutSection() {
         <div style={{ height: 100 }} />
         <Body variant='body1' align='justify'>
           This website provides access to a Research Inventory of marine plastics coordinated by the National University of Singapore and completed in November 2021 with a view of supporting the development of a regional node of the Global Partnership for Marine Litter (GMPL) under the leadership of the Coordinating Body for the Seas of East Asia (COBSEA).
-          <br /><br />
+          <br />
         </Body>
         <div style={{ textAlign: 'center' }}>
           <Button
