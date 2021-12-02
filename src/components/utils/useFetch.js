@@ -27,6 +27,14 @@ const useFetch = (url) => {
   useEffect(() => {
     // Get the user current time
     const time = new Date()
+    const formattedTime = time.toLocaleDateString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: false,
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    })
     const now = time.getTime()
     const abortCont = new AbortController();
 
@@ -42,14 +50,14 @@ const useFetch = (url) => {
         .then(text => {
           const data = textToJson(text.substr(47).slice(0, -2))
           dispatch(setIsDataChanged(!compareObject(storage.data, data)))
-          setToStorage("data", jsonToText({ data: data, expiry: now + ttl, time: time }))
+          setToStorage("data", jsonToText({ data: data, expiry: now + ttl, time: formattedTime }))
 
           // Set position of all the data
           setColumnValue()
           dispatch(setIsPending(false))
           dispatch(setData(textToJson(getFromStorage("data"))))
           dispatch(setPosition(textToJson(getFromStorage("position"))))
-          dispatch(setLastUpdated(time.toString()))
+          dispatch(setLastUpdated(formattedTime))
           console.log("Data was fetched")
         })
         .catch(err => {
@@ -62,7 +70,7 @@ const useFetch = (url) => {
       dispatch(setIsPending(false))
       dispatch(setData(textToJson(getFromStorage("data"))))
       dispatch(setPosition(textToJson(getFromStorage("position"))))
-      dispatch(setLastUpdated(storage.time.toString()))
+      dispatch(setLastUpdated(formattedTime))
     }
     // abort the fetch
     return () => abortCont.abort();

@@ -155,10 +155,10 @@ const Tile = ({ header, body }) => {
       <TileBody>
         <ul style={{ listStyleType: "none" }}>
           {body.map((contributor, idx) => (
-            <>
-              <li key={idx} style={{ margin: "0.5rem 0" }}>{contributor.name}</li>
+            <React.Fragment key={idx}>
+              <li style={{ margin: "0.5rem 0" }}>{contributor.name}</li>
               {body.length - 1 !== idx ? <Divider /> : null}
-            </>
+            </React.Fragment>
           ))}
         </ul>
       </TileBody>
