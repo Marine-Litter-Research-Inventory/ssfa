@@ -77,13 +77,19 @@ export default function App() {
     :
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/about" component={About} />
-      <Route exact path="/factsheets" component={Factsheets} />
       <Route exact path="/map" component={() => <Map isDataChanged={isDataChanged} />} />
+
       <Route exact path="/data" component={Data} />
-      <Route exact path="/data/chart" component={DataChart} />
-      <Route exact path="/data/extraction" component={DataExtraction} />
+      <Route exact path="/data/custom-data-subset" component={DataExtraction} />
+      <Route exact path="/data/research-landscape" component={DataChart} />
+      <Route exact path="/data/methodology-and-ontology" component={DataChart} />
+      <Route exact path="/data/scientific-research" component={DataChart} />
+      <Route exact path="/data/policy-legal-socio-economic-and-cultural-research" component={DataChart} />
+      <Route exact path="/data/information-for-policy-making" component={DataChart} />
+
+      <Route exact path="/factsheets" component={Factsheets} />
       <Route exact path="/feedback" component={Feedback} />
+      <Route exact path="/about" component={About} />
       <Route exact path="*" component={NotFound} />
     </Switch>
 

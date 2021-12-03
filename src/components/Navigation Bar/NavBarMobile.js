@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-import { IconButton, Drawer, List, Typography } from '@mui/material';
+import {
+  IconButton, Drawer, List, Typography,
+  Accordion, AccordionSummary, AccordionDetails,
+} from '@mui/material';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { styled } from '@mui/system';
 import { ListItemButton } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 
+// Icons
+import MenuIcon from '@mui/icons-material/Menu';
+import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
+
+function formatter(text, route) {
+  return { text, route }
+}
 
 const lists = [
   {
@@ -33,25 +42,98 @@ const lists = [
   },
 ]
 
+const dataOptions = [
+  formatter(
+    "Custom Data-Subset",
+    "/data/custom-data-subset"
+  ),
+  formatter(
+    "Research Landscape",
+    "/data/research-landscape"
+  ),
+  formatter(
+    "Methodology and Ontology",
+    "/data/methodology-and-ontology"
+  ),
+  formatter(
+    "Scientific Research",
+    "/data/scientific-research"
+  ),
+  formatter(
+    "Policy, legal, socio-economic and cultural research",
+    "/data/policy-legal-socio-economic-and-cultural-research"
+  ),
+  formatter(
+    "Information for policy-making",
+    "/data/information-for-policy-making"
+  ),
+]
+
+const Collapsible = ({ title }) => {
+  const location = useLocation()
+
+  const StyledAccordion = styled(Accordion)(({ theme }) => ({
+    backgroundColor: theme.palette.primary.main,
+  }))
+
+  const StyledAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+  }))
+
+  return (
+    <StyledAccordion disableGutters>
+      <StyledAccordionSummary
+        expandIcon={<ExpandMoreOutlinedIcon />}
+      >
+        <Typography
+          sx={{ width: "100%", fontWeight: 'bold' }}
+        >
+          {title}
+        </Typography>
+      </StyledAccordionSummary>
+      <AccordionDetails>
+        {dataOptions.map((list, idx) => (
+          <CustomizedItem
+            key={idx}
+            text={list.text}
+            route={list.route}
+            location={location}
+            activeColor={"quaternary"}
+            neutralColor={"secondary"}
+          >
+            {list.text}
+          </CustomizedItem>
+        ))}
+      </AccordionDetails>
+    </StyledAccordion>
+  )
+}
+
 const StyledList = styled(List)(({ theme }) => ({
   width: '100%',
   backgroundColor: theme.palette.primary.main,
 }))
 
-const CustomizedItem = ({ route, text, location }) => {
+const CustomizedItem = ({ route, text, location, activeColor, neutralColor }) => {
+
+  const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
+    backgroundColor: route === location.pathname ?
+      theme.palette[activeColor].main : theme.palette[neutralColor].main,
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    textAlign: 'center'
+  }))
+
   return (
-    <ListItemButton
+    <StyledListItemButton
       component={RouterLink}
       alignItems="center"
       to={route}
-      style={{
-        justifyContent: 'center',
-        backgroundColor: route === location.pathname ? '#c8a464' : '#f8e6dc',
-        fontWeight: 'bold',
-      }}
     >
       {text}
-    </ListItemButton>
+    </StyledListItemButton>
   )
 }
 
@@ -89,12 +171,17 @@ export default function NavBarMobile() {
       >
         <StyledList>
           {lists.map((list, index) => (
-            <CustomizedItem
-              key={index}
-              text={list.text}
-              route={list.route}
-              location={location}
-            />
+            list.route !== "/data" ?
+              <CustomizedItem
+                key={index}
+                text={list.text}
+                route={list.route}
+                location={location}
+                activeColor={"quaternary"}
+                neutralColor={"primary"}
+              />
+              :
+              <Collapsible title={list.text} />
           ))}
         </StyledList>
       </Drawer>

@@ -1,18 +1,96 @@
 import React from "react";
-import { Button, Typography } from '@mui/material';
+import {
+  Button, Typography,
+  Popover, ClickAwayListener,
+} from '@mui/material';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
+function formatter(text, route) {
+  return { text, route }
+}
+
 const lists = [
-  { text: 'Home', route: '/' },
-  { text: 'Map', route: '/map' },
-  { text: 'Data & Analytics', route: '/data' },
-  { text: 'Fact Sheets', route: '/factsheets' },
-  { text: 'Feedback', route: '/feedback' },
-  { text: 'About', route: '/about' },
+  formatter("Home", "/"),
+  formatter("Map", "/map"),
+  formatter("Data and Analytics", "/data"),
+  formatter("Fact Sheets", "/factsheets"),
+  formatter("Feedback", "/feedback"),
+  formatter("About", "/about"),
 ]
+
+const dataOptions = [
+  formatter(
+    "Custom Data-Subset",
+    "/data/custom-data-subset"
+  ),
+  formatter(
+    "Research Landscape",
+    "/data/research-landscape"
+  ),
+  formatter(
+    "Methodology and Ontology",
+    "/data/methodology-and-ontology"
+  ),
+  formatter(
+    "Scientific Research",
+    "/data/scientific-research"
+  ),
+  formatter(
+    "Policy, legal, socio-economic and cultural research",
+    "/data/policy-legal-socio-economic-and-cultural-research"
+  ),
+  formatter(
+    "Information for policy-making",
+    "/data/information-for-policy-making"
+  ),
+]
+
+const DataExtends = ({ anchorEl, open, onClose }) => {
+  const location = useLocation()
+
+  return (
+    <Popover
+      anchorEl={anchorEl}
+      open={open}
+      onClose={onClose}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+      }}
+    >
+      {dataOptions.map((list, idx) => (
+        <Button
+          key={idx}
+          color="quaternary"
+          component={RouterLink}
+          to={list.route}
+          sx={{
+            textAlign: 'center',
+            fontWeight: 'bold',
+            display: "block",
+            color: list.route === location.pathname ? "white" : "black",
+          }}
+          variant={list.route === location.pathname ? "contained" : "text"}
+        >
+          {list.text}
+        </Button>
+      ))}
+    </Popover>
+  )
+}
 
 export default function NavBarNormal() {
   const location = useLocation()
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const open = Boolean(anchorEl)
+
+  const handleClick = (event) => {
+    setAnchorEl(anchorEl ? null : event.currentTarget)
+  }
 
   return (
     <>
@@ -39,21 +117,43 @@ export default function NavBarNormal() {
         Research Inventory
       </Typography>
       {lists.map((list, idx) => (
-        <Button
-          key={idx}
-          color="quaternary"
-          component={RouterLink}
-          to={list.route}
-          sx={{
-            textAlign: 'center',
-            fontWeight: 'bold',
-            color: list.route === location.pathname ? "white" : "black",
-          }}
-          variant={list.route === location.pathname ? "contained" : "text"}
-        >
-          {list.text}
-        </Button>
-      ))}
+        list.route == "/data" ?
+          <>
+            <Button
+              key={idx}
+              color="quaternary"
+              component={RouterLink}
+              to={list.route}
+              sx={{
+                textAlign: 'center',
+                fontWeight: 'bold',
+                color: list.route === location.pathname ? "white" : "black",
+              }}
+              variant={list.route === location.pathname ? "contained" : "text"}
+              onClick={list.route == "/data" ? handleClick : null}
+            >
+              {list.text}
+            </Button>
+            <DataExtends anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)} />
+          </>
+          :
+          <Button
+            key={idx}
+            color="quaternary"
+            component={RouterLink}
+            to={list.route}
+            sx={{
+              textAlign: 'center',
+              fontWeight: 'bold',
+              color: list.route === location.pathname ? "white" : "black",
+            }}
+            variant={list.route === location.pathname ? "contained" : "text"}
+            onClick={list.route == "/data" ? handleClick : null}
+          >
+            {list.text}
+          </Button>
+      ))
+      }
     </>
   )
 }
