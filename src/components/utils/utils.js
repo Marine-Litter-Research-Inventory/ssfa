@@ -24,7 +24,7 @@ export function jsonToText(json) {
  * @returns {any} value of the local storage 
  */
 export function getFromStorage(name) {
-  return localStorage.getItem(name)
+  return textToJson(localStorage.getItem(name))
 }
 
 /**
@@ -34,7 +34,7 @@ export function getFromStorage(name) {
  * @returns {any} value of the local storage 
  */
 export function setToStorage(name, data) {
-  return localStorage.setItem(name, data)
+  return localStorage.setItem(name, jsonToText(data))
 }
 
 /**
@@ -53,13 +53,13 @@ export function compareObject(a, b) {
  * and then save to local storage under "position"
  * can be used to locate position of data in rows.
  */
-export function setColumnValue() {
-  const data = textToJson(getFromStorage('data'))
+export function setPositionValue() {
+  const data = getFromStorage('data')
   let columns = {}
   data.data.table.cols.forEach((col, idx) => {
     columns[col.label] = idx
   })
-  setToStorage('position', jsonToText(columns))
+  setToStorage('position', columns)
 }
 
 /**

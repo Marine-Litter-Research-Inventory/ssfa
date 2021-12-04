@@ -1,25 +1,23 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import initData from "data/initData.json"
 import {
-  setData,
-  setPosition,
   setIsPending,
-  setError,
+  setIsError,
   setIsDataChanged,
   setLastUpdated,
+  setErrorInfo
 } from 'app/slice/rootData'
 import {
   textToJson,
-  jsonToText,
   getFromStorage,
   setToStorage,
   compareObject,
-  setColumnValue,
 } from 'components/utils/utils';
 
 // Time to live
 // const ttl = 86400000 // 24 hours
-const ttl = 300000
+const ttl = 10000
 
 const useFetch = (url) => {
   const dispatch = useDispatch()
@@ -39,7 +37,7 @@ const useFetch = (url) => {
     const abortCont = new AbortController();
 
     // Check previous data if existed
-    const storage = textToJson(getFromStorage("data")) ?? { expiry: -1, data: null }
+    const storage = getFromStorage("data") ?? initData
 
     if (now > storage.expiry) {
       fetch(url, { signal: abortCont.signal })
@@ -49,27 +47,25 @@ const useFetch = (url) => {
         })
         .then(text => {
           const data = textToJson(text.substr(47).slice(0, -2))
+          setToStorage("data", { data: data, expiry: now + ttl, time: formattedTime })
           dispatch(setIsDataChanged(!compareObject(storage.data, data)))
-          setToStorage("data", jsonToText({ data: data, expiry: now + ttl, time: formattedTime }))
-
-          // Set position of all the data
-          setColumnValue()
-          dispatch(setIsPending(false))
-          dispatch(setData(textToJson(getFromStorage("data"))))
-          dispatch(setPosition(textToJson(getFromStorage("position"))))
           dispatch(setLastUpdated(formattedTime))
+          dispatch(setIsPending(false))
           console.log("Data was fetched")
         })
         .catch(err => {
           // auto catches network / connection error
           dispatch(setIsPending(false))
-          dispatch(setError(err.message))
+          dispatch(setIsError(true))
+          dispatch(setIsDataChanged(false))
+          dispatch(setErrorInfo(err.msg))
         })
     } else {
       console.log("Data was not fetched")
+      setToStorage("data", storage)
       dispatch(setIsPending(false))
-      dispatch(setData(textToJson(getFromStorage("data"))))
-      dispatch(setPosition(textToJson(getFromStorage("position"))))
+      dispatch(setIsError(false))
+      dispatch(setIsDataChanged(false))
       dispatch(setLastUpdated(formattedTime))
     }
     // abort the fetch

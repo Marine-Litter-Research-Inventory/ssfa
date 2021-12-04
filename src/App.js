@@ -8,8 +8,14 @@ import { useSelector } from "react-redux"
 import ScrollToTop from 'components/ScrollToTop';
 import Layout from 'components/Layout';
 import useFetch from 'components/utils/useFetch';
+import {
+  setToStorage,
+  setPositionValue,
+  getFromStorage,
+} from "components/utils/utils";
+import initData from "data/initData.json";
 
-
+import Loading from "pages/Loading"
 import Home from 'pages/Home/Home';
 import About from 'pages/About';
 import NotFound from 'pages/NotFound';
@@ -56,11 +62,6 @@ let theme = createTheme({
 theme = responsiveFontSizes(theme)
 
 export default function App() {
-  const {
-    isPending,
-    isDataChanged,
-    databaseLink,
-  } = useSelector(state => state.rootData)
   // Uncomment for production only
   // var console = {}
   // console.log = function () { }
@@ -68,41 +69,53 @@ export default function App() {
 
   // Uncomment below for testing of caching
   // localStorage.clear()
+
+  const {
+    isPending,
+    isDataChanged,
+    databaseLink,
+    isError,
+  } = useSelector(state => state.rootData)
+
   useFetch(databaseLink)
 
-  const content = isPending ?
-    <h1>
-      Please wait while we load the data for the website
-    </h1>
-    :
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/map" component={() => <Map isDataChanged={isDataChanged} />} />
-
-      <Route exact path="/data" component={Data} />
-      <Route exact path="/data/custom-data-subset" component={DataExtraction} />
-      <Route exact path="/data/research-landscape" component={DataChart} />
-      <Route exact path="/data/methodology-and-ontology" component={DataChart} />
-      <Route exact path="/data/scientific-research" component={DataChart} />
-      <Route exact path="/data/policy-legal-socio-economic-and-cultural-research" component={DataChart} />
-      <Route exact path="/data/information-for-policy-making" component={DataChart} />
-
-      <Route exact path="/factsheets" component={Factsheets} />
-      <Route exact path="/feedback" component={Feedback} />
-      <Route exact path="/about" component={About} />
-      <Route exact path="*" component={NotFound} />
-    </Switch>
+  React.useEffect(() => {
+    if (!Boolean(getFromStorage("position")))
+      setPositionValue()
+    else if (isDataChanged)
+      setPositionValue()
+  }, [isDataChanged])
 
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        <ScrollToTop />
-        <div className="App">
-          <Layout>
-            {content}
-          </Layout>
-        </div>
-      </Router>
+      {isPending ?
+        <Loading />
+        :
+        <Router>
+          <ScrollToTop />
+          <div className="App">
+            <Layout>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/map" component={() => <Map isDataChanged={isDataChanged} />} />
+
+                <Route exact path="/data" component={Data} />
+                {/* <Route exact path="/data/custom-data-subset" component={DataExtraction} /> */}
+                <Route exact path="/data/research-landscape" component={DataChart} />
+                <Route exact path="/data/methodology-and-ontology" component={DataChart} />
+                <Route exact path="/data/scientific-research" component={DataChart} />
+                <Route exact path="/data/policy-legal-socio-economic-and-cultural-research" component={DataChart} />
+                <Route exact path="/data/information-for-policy-making" component={DataChart} />
+
+                <Route exact path="/factsheets" component={Factsheets} />
+                <Route exact path="/feedback" component={Feedback} />
+                <Route exact path="/about" component={About} />
+                <Route exact path="*" component={NotFound} />
+              </Switch>
+            </Layout>
+          </div>
+        </Router>
+      }
     </ThemeProvider>
   );
 }
