@@ -40,12 +40,13 @@ const Header = styled(Typography)(({ theme }) => ({
   textAlign: 'center',
 }))
 
-const Body = styled(Typography)({
+const Body = styled(Typography)(({ theme }) => ({
   margin: 'auto',
-  marginBottom: 30,
   boxSizing: 'border-box',
   padding: 20,
-})
+  marginBottom: 30,
+  backgroundColor: theme.palette.primary.main,
+}))
 
 const CustomizePaper = ({ title, description, link }) => {
 

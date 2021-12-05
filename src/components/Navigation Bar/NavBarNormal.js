@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Button, Typography,
-  Popover, ClickAwayListener,
+  Popover,
 } from '@mui/material';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
@@ -117,8 +117,8 @@ export default function NavBarNormal() {
         Research Inventory
       </Typography>
       {lists.map((list, idx) => (
-        list.route == "/data" ?
-          <>
+        list.route === "/data" ?
+          <React.Fragment key={idx}>
             <Button
               key={idx}
               color="quaternary"
@@ -130,12 +130,12 @@ export default function NavBarNormal() {
                 color: list.route === location.pathname ? "white" : "black",
               }}
               variant={list.route === location.pathname ? "contained" : "text"}
-              onClick={list.route == "/data" ? handleClick : null}
+              onClick={list.route === "/data" ? handleClick : null}
             >
               {list.text}
             </Button>
             <DataExtends anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)} />
-          </>
+          </React.Fragment>
           :
           <Button
             key={idx}
@@ -148,7 +148,7 @@ export default function NavBarNormal() {
               color: list.route === location.pathname ? "white" : "black",
             }}
             variant={list.route === location.pathname ? "contained" : "text"}
-            onClick={list.route == "/data" ? handleClick : null}
+            onClick={list.route === "/data" ? handleClick : null}
           >
             {list.text}
           </Button>

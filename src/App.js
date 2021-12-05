@@ -9,11 +9,9 @@ import ScrollToTop from 'components/ScrollToTop';
 import Layout from 'components/Layout';
 import useFetch from 'components/utils/useFetch';
 import {
-  setToStorage,
   setPositionValue,
   getFromStorage,
 } from "components/utils/utils";
-import initData from "data/initData.json";
 
 import Loading from "pages/Loading"
 import Home from 'pages/Home/Home';
@@ -74,7 +72,6 @@ export default function App() {
     isPending,
     isDataChanged,
     databaseLink,
-    isError,
   } = useSelector(state => state.rootData)
 
   useFetch(databaseLink)
@@ -100,7 +97,7 @@ export default function App() {
                 <Route exact path="/map" component={() => <Map isDataChanged={isDataChanged} />} />
 
                 <Route exact path="/data" component={Data} />
-                {/* <Route exact path="/data/custom-data-subset" component={DataExtraction} /> */}
+                <Route exact path="/data/custom-data-subset" component={DataExtraction} />
                 <Route exact path="/data/research-landscape" component={DataChart} />
                 <Route exact path="/data/methodology-and-ontology" component={DataChart} />
                 <Route exact path="/data/scientific-research" component={DataChart} />

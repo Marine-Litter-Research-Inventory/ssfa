@@ -21,6 +21,7 @@ export default function Loading() {
       <Container maxWidth="md" align="center">
         <img
           src="Dugong.png"
+          alt="Dugong logo"
           width={150}
           height={150}
         />

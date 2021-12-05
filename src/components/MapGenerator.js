@@ -1,14 +1,10 @@
 // import for d3 tools
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { geoPath, geoConicEqualArea } from 'd3-geo';
 import * as d3 from 'd3';
 // @ts-ignore
 import data from 'data/geo.json';
-import {
-  countryNameFormatter,
-  getQuantity,
-  getCountryOfInstitutions
-} from "components/utils/utils";
+
 import useWindowDimensions from "components/utils/useWindowDimensions";
 
 //import for Material UI
@@ -17,34 +13,9 @@ import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 
 export default function MapGenerator({ isDataChanged = false }) {
   // States
-  const [paperQuantityList, setPaperQuantityList] = useState({})
-  const [institutionOriginList, setInstitutionOriginList] = useState({})
   const [windowWidth, windowHeight] = useWindowDimensions()
-  const width = windowWidth
+  const width = windowWidth * 0.8
   const height = windowHeight * 0.75
-
-  // Testing
-
-  // Generating data if there is no prior values
-  // Log from local storage if there is
-  useEffect(() => {
-    let paperQuantity = {}
-    let institutionOrigin = {}
-    if (isDataChanged) {
-      paperQuantity = getQuantity(JSON.parse(localStorage.getItem('data')))
-      institutionOrigin = getCountryOfInstitutions(JSON.parse(localStorage.getItem('data')))
-      localStorage.setItem('quantityOfPapers', JSON.stringify(paperQuantity))
-      localStorage.setItem('quantityOfInstitutions', JSON.stringify(institutionOrigin))
-      console.log('New quantity generation')
-    } else {
-      paperQuantity = JSON.parse(localStorage.getItem('quantityOfPapers'))
-      institutionOrigin = JSON.parse(localStorage.getItem('quantityOfInstitutions'))
-      console.log('Quantity from local storage')
-      // console.log(JSON.parse(localStorage.getItem('quantityOfPapers')))
-    }
-    setPaperQuantityList(paperQuantity)
-    setInstitutionOriginList(institutionOrigin)
-  }, [isDataChanged])
 
   // Function for tooltip beahviours
   useEffect(() => {
@@ -73,31 +44,31 @@ export default function MapGenerator({ isDataChanged = false }) {
         .style("display", "none")
     }
 
-    const infoBox = (countryName) => {
+    // const infoBox = (countryName) => {
 
-      let beautify = ''
-      for (let i = 0; i < institutionOriginList[countryName].length; i++) {
-        if (i < institutionOriginList[countryName].length - 1) {
-          beautify += institutionOriginList[countryName][i] + ', '
-        } else {
-          beautify += institutionOriginList[countryName][i] + '.'
-        }
-      }
+    //   let beautify = ''
+    //   for (let i = 0; i < institutionOriginList[countryName].length; i++) {
+    //     if (i < institutionOriginList[countryName].length - 1) {
+    //       beautify += institutionOriginList[countryName][i] + ', '
+    //     } else {
+    //       beautify += institutionOriginList[countryName][i] + '.'
+    //     }
+    //   }
 
-      const content = `There are ${paperQuantityList[countryName]} papers about ${countryName}`
-        + `<br/> The papers come from Institutions in ${beautify}`
-      return content
-    }
+    //   const content = `There are ${paperQuantityList[countryName]} papers about ${countryName}`
+    //     + `<br/> The papers come from Institutions in ${beautify}`
+    //   return content
+    // }
 
-    const mousemove = (event, countryName) => (Tooltip
-      .html(
-        paperQuantityList[countryName] !== undefined ?
-          infoBox(countryName) :
-          // `There are ${paperQuantityList[countryName]} papers about ${countryName}` :
-          `There are no papers about ${countryName}`
-      )
-      .style("right", "0px")
-    )
+    // const mousemove = (event, countryName) => (Tooltip
+    //   .html(
+    //     paperQuantityList[countryName] !== undefined ?
+    //       infoBox(countryName) :
+    //       // `There are ${paperQuantityList[countryName]} papers about ${countryName}` :
+    //       `There are no papers about ${countryName}`
+    //   )
+    //   .style("right", "0px")
+    // )
 
     // Projection generation
     const projection = geoConicEqualArea()
@@ -136,7 +107,7 @@ export default function MapGenerator({ isDataChanged = false }) {
       .call(zoomBehavior)
 
     const g = svg.append("g")
-      .attr("fill", 'lightskyblue')
+      .attr("fill", '#c8a464')
 
     g.selectAll("path")
       .data(data.features, feature => { return feature })
@@ -150,10 +121,10 @@ export default function MapGenerator({ isDataChanged = false }) {
 
     d3.select('g')
       .on("mouseover", mouseover)
-      .on("mousemove", event => {
-        let countryName = countryNameFormatter(event.srcElement.id)
-        mousemove(event, countryName)
-      })
+      // .on("mousemove", event => {
+      //   let countryName = countryNameFormatter(event.srcElement.id)
+      //   mousemove(event, countryName)
+      // })
       .on("mouseleave", mouseleave)
 
     function reset() {
@@ -166,12 +137,12 @@ export default function MapGenerator({ isDataChanged = false }) {
 
     d3.select("#re-center")
       .on("click", reset)
-  }, [width, height, paperQuantityList, institutionOriginList])
+  }, [width, height])
 
   return (
     <>
       <div style={{
-        border: '1px solid blue', overflow: 'auto', boxSizing: 'border-box',
+        border: '1px solid #4f563f', overflow: 'auto', boxSizing: 'border-box',
         // height: { height } 
       }}>
         <div id="map">

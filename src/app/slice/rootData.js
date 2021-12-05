@@ -1,28 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
+import initData from "data/initData.json"
+import { getFromStorage } from "components/utils/utils";
 
 const rootData = createSlice({
   name: "rootData",
   initialState: {
-    data: { expiry: -1, data: null },
-    isPending: true,
-    error: null,
-    isDataChanged: false,
-    position: {},
-    lastUpdated: JSON.parse(localStorage.getItem("data")).time.toString() ?? "unknown",
     databaseLink: 'https://docs.google.com/spreadsheets/d/1yRLGaQk3-9UlopftPr5e8F-X3pKkjwLlZWcTwai6_Ds/gviz/tq?tqx=out:json&sheet=published',
+    errorInfo: null,
+    isDataChanged: false,
+    isError: false,
+    isPending: true,
+    lastUpdated: getFromStorage("data")?.time.toString() ?? initData.lastUpdated,
   },
   reducers: {
-    setData: (state, action) => {
-      state.data = action.payload;
-    },
-    setPosition: (state, action) => {
-      state.position = action.payload;
-    },
     setIsPending: (state, action) => {
       state.isPending = action.payload;
     },
-    setError: (state, action) => {
-      state.error = action.payload;
+    setIsError: (state, action) => {
+      state.isError = action.payload;
+    },
+    setErrorInfo: (state, action) => {
+      state.errorInfo = action.payload;
     },
     setIsDataChanged: (state, action) => {
       state.isDataChanged = action.payload;
@@ -34,11 +32,10 @@ const rootData = createSlice({
 })
 
 export const {
-  setData,
-  setPosition,
   setIsPending,
-  setError,
+  setIsError,
   setIsDataChanged,
-  setLastUpdated
+  setLastUpdated,
+  setErrorInfo
 } = rootData.actions
 export default rootData.reducer
