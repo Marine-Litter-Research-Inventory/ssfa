@@ -77,11 +77,11 @@ export default function App() {
   useFetch(databaseLink)
 
   React.useEffect(() => {
-    if (!Boolean(getFromStorage("position")))
+    if (!Boolean(getFromStorage("position")) && !isPending)
       setPositionValue()
     else if (isDataChanged)
       setPositionValue()
-  }, [isDataChanged])
+  }, [isDataChanged, isPending])
 
   return (
     <ThemeProvider theme={theme}>

@@ -55,10 +55,11 @@ const useFetch = (url) => {
         })
         .catch(err => {
           // auto catches network / connection error
-          dispatch(setIsPending(false))
+          setToStorage("data", storage)
           dispatch(setIsError(true))
-          dispatch(setIsDataChanged(false))
           dispatch(setErrorInfo(err.msg))
+          dispatch(setIsDataChanged(false))
+          dispatch(setIsPending(false))
         })
     } else {
       console.log("Data was not fetched")
