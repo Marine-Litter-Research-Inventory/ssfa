@@ -66,7 +66,7 @@ function dataFormatting() {
   rows.forEach((item, idx) => {
     let row = item.c
     res.push({
-      id: idx,
+      id: idx + 1,
       title: row[position['Title']]?.v,
       translated: row[position['Translated Title']]?.v,
       authors: row[position['Author(s)']]?.v,
@@ -213,7 +213,7 @@ const CustomCell = (props) => {
       )
     case "id":
       return (
-        <Wrapper>{props.value + 1}</Wrapper>
+        <Wrapper>{props.value}</Wrapper>
       )
     default:
       return (
@@ -394,7 +394,7 @@ export default function DataExtraction() {
             <Paper elevation={1} style={{ height: 1000, marginBottom: "4rem" }}>
               <DataGrid
                 rows={dataRows}
-                columns={columnOrderLong}
+                columns={columnOrderLong.map(col => ({ ...col, valueFormatter: ({ value }) => value?.toString().replace(/\n/g, '') }))}
                 density="comfortable"
                 rowHeight={120}
                 columnBuffer={20}
