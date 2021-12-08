@@ -13,7 +13,6 @@ import {
   GridToolbarExport,
   GridToolbarColumnsButton,
 } from '@mui/x-data-grid';
-import { styled } from '@mui/system';
 import { CSVLink } from "react-csv";
 import {
   getFromStorage,
@@ -48,6 +47,9 @@ import ClearIcon from '@mui/icons-material/Clear';
 import SearchIcon from '@mui/icons-material/Search';
 import LinkIcon from '@mui/icons-material/Link';
 
+import Header from 'components/StyledComponents/Header';
+import Body from 'components/StyledComponents/Body';
+
 function dataFormatting() {
   let data = getFromStorage('data')
   let position = getFromStorage('position')
@@ -66,7 +68,7 @@ function dataFormatting() {
   rows.forEach((item, idx) => {
     let row = item.c
     res.push({
-      id: idx + 1,
+      id: row[position["ID"]]?.v ?? idx,
       title: row[position['Title']]?.v,
       translated: row[position['Translated Title']]?.v,
       authors: row[position['Author(s)']]?.v,
@@ -92,20 +94,6 @@ function dataFormatting() {
 function escapeRegExp(value) {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 }
-
-const Header = styled(Typography)(({ theme }) => ({
-  fontWeight: 'bold',
-  padding: '60px 20px',
-  boxSizing: 'border-box',
-  textAlign: 'center',
-}))
-
-const Body = styled(Typography)(({ theme }) => ({
-  boxSizing: 'border-box',
-  padding: 20,
-  marginBottom: 30,
-  backgroundColor: theme.palette.primary.main,
-}))
 
 const QuickSearchToolbar = (props) => {
   return (
@@ -172,9 +160,9 @@ const CustomCell = (props) => {
           width: props.width - 20,
           padding: 10,
           alignItems: 'center',
-          justifyContent: 'center',
+          // justifyContent: 'center',
           display: 'flex',
-          alignText: "left",
+          textAlign: "left",
           borderBottom: '1px solid',
         }}
       >
@@ -345,10 +333,12 @@ export default function DataExtraction() {
   return (
     <div>
       <Header variant='h2' align='center'>
-        Data Extraction
+        Custom Data-Subset
       </Header>
       <Container maxWidth="md">
-        <Body variant='body1'>
+        <Body variant='body1'
+          sx={{ backgroundColor: theme => theme.palette.primary.main, }}
+        >
           Explore the data compiled on research within, and about, marine plastic in Southeast and East Asia.
           <br /><br />
           <li>Select columns to show or hide, using the side bar.</li>
@@ -401,6 +391,7 @@ export default function DataExtraction() {
                 components={{
                   Cell: CustomCell,
                   Toolbar: QuickSearchToolbar,
+                  // ColumnsPanel: CustomPanel,
                 }}
                 componentsProps={{
                   cell: {
@@ -415,7 +406,7 @@ export default function DataExtraction() {
                       dispatch(setSearchDisplay(''))
                       requestSearch('')
                     },
-                  }
+                  },
                 }}
                 sx={{
                   "& .MuiDataGrid-row": {
@@ -427,12 +418,9 @@ export default function DataExtraction() {
                   "& .MuiDataGrid-iconSeparator": (theme) => ({
                     color: "#9c4a55",
                   }),
-                  "& .MuiDataGrid-columnHeaderTitle": {
-                    margin: "auto",
-                  },
-                  "& MuiDataGrid-virtualScrollerContent": {
+                  "& .MuiDataGrid-virtualScrollerContent": {
                     overflow: "unset",
-                  }
+                  },
                 }}
               />
             </Paper>

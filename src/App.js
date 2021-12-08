@@ -21,8 +21,12 @@ import Map from 'pages/Map';
 import Feedback from 'pages/Feedback';
 import Factsheets from 'pages/Factsheets';
 import Data from 'pages/Data/Data';
-import DataChart from "pages/Data/DataChart";
 import DataExtraction from "pages/Data/DataExtraction";
+import Information from "pages/Data/Information";
+import Methodology from "pages/Data/Methodology";
+import Policy from "pages/Data/Policy";
+import ResearchLandscape from "pages/Data/ResearchLandscape";
+import ScientificResearch from "pages/Data/ScientificResearch";
 
 let theme = createTheme({
   palette: {
@@ -98,11 +102,11 @@ export default function App() {
 
                 <Route exact path="/data" component={Data} />
                 <Route exact path="/data/custom-data-subset" component={DataExtraction} />
-                <Route exact path="/data/research-landscape" component={DataChart} />
-                <Route exact path="/data/methodology-and-ontology" component={DataChart} />
-                <Route exact path="/data/scientific-research" component={DataChart} />
-                <Route exact path="/data/policy-legal-socio-economic-and-cultural-research" component={DataChart} />
-                <Route exact path="/data/information-for-policy-making" component={DataChart} />
+                <Route exact path="/data/research-landscape" component={ResearchLandscape} />
+                <Route exact path="/data/methodology-and-ontology" component={Methodology} />
+                <Route exact path="/data/scientific-research" component={ScientificResearch} />
+                <Route exact path="/data/policy-legal-socio-economic-and-cultural-research" component={Policy} />
+                <Route exact path="/data/information-for-policy-making" component={Information} />
 
                 <Route exact path="/factsheets" component={Factsheets} />
                 <Route exact path="/feedback" component={Feedback} />

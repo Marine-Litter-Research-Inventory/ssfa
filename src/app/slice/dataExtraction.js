@@ -6,9 +6,9 @@ function formatter(headerName, field, width) {
 
 const initColumnsHeader = [
   formatter(
-    "No.",
+    "ID",
     "id",
-    100
+    80
   ),
   formatter(
     "Title",

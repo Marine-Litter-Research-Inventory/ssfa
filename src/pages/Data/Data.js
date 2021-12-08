@@ -134,7 +134,8 @@ export default function Data() {
         <Body variant='body1' align="justify">
           Explore the inventory of research that have been conducted on pollution from marine plastics in the seas of Southeast and East Asia, and analytical data that were generated from the inventory. Use the tiles below to navigate to a section to start.
           <br /><br />
-          The data represented in the research inventory is constantly evolving. Your participation is essential to make this resource more accurate and comprehensive. You can do that by providing feedback on existing data, or any other queries or suggestions.        </Body>
+          The data represented in the research inventory is constantly evolving. Your participation is essential to make this resource more accurate and comprehensive. You can do that by providing feedback on existing data, or any other queries or suggestions.
+        </Body>
         <Navigation />
       </Container>
     </div>

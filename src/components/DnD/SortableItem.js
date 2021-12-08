@@ -27,6 +27,9 @@ function SortableItem({ index, data }) {
     borderRadius: "1rem",
     margin: 3,
     textAlign: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   };
 
   return (

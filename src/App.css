@@ -67,3 +67,15 @@ div #map path:hover {
 .custom-shape-divider-top-1625586722 .shape-fill {
   fill: #ffffff;
 }
+
+.MuiDataGrid-panelFooter > .MuiButton-root,
+.MuiSwitch-input {
+  color: var(--secondary);
+}
+
+.MuiDataGrid-columnsPanelRow .MuiButtonBase-root.Mui-checked {
+  color: var(--tertiary);
+}
+.MuiSwitch-root .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+  background-color: var(--tertiary);
+}

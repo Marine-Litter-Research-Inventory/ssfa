@@ -2,7 +2,7 @@
 import React from 'react';
 import { Typography, Container, Grid, Divider } from '@mui/material';
 import { styled } from '@mui/system';
-import HeaderRibbon from 'components/HeaderRibbon';
+import HeaderRibbon from 'components/StyledComponents/HeaderRibbon';
 
 const logos = [
   {
