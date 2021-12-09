@@ -19,7 +19,6 @@ import {
 } from 'components/utils/utils';
 import {
   setDataRows,
-  setData,
   setSearchDisplay,
   setSearchKeywords,
   setColumnOrder,
@@ -49,47 +48,6 @@ import LinkIcon from '@mui/icons-material/Link';
 
 import Header from 'components/StyledComponents/Header';
 import Body from 'components/StyledComponents/Body';
-
-function dataFormatting() {
-  let data = getFromStorage('data')
-  let position = getFromStorage('position')
-  let rows = data.data.table.rows
-  let res = []
-  let exp = []
-  rows.forEach(item => {
-    let row = item.c
-    let temp = {}
-    for (const key in position) {
-      temp[key] = row[position[key]]?.v
-    }
-    exp.push(temp)
-  })
-
-  rows.forEach((item, idx) => {
-    let row = item.c
-    res.push({
-      id: row[position["ID"]]?.v ?? idx,
-      title: row[position['Title']]?.v,
-      translated: row[position['Translated Title']]?.v,
-      authors: row[position['Author(s)']]?.v,
-      research_topics: row[position['Research Topics']]?.v,
-      aim: row[position["Aim of Research"]]?.v,
-      coastal: row[position["Coastal or Offshore"]]?.v,
-      location_studied: row[position['Location/Territory studied']]?.v,
-      water_body_general: row[position['Water Body_General']]?.v,
-      key_findings: row[position["Key Findings"]]?.v,
-      methodologies: row[position['Methodologies Used ']]?.v,
-      geographic_scale: row[position['Geographical Scale']]?.v,
-      compartments: row[position['Field Sampling_Compartment']]?.v,
-      polymer: row[position['Plastic Characterisation_Polymer']]?.v,
-      year_published: row[position['Year Published']]?.v,
-      research_group: row[position['Research Group(s)']]?.v,
-      citation: row[position["Citation"]]?.v,
-      link: row[position['Link to source']]?.v,
-    })
-  })
-  return [res, exp]
-}
 
 function escapeRegExp(value) {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
@@ -310,14 +268,7 @@ export default function DataExtraction() {
     searchDisplay,
   } = useSelector(state => state.dataExtraction)
 
-  const [exportedData, setExportedData] = React.useState([])
-
-  React.useEffect(() => {
-    const [res, exp] = dataFormatting()
-    dispatch(setData(res))
-    setExportedData(exp)
-    dispatch(setDataRows(res))
-  }, [dispatch])
+  const exportedData = getFromStorage('exportedData')
 
   const requestSearch = (searchValue) => {
     dispatch(setSearchKeywords(searchValue))

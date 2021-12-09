@@ -11,65 +11,7 @@ import { ListItemButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 
-function formatter(text, route) {
-  return { text, route }
-}
-
-const lists = [
-  {
-    text: 'Home',
-    route: '/',
-  },
-  {
-    text: 'Map',
-    route: '/map',
-  },
-  {
-    text: 'Data & Analytics',
-    route: '/data',
-  },
-  {
-    text: 'Fact Sheets',
-    route: '/factsheets',
-  },
-  {
-    text: 'Feedback',
-    route: '/feedback',
-  },
-  {
-    text: 'About',
-    route: '/about',
-  },
-]
-
-const dataOptions = [
-  formatter(
-    "Custom Data-Subset",
-    "/data/custom-data-subset"
-  ),
-  formatter(
-    "Research Landscape",
-    "/data/research-landscape"
-  ),
-  formatter(
-    "Methodology and Ontology",
-    "/data/methodology-and-ontology"
-  ),
-  formatter(
-    "Scientific Research",
-    "/data/scientific-research"
-  ),
-  formatter(
-    "Policy, legal, socio-economic and cultural research",
-    "/data/policy-legal-socio-economic-and-cultural-research"
-  ),
-  formatter(
-    "Information for policy-making",
-    "/data/information-for-policy-making"
-  ),
-]
-
-const Collapsible = ({ title }) => {
+const Collapsible = ({ title, dataOptions }) => {
   const location = useLocation()
 
   const StyledAccordion = styled(Accordion)(({ theme }) => ({
@@ -137,7 +79,7 @@ const CustomizedItem = ({ route, text, location, activeColor, neutralColor }) =>
   )
 }
 
-export default function NavBarMobile() {
+export default function NavBarMobile({ lists, dataOptions }) {
   const [state, setState] = useState(false)
   const location = useLocation();
 
@@ -153,7 +95,7 @@ export default function NavBarMobile() {
       </IconButton>
       <div id='spacer' style={{ width: 10 }} />
       <Typography align="center" style={{ flexGrow: 1, fontWeight: 'bold' }}>
-        Marine Plastic Research Inventory
+        Marine Plastic Research Inventory (Beta)
       </Typography>
       <img
         src="https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/Dugong%203.png?raw=true"
@@ -181,7 +123,11 @@ export default function NavBarMobile() {
                 neutralColor={"primary"}
               />
               :
-              <Collapsible title={list.text} />
+              <Collapsible
+                key={index}
+                title={list.text}
+                dataOptions={dataOptions}
+              />
           ))}
         </StyledList>
       </Drawer>

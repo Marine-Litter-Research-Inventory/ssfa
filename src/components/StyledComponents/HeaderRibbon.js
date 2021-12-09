@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
-export default function HeaderRibbon({ text, variant, color }) {
+export default function HeaderRibbon({ text, color, ...props }) {
 
   const Ribbon = styled("div")(({ theme }) => ({
     backgroundColor: theme.palette[color].main,
@@ -18,7 +18,7 @@ export default function HeaderRibbon({ text, variant, color }) {
   return (
     <div>
       <Ribbon>
-        <Typography variant={variant}>{text}</Typography>
+        <Typography {...props}>{text}</Typography>
       </Ribbon>
     </div>
   )

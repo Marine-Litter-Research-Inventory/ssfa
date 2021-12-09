@@ -1,8 +1,8 @@
 // @ts-nocheck
 import React from 'react';
-import { Typography, Container, Grid, Divider } from '@mui/material';
-import { styled } from '@mui/system';
-import HeaderRibbon from 'components/StyledComponents/HeaderRibbon';
+import { Container, Grid } from '@mui/material';
+import Header from 'components/StyledComponents/Header';
+import Body from 'components/StyledComponents/Body';
 
 const logos = [
   {
@@ -10,11 +10,11 @@ const logos = [
     alt: 'CIL logo',
     style: { width: '100%' },
   },
-  {
-    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/NUS.png',
-    alt: 'NUS logo',
-    style: { width: '100%' },
-  },
+  // {
+  //   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/NUS.png',
+  //   alt: 'NUS logo',
+  //   style: { width: '100%' },
+  // },
   {
     src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/TMSI.png',
     alt: 'TMSI logo',
@@ -25,11 +25,11 @@ const logos = [
     alt: 'COBSEA logo',
     style: { width: '100%' },
   },
-  {
-    src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/download.png',
-    alt: 'UNEP logo',
-    style: { width: '100%' },
-  },
+  // {
+  //   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/download.png',
+  //   alt: 'UNEP logo',
+  //   style: { width: '100%' },
+  // },
   {
     src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/SEA-circular_RGB_badge-color-min1.png',
     alt: 'SeaCircular logo',
@@ -43,128 +43,38 @@ const logos = [
   },
 ]
 
-const partners = [
-  {
-    country: "Malaysia",
-    contributors: [
-      {
-        name: "Changi Wong",
-        link: "/",
-      },
-      {
-        name: "Japareng Lalung and his team",
-        link: "/",
-      },
-      {
-        name: "Moritz Mueller",
-        link: "/",
-      },
-    ]
-  },
-  {
-    country: "Vietnam",
-    contributors: [
-      {
-        name: "Tri Van",
-        link: "/",
-      },
-    ]
-  },
-  {
-    country: "Philippines",
-    contributors: [
-      {
-        name: "Neil Angelo S.Abreo",
-        link: "/",
-      },
-    ]
-  },
-  {
-    country: "Thailand",
-    contributors: [
-      {
-        name: "Chawalit",
-        link: "/",
-      },
-    ]
-  },
-  {
-    country: "Indonesia",
-    contributors: [
-      {
-        name: "Sulistiowati",
-        link: "/",
-      },
-    ]
-  },
-  {
-    country: "Myanmar",
-    contributors: [
-      {
-        name: "Thanda Ko Gyi",
-        link: "/",
-      },
-    ]
-  },
-  {
-    country: "China",
-    contributors: [
-      {
-        name: "Zhu Lixin and his team",
-        link: "/",
-      },
-    ]
-  },
+// const Tile = ({ header, body }) => {
 
-]
+//   const TileHeader = styled("div")(({ theme }) => ({
+//     backgroundColor: theme.palette.quaternary.main,
+//     color: "white",
+//     padding: "0.5rem",
+//     borderRadius: "1rem 1rem 0 0",
+//     fontWeight: "bold",
+//   }))
 
-const Header = styled(Typography)(({ theme }) => ({
-  fontWeight: 'bold',
-  padding: `60px 20px`,
-  boxSizing: 'border-box',
-  textAlign: 'center',
-}))
+//   const TileBody = styled("div")(({ theme }) => ({
+//     backgroundColor: theme.palette.primary.main,
+//     padding: "1rem",
+//     borderRadius: "0 0 1rem 1rem",
+//   }))
 
-const Body = styled(Typography)({
-  margin: 'auto',
-  marginBottom: 30,
-  boxSizing: 'border-box',
-  padding: 20,
-})
-
-
-const Tile = ({ header, body }) => {
-
-  const TileHeader = styled("div")(({ theme }) => ({
-    backgroundColor: theme.palette.quaternary.main,
-    color: "white",
-    padding: "0.5rem",
-    borderRadius: "1rem 1rem 0 0",
-    fontWeight: "bold",
-  }))
-
-  const TileBody = styled("div")(({ theme }) => ({
-    backgroundColor: theme.palette.primary.main,
-    padding: "1rem",
-    borderRadius: "0 0 1rem 1rem",
-  }))
-
-  return (
-    <div>
-      <TileHeader>{header}</TileHeader>
-      <TileBody>
-        <ul style={{ listStyleType: "none" }}>
-          {body.map((contributor, idx) => (
-            <React.Fragment key={idx}>
-              <li style={{ margin: "0.5rem 0" }}>{contributor.name}</li>
-              {body.length - 1 !== idx ? <Divider /> : null}
-            </React.Fragment>
-          ))}
-        </ul>
-      </TileBody>
-    </div>
-  )
-}
+//   return (
+//     <div>
+//       <TileHeader>{header}</TileHeader>
+//       <TileBody>
+//         <ul style={{ listStyleType: "none" }}>
+//           {body.map((contributor, idx) => (
+//             <React.Fragment key={idx}>
+//               <li style={{ margin: "0.5rem 0" }}>{contributor.name}</li>
+//               {body.length - 1 !== idx ? <Divider /> : null}
+//             </React.Fragment>
+//           ))}
+//         </ul>
+//       </TileBody>
+//     </div>
+//   )
+// }
 
 export default function About() {
 
@@ -174,16 +84,16 @@ export default function About() {
         About
       </Header>
       <Container maxWidth='md' sx={{ marginBottom: 5 }}>
-        <HeaderRibbon
-          text='Organisations and partners'
-          color="secondary"
-          variant="h6"
-        />
         <Body variant='body1' align='justify'>
-          This temporary resource site is designed to provide resources on research on marine plastic pollution to researchers in Southeast and East Asia (SE-EA), pending the development of an research inventory and resource platform to that effect. The development of this  on-line tool, which  will further support the regional node of the Global Partnership for Marine Litter (GMPL), is being led by the Coordinating Body for the Seas of East Asia (COBSEA).
+          The regional team involved in the development of the database was composed of more than 30 researchers from Southeast and East Asia.
           <br /><br />
-          This initiative takes place in the wider context of a series of research projects undertaken by the Policy-Science Research Team of the National University of Singapore (NUS) with a view to strengthen the overall understanding of marine plastic research in SE-EA, the state of knowledge, as well as practices and issues faced. In this context, NUS and COBSEA/UNEP have undertaken two successive projects. The first one concluded with the online publication of an inventory of marine plastic research in SE-EA in Auguste 2020. The current project started on 1 January 2021.
+          It has been coordinated by a multi-disciplinary core team from the National University of Singapore (NUS) with the Centre for International Law (CIL) as overall lead coordinator and the Tropical Marine Science Institute  (TMSI) as lead-controller of marine scientific data extraction. The NUS home team included regional researchers from Singapore, China, Indonesia, RO Korea and Vietnam. It was composed of Youna Lyons, Cheng Ling Lim, 刘雨露 (Yulu Liu), Bùi Quang Huy (Bui Quang Huy), Dennis Tan, Dita Liliansa, 정다운 (Dawoon Jung),  Sng Wen Xin, Vũ Hải Đăng (Vu Hai Dang) from CIL; Mei Lin Neo, Jenny Fong, Lee Hsien Rong Samuel and Theresa Su from TMSI.
           <br /><br />
+          The extended region team, without whom the RRI 2.0 could not have been built, included Japareng Lalung and his team (Universiti Sains Malaysia, Malaysia), Changi Wong and Moritz Mueller (Swinburne Sarawak, Malaysia), Văn Phạm Đăng Trí (Van Pham Dang Tri) and Lê Hoàng Hải Anh (Le Hoang Hai Anh) (Can Tho University, Vietnam), Neil Angelo S. Abreo (University of the Philippines-Mindanao, the Philippines), Ronan Baculi and Deo Onda (Marine Science Institute, the Philippines), ชวลิต เจริญพงษ์ (Chawalit Net Charoenpong), ปิ่นมนัส บูชา (Pinamas Bucha), เพ็ญใจ สมพงษ์ชัยกุล (Penjai Sompongchaiyakul) and ราฮุล เมโรทรา (Rahul Mehrotra) (Chulalongkorn University, Thailand), Sulistiowati and Muhammad Reza Cordova (Indonesian Institute of Science (LIPI), Indonesia), သန္တာကိုကြီး (Thanda Ko Gyi) (Myanmar Ocean Project, Myanmar), 李道季 (Li Daoji) and 朱礼鑫 (Zhu Lixin) and their team (East China Normal University, China). Unfortunately, no Japanese researchers could join us. However, we will continue to extend the regional teams and contributing researchers, including from institutions in RO Korea and Japan.
+          <br /><br />
+          The team, RRI 2.0 and its visual displays and factsheets also benefited greatly from the external critical and constructive review of Karen Raubenheimer (ANCORS, University of Wollongong, Australia) and the provision of graphic-design content (including the dugong mascot) and batik colour scheme by Fanny Esquivel (https://www.fannyesquivel.net).
+          <br /><br />
+          Key institutional partners in the development projects have their logo below.
         </Body>
         <Grid
           container
@@ -200,34 +110,6 @@ export default function About() {
             </React.Fragment>
           ))}
         </Grid>
-        <br /><br /><br />
-        <HeaderRibbon
-          text='Contributors'
-          color="secondary"
-          variant="h6"
-        />
-        <Body variant="body1">
-          With special thanks to our regional partners and contributors, without whom the work could not have been achieved:
-        </Body>
-        <Grid
-          container
-          gap={5}
-          justifyContent="center"
-          alignItems='center'
-          align='center'
-        >
-          {partners.map((partner, idx) => (
-            <React.Fragment key={idx}>
-              <Grid item xs={5} md={3}>
-                <Tile
-                  header={partner.country}
-                  body={partner.contributors}
-                />
-              </Grid>
-            </React.Fragment>
-          ))}
-        </Grid>
-
       </Container>
     </>
   )

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Information() {
+export default function Institutions() {
   return (
     <div>
       To be continued

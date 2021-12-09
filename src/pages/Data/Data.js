@@ -11,32 +11,37 @@ const Tiles = [
   formatter(
     "Custom Data-Subset",
     "/data/custom-data-subset",
-    "Search and filter through a sub-section of the data contained in the inventory, for your customised exploration"
+    "Search and filter through a sub-section of the data contained in the inventory that best responds to your interest"
   ),
   formatter(
     "Research Landscape",
     "/data/research-landscape",
-    "Charts and graphs on the profile of research conducted on marine plastics in the seas of Southeast and East Asia"
+    "Explore charts and graphs on the profile of research conducted on marine plastics in the seas of Southeast and East Asia"
   ),
   formatter(
     "Methodology and Ontology",
     "/data/methodology-and-ontology",
-    "Description of the methodology and database ontology adopted to develop the inventory"
+    "Consult the methodology and database ontology adopted to develop the research inventory"
   ),
   formatter(
     "Scientific Research",
     "/data/scientific-research",
-    "Charts and graphs on the characteristics of scientific research"
+    "Explore charts and graphs on the characteristics of scientific research publications"
   ),
   formatter(
-    "Policy, legal, socio-economic and cultural research",
-    "/data/policy-legal-socio-economic-and-cultural-research",
-    "Charts and graphs on aspects of policy, legal, socio-economic and cultural research"
+    "Research in Humanities",
+    "/data/research-in-humanities",
+    "Explore charts and graphs on the characteristics of research publications in the legal, policy, socio-economic and cultural fields of research"
   ),
   formatter(
-    "Information for policy-making",
+    "Information for Policy-Making",
     "/data/information-for-policy-making",
-    "Charts and graphs on insight that may be gained from the Inventory for  that policy- making purposes"
+    "Explore charts and graphs on insight that may be gained from the Research Inventory for  policy- making purposes"
+  ),
+  formatter(
+    "Reserach Institutions",
+    "/data/research-institutions",
+    "Explore research institutions, researchers, their country/territory and areas of research "
   ),
 ]
 

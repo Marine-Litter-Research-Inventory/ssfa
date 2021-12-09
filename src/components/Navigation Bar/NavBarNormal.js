@@ -5,47 +5,7 @@ import {
 } from '@mui/material';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
-function formatter(text, route) {
-  return { text, route }
-}
-
-const lists = [
-  formatter("Home", "/"),
-  formatter("Map", "/map"),
-  formatter("Data and Analytics", "/data"),
-  formatter("Fact Sheets", "/factsheets"),
-  formatter("Feedback", "/feedback"),
-  formatter("About", "/about"),
-]
-
-const dataOptions = [
-  formatter(
-    "Custom Data-Subset",
-    "/data/custom-data-subset"
-  ),
-  formatter(
-    "Research Landscape",
-    "/data/research-landscape"
-  ),
-  formatter(
-    "Methodology and Ontology",
-    "/data/methodology-and-ontology"
-  ),
-  formatter(
-    "Scientific Research",
-    "/data/scientific-research"
-  ),
-  formatter(
-    "Policy, legal, socio-economic and cultural research",
-    "/data/policy-legal-socio-economic-and-cultural-research"
-  ),
-  formatter(
-    "Information for policy-making",
-    "/data/information-for-policy-making"
-  ),
-]
-
-const DataExtends = ({ anchorEl, open, onClose }) => {
+const DataExtends = ({ anchorEl, open, onClose, dataOptions }) => {
   const location = useLocation()
 
   return (
@@ -83,7 +43,7 @@ const DataExtends = ({ anchorEl, open, onClose }) => {
   )
 }
 
-export default function NavBarNormal() {
+export default function NavBarNormal({ lists, dataOptions }) {
   const location = useLocation()
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
@@ -114,7 +74,7 @@ export default function NavBarNormal() {
       >
         Marine Plastic
         <br />
-        Research Inventory
+        Research Inventory (Beta)
       </Typography>
       {lists.map((list, idx) => (
         list.route === "/data" ?
@@ -134,7 +94,12 @@ export default function NavBarNormal() {
             >
               {list.text}
             </Button>
-            <DataExtends anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)} />
+            <DataExtends
+              anchorEl={anchorEl}
+              open={open}
+              dataOptions={dataOptions}
+              onClose={() => setAnchorEl(null)}
+            />
           </React.Fragment>
           :
           <Button

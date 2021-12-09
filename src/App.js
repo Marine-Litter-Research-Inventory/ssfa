@@ -22,11 +22,12 @@ import Feedback from 'pages/Feedback';
 import Factsheets from 'pages/Factsheets';
 import Data from 'pages/Data/Data';
 import DataExtraction from "pages/Data/DataExtraction";
-import Information from "pages/Data/Information";
 import Methodology from "pages/Data/Methodology";
 import Policy from "pages/Data/Policy";
 import ResearchLandscape from "pages/Data/ResearchLandscape";
 import ScientificResearch from "pages/Data/ScientificResearch";
+import Institutions from 'pages/Data/Institutions';
+import Humanities from 'pages/Data/Humanities';
 
 let theme = createTheme({
   palette: {
@@ -105,8 +106,9 @@ export default function App() {
                 <Route exact path="/data/research-landscape" component={ResearchLandscape} />
                 <Route exact path="/data/methodology-and-ontology" component={Methodology} />
                 <Route exact path="/data/scientific-research" component={ScientificResearch} />
-                <Route exact path="/data/policy-legal-socio-economic-and-cultural-research" component={Policy} />
-                <Route exact path="/data/information-for-policy-making" component={Information} />
+                <Route exact path="/data/research-in-humanities" component={Humanities} />
+                <Route exact path="/data/information-for-policy-making" component={Policy} />
+                <Route exact path="/data/research-institutions" component={Institutions} />
 
                 <Route exact path="/factsheets" component={Factsheets} />
                 <Route exact path="/feedback" component={Feedback} />
