@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, Container, Paper, Skeleton } from '@mui/material';
+import { Typography, Container, Paper, Skeleton } from '@mui/material';
 import { styled } from '@mui/system';
 import Header from 'components/StyledComponents/Header';
 import Body from 'components/StyledComponents/Body';
