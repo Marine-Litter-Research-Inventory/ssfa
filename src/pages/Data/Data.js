@@ -2,6 +2,8 @@ import React from 'react';
 import { Typography, Grid, ButtonBase, Skeleton, Container } from '@mui/material';
 import { styled } from '@mui/system';
 import { Link } from "react-router-dom";
+import Header from "components/StyledComponents/Header";
+import Body from "components/StyledComponents/Body";
 
 function formatter(title, route, description) {
   return { title, route, description }
@@ -37,28 +39,8 @@ const Tiles = [
     "Information for Policy-Making",
     "/data/information-for-policy-making",
     "Explore charts and graphs on insight that may be gained from the Research Inventory for  policy- making purposes"
-  ),
-  formatter(
-    "Reserach Institutions",
-    "/data/research-institutions",
-    "Explore research institutions, researchers, their country/territory and areas of research "
-  ),
+  )
 ]
-
-const Header = styled(Typography)(({ theme }) => ({
-  fontWeight: 'bold',
-  padding: `60px 20px`,
-  boxSizing: 'border-box',
-  textAlign: 'center',
-}))
-
-const Body = styled(Typography)(({ theme }) => ({
-  margin: 'auto',
-  boxSizing: 'border-box',
-  padding: 20,
-  marginBottom: 30,
-  backgroundColor: theme.palette.primary.main,
-}))
 
 const Tile = ({ title, description, LinkComponent, to }) => {
 
@@ -136,7 +118,7 @@ export default function Data() {
         <Header variant='h2' align='center'>
           Data & Analytics
         </Header>
-        <Body variant='body1' align="justify">
+        <Body variant='body1' align="justify" sx={{ backgroundColor: theme => theme.palette.primary.main }}>
           Explore the inventory of research that have been conducted on pollution from marine plastics in the seas of Southeast and East Asia, and analytical data that were generated from the inventory. Use the tiles below to navigate to a section to start.
           <br /><br />
           The data represented in the research inventory is constantly evolving. Your participation is essential to make this resource more accurate and comprehensive. You can do that by providing feedback on existing data, or any other queries or suggestions.

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SwipeableDrawer } from '@mui/material';
 import { styled } from '@mui/system';
 
-import ExperimentalChart from 'components/Chart/ExperimentalChart';
+import ExperimentalChart from 'components/Chart/OldChart/ExperimentalChart';
 import WordCloudChart from 'components/Chart/WordCloud';
 // import DonutChart from 'components/Chart/DonutChart';
 

@@ -103,7 +103,7 @@ export default function ScientificResearch() {
     <div>
       <Container>
         <Header variant="h2" align="center">
-          Research Landscape
+          Scientific Research
         </Header>
         {data.map((section, index) => (
           <Section

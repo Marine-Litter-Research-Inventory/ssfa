@@ -13,6 +13,7 @@ import {
   getFromStorage,
   setToStorage,
   compareObject,
+  setPositionValue,
 } from 'components/utils/utils';
 import {
   setDataRows,
@@ -93,6 +94,7 @@ const useFetch = (url) => {
         .then(text => {
           const data = textToJson(text.substr(47).slice(0, -2))
           setToStorage("data", { data: data, expiry: now + ttl, time: formattedTime })
+          setPositionValue()
           const [res, exp] = dataFormatting()
           setToStorage("exportedData", exp)
           dispatch(setDataRows(res))
@@ -105,6 +107,7 @@ const useFetch = (url) => {
         .catch(err => {
           // auto catches network / connection error
           setToStorage("data", storage)
+          setPositionValue()
           const [res, exp] = dataFormatting()
           setToStorage("exportedData", exp)
           dispatch(setDataRows(res))
@@ -117,6 +120,7 @@ const useFetch = (url) => {
     } else {
       console.log("Data was not fetched")
       setToStorage("data", storage)
+      setPositionValue()
       const [res, exp] = dataFormatting()
       setToStorage("exportedData", exp)
       dispatch(setDataRows(res))

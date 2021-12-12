@@ -43,10 +43,6 @@ const dataOptions = [
     "Information for Policy-Making",
     "/data/information-for-policy-making",
   ),
-  formatter(
-    "Reserach Institutions",
-    "/data/research-institutions",
-  ),
 ]
 
 
