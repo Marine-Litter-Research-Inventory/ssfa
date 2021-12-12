@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "components/Navigation Bar/Navbar";
-import Footer from 'components/Footer';
-import useWindowDimensions from "./utils/useWindowDimensions";
+import Footer from 'components/Layout/Footer';
+import useWindowDimensions from "../utils/useWindowDimensions";
 
 export default function Layout({ children }) {
   let height = useWindowDimensions()[1]

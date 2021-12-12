@@ -5,8 +5,8 @@ import { ThemeProvider } from '@mui/material';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useSelector } from "react-redux"
 
-import ScrollToTop from 'components/ScrollToTop';
-import Layout from 'components/Layout';
+import ScrollToTop from 'components/utils/ScrollToTop';
+import Layout from 'components/Layout/Layout';
 import useFetch from 'components/utils/useFetch';
 import {
   setPositionValue,

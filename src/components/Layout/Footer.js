@@ -6,7 +6,7 @@ import { styled } from "@mui/system";
 import React from "react";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useSelector } from 'react-redux';
-import WaveUpper from "./WaveUpper";
+import WaveUpper from "components/StyledComponents/WaveUpper";
 
 
 const Wrapper = styled("div")(({ theme }) => ({
