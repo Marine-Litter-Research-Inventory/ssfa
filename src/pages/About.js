@@ -10,11 +10,6 @@ const logos = [
     alt: 'CIL logo',
     style: { width: '100%' },
   },
-  // {
-  //   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/NUS.png',
-  //   alt: 'NUS logo',
-  //   style: { width: '100%' },
-  // },
   {
     src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/TMSI.png',
     alt: 'TMSI logo',
@@ -25,11 +20,6 @@ const logos = [
     alt: 'COBSEA logo',
     style: { width: '100%' },
   },
-  // {
-  //   src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/download.png',
-  //   alt: 'UNEP logo',
-  //   style: { width: '100%' },
-  // },
   {
     src: 'https://github.com/Marine-Litter-Research-Inventory/image/blob/main/logos/SEA-circular_RGB_badge-color-min1.png',
     alt: 'SeaCircular logo',
@@ -43,38 +33,13 @@ const logos = [
   },
 ]
 
-// const Tile = ({ header, body }) => {
-
-//   const TileHeader = styled("div")(({ theme }) => ({
-//     backgroundColor: theme.palette.quaternary.main,
-//     color: "white",
-//     padding: "0.5rem",
-//     borderRadius: "1rem 1rem 0 0",
-//     fontWeight: "bold",
-//   }))
-
-//   const TileBody = styled("div")(({ theme }) => ({
-//     backgroundColor: theme.palette.primary.main,
-//     padding: "1rem",
-//     borderRadius: "0 0 1rem 1rem",
-//   }))
-
-//   return (
-//     <div>
-//       <TileHeader>{header}</TileHeader>
-//       <TileBody>
-//         <ul style={{ listStyleType: "none" }}>
-//           {body.map((contributor, idx) => (
-//             <React.Fragment key={idx}>
-//               <li style={{ margin: "0.5rem 0" }}>{contributor.name}</li>
-//               {body.length - 1 !== idx ? <Divider /> : null}
-//             </React.Fragment>
-//           ))}
-//         </ul>
-//       </TileBody>
-//     </div>
-//   )
-// }
+const NoBreaks = ({ children }) => {
+  return (
+    <span style={{ whiteSpace: 'nowrap' }}>
+      {children}
+    </span>
+  )
+}
 
 export default function About() {
 
@@ -87,9 +52,20 @@ export default function About() {
         <Body variant='body1' align='justify'>
           The regional team involved in the development of the database was composed of more than 30 researchers from Southeast and East Asia.
           <br /><br />
-          It has been coordinated by a multi-disciplinary core team from the National University of Singapore (NUS) with the Centre for International Law (CIL) as overall lead coordinator and the Tropical Marine Science Institute  (TMSI) as lead-controller of marine scientific data extraction. The NUS home team included regional researchers from Singapore, China, Indonesia, RO Korea and Vietnam. It was composed of Youna Lyons, Cheng Ling Lim, 刘雨露 (Yulu Liu), Bùi Quang Huy (Bui Quang Huy), Dennis Tan, Dita Liliansa, 정다운 (Dawoon Jung),  Sng Wen Xin, Vũ Hải Đăng (Vu Hai Dang) from CIL; Mei Lin Neo, Jenny Fong, Lee Hsien Rong Samuel and Theresa Su from TMSI.
+          It has been coordinated by a multi-disciplinary core team from the National University of Singapore (NUS) with the Centre for International Law (CIL) as overall lead coordinator and the Tropical Marine Science Institute  (TMSI) as lead-controller of marine scientific data extraction. The NUS home team included regional researchers from Singapore, China, Indonesia, RO Korea and Vietnam. It was composed of Youna Lyons, Cheng Ling Lim,
+          <NoBreaks> 刘雨露 </NoBreaks>(Yulu Liu),
+          Bùi Quang Huy (Bui Quang Huy), Dennis Tan, Dita Liliansa,
+          <NoBreaks> 정다운 </NoBreaks>(Dawoon Jung),
+          Sng Wen Xin, Vũ Hải Đăng (Vu Hai Dang) from CIL; Mei Lin Neo, Jenny Fong, Lee Hsien Rong Samuel and Theresa Su from TMSI.
           <br /><br />
-          The extended region team, without whom the RRI 2.0 could not have been built, included Japareng Lalung and his team (Universiti Sains Malaysia, Malaysia), Changi Wong and Moritz Mueller (Swinburne Sarawak, Malaysia), Văn Phạm Đăng Trí (Van Pham Dang Tri) and Lê Hoàng Hải Anh (Le Hoang Hai Anh) (Can Tho University, Vietnam), Neil Angelo S. Abreo (University of the Philippines-Mindanao, the Philippines), Ronan Baculi and Deo Onda (Marine Science Institute, the Philippines), ชวลิต เจริญพงษ์ (Chawalit Net Charoenpong), ปิ่นมนัส บูชา (Pinamas Bucha), เพ็ญใจ สมพงษ์ชัยกุล (Penjai Sompongchaiyakul) and ราฮุล เมโรทรา (Rahul Mehrotra) (Chulalongkorn University, Thailand), Sulistiowati and Muhammad Reza Cordova (Indonesian Institute of Science (LIPI), Indonesia), သန္တာကိုကြီး (Thanda Ko Gyi) (Myanmar Ocean Project, Myanmar), 李道季 (Li Daoji) and 朱礼鑫 (Zhu Lixin) and their team (East China Normal University, China). Unfortunately, no Japanese researchers could join us. However, we will continue to extend the regional teams and contributing researchers, including from institutions in RO Korea and Japan.
+          The extended region team, without whom the RRI 2.0 could not have been built, included Japareng Lalung and his team (Universiti Sains Malaysia, Malaysia), Changi Wong and Moritz Mueller (Swinburne Sarawak, Malaysia), Văn Phạm Đăng Trí (Van Pham Dang Tri) and Lê Hoàng Hải Anh (Le Hoang Hai Anh) (Can Tho University, Vietnam), Neil Angelo S. Abreo (University of the Philippines-Mindanao, the Philippines), Ronan Baculi and Deo Onda (Marine Science Institute, the Philippines),
+          <NoBreaks> ชวลิต เจริญพงษ์ </NoBreaks> (Chawalit Net Charoenpong),
+          <NoBreaks> ปิ่นมนัส บูชา  </NoBreaks>(Pinamas Bucha),
+          <NoBreaks> เพ็ญใจ สมพงษ์ชัยกุล </NoBreaks>(Penjai Sompongchaiyakul) and
+          <NoBreaks> ราฮุล เมโรทรา </NoBreaks>(Rahul Mehrotra) (Chulalongkorn University, Thailand), Sulistiowati and Muhammad Reza Cordova (Indonesian Institute of Science (LIPI), Indonesia),
+          <NoBreaks> သန္တာကိုကြီး </NoBreaks>(Thanda Ko Gyi) (Myanmar Ocean Project, Myanmar),
+          <NoBreaks> 李道季 </NoBreaks>(Li Daoji) and
+          <NoBreaks> 朱礼鑫 </NoBreaks>(Zhu Lixin) and their team (East China Normal University, China). Unfortunately, no Japanese researchers could join us. However, we will continue to extend the regional teams and contributing researchers, including from institutions in RO Korea and Japan.
           <br /><br />
           The team, RRI 2.0 and its visual displays and factsheets also benefited greatly from the external critical and constructive review of Karen Raubenheimer (ANCORS, University of Wollongong, Australia) and the provision of graphic-design content (including the dugong mascot) and batik colour scheme by Fanny Esquivel (https://www.fannyesquivel.net).
           <br /><br />
