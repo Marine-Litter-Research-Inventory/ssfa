@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from '@mui/material';
 import Header from 'components/StyledComponents/Header';
 import HeaderRibbon from 'components/StyledComponents/HeaderRibbon';
+import Dial from 'components/Dial';
 
 function formatter(title, charts) {
   return { title, charts }
@@ -17,7 +18,7 @@ function graphFormatter(link, width, height) {
 
 const data = [
   formatter(
-    "RL1. Research profile of the region",
+    ["RL1. Research profile of the region", "RL1"],
     [
       graphFormatter(
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=1477279943&format=interactive",
@@ -57,7 +58,7 @@ const data = [
     ]
   ),
   formatter(
-    "RL2. On language of publications",
+    ["RL2. On language of publications", "RL2"],
     [
       graphFormatter(
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=1749235858&format=interactive",
@@ -87,7 +88,7 @@ const data = [
     ]
   ),
   formatter(
-    "RL3. Overview of plastic polymers & plastic shapes found",
+    ["RL3. Overview of plastic polymers & plastic shapes found", "RL3"],
     [
       graphFormatter(
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=2132834271&format=interactive",
@@ -103,20 +104,20 @@ const data = [
   ),
 ]
 
-const fakeData1 = [
-  ["Task", "Hours per Day"],
-  ["Both", 34],
-  ["Humanities", 120],
-  ["Science", 546],
-]
+// const fakeData1 = [
+//   ["Task", "Hours per Day"],
+//   ["Both", 34],
+//   ["Humanities", 120],
+//   ["Science", 546],
+// ]
 
-const fakeData2 = [
-  ['Genre', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
-    'Western', 'Literature', { role: 'annotation' }],
-  ['2010', 10, 24, 20, 32, 18, 5, ''],
-  ['2020', 16, 22, 23, 30, 16, 9, ''],
-  ['2030', 28, 19, 29, 30, 12, 13, '']
-]
+// const fakeData2 = [
+//   ['Genre', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
+//     'Western', 'Literature', { role: 'annotation' }],
+//   ['2010', 10, 24, 20, 32, 18, 5, ''],
+//   ['2020', 16, 22, 23, 30, 16, 9, ''],
+//   ['2030', 28, 19, 29, 30, 12, 13, '']
+// ]
 
 // const sections = [
 //   formatter(
@@ -150,7 +151,7 @@ const fakeData2 = [
 const Section = (props) => {
 
   return (
-    <div>
+    <div id={props.id}>
       <HeaderRibbon
         text={props.text}
         variant="h6"
@@ -173,16 +174,22 @@ const Section = (props) => {
 }
 
 export default function ResearchLandscape() {
+  const sections = data.map(section => (
+    section.title[1]
+  )).reverse()
+
   return (
     <div>
+      <Dial sections={sections} />
       <Container>
         <Header variant="h2" align="center">
           Research Landscape
         </Header>
         {data.map((section, index) => (
           <Section
+            id={section.title[1]}
             key={index}
-            text={section.title}
+            text={section.title[0]}
             charts={section.charts}
           />
         ))}

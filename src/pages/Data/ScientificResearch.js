@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from '@mui/material';
 import Header from 'components/StyledComponents/Header';
 import HeaderRibbon from 'components/StyledComponents/HeaderRibbon';
+import Dial from 'components/Dial';
 
 function formatter(title, charts) {
   return { title, charts }
@@ -13,7 +14,7 @@ function graphFormatter(link, width, height) {
 
 const data = [
   formatter(
-    "SR1. Profile of marine plastic found",
+    ["SR1. Profile of marine plastic found", "SR1"],
     [
       graphFormatter(
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=1315077066&format=interactive",
@@ -28,7 +29,7 @@ const data = [
     ]
   ),
   formatter(
-    "RL2. On languageSR2. Dive into Microplastic of publications",
+    ["SR2. Dive into Microplastic of publications", "SR2"],
     [
       graphFormatter(
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=1417951165&format=interactive",
@@ -63,7 +64,7 @@ const data = [
     ]
   ),
   formatter(
-    "SR3. Biota sampled",
+    ["SR3. Biota sampled", "SR3"],
     [
       graphFormatter(
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=450897781&format=interactive",
@@ -76,7 +77,7 @@ const data = [
 
 const Section = (props) => {
   return (
-    <div>
+    <div id={props.id}>
       <HeaderRibbon
         text={props?.text}
         variant="h6"
@@ -99,14 +100,20 @@ const Section = (props) => {
 }
 
 export default function ScientificResearch() {
+  const sections = data.map(section => (
+    section.title[1]
+  )).reverse()
+
   return (
     <div>
+      <Dial sections={sections} />
       <Container>
         <Header variant="h2" align="center">
           Scientific Research
         </Header>
         {data.map((section, index) => (
           <Section
+            id={section.title[1]}
             key={index}
             text={section.title}
             charts={section.charts}
