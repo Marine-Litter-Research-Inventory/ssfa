@@ -30,7 +30,7 @@ const SR1 = formatter(
 )
 
 const SR2 = formatter(
-  ["SR2. Dive into Microplastic of publications", "SR2"],
+  ["SR2. Dive into microplastic of publications", "SR2"],
   [
     graphFormatter(
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=1417951165&format=interactive",
@@ -102,7 +102,7 @@ const Charts = (props) => {
 export default function Humanities() {
   const sections = [
     "SR3. Biota sampled",
-    "SR2. Dive into Microplastic of publications",
+    "SR2. Dive into microplastic of publications",
     "SR1. Profile of marine plastic found",
   ]
 
