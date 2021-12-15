@@ -49,6 +49,22 @@ import LinkIcon from '@mui/icons-material/Link';
 import Header from 'components/StyledComponents/Header';
 import Body from 'components/StyledComponents/Body';
 
+function dataFormatting() {
+  let data = getFromStorage('data')
+  let position = getFromStorage('position')
+  let rows = data.data.table.rows
+  let exp = []
+  rows.forEach(item => {
+    let row = item.c
+    let temp = {}
+    for (const key in position) {
+      temp[key] = row[position[key]]?.v
+    }
+    exp.push(temp)
+  })
+  return exp
+}
+
 function escapeRegExp(value) {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 }
@@ -257,6 +273,7 @@ const ColumnOrganizer = (props) => {
 
 // Main program start here
 export default function DataExtraction() {
+  const [exportedData] = React.useState(dataFormatting())
   const dispatch = useDispatch()
   const {
     columnOrderLong,
@@ -267,8 +284,6 @@ export default function DataExtraction() {
     searchKeywords,
     searchDisplay,
   } = useSelector(state => state.dataExtraction)
-
-  const exportedData = getFromStorage('exportedData')
 
   const requestSearch = (searchValue) => {
     dispatch(setSearchKeywords(searchValue))

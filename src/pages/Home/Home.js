@@ -11,14 +11,29 @@ import Body from 'components/StyledComponents/Body';
 import HeaderRibbon from 'components/StyledComponents/HeaderRibbon';
 import StyledLink from 'components/StyledComponents/StyledLink';
 
-const exportedData = getFromStorage('exportedData')
-
 const Wrapper = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   marginBottom: '6rem',
 }))
 
+function dataFormatting() {
+  let data = getFromStorage('data')
+  let position = getFromStorage('position')
+  let rows = data.data.table.rows
+  let exp = []
+  rows.forEach(item => {
+    let row = item.c
+    let temp = {}
+    for (const key in position) {
+      temp[key] = row[position[key]]?.v
+    }
+    exp.push(temp)
+  })
+  return exp
+}
+
 export default function Home() {
+  const [exportedData] = React.useState(dataFormatting())
 
   return (
     <div>

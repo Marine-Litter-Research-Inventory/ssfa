@@ -29,15 +29,6 @@ function dataFormatting() {
   let position = getFromStorage('position')
   let rows = data.data.table.rows
   let res = []
-  let exp = []
-  rows.forEach(item => {
-    let row = item.c
-    let temp = {}
-    for (const key in position) {
-      temp[key] = row[position[key]]?.v
-    }
-    exp.push(temp)
-  })
 
   rows.forEach((item, idx) => {
     let row = item.c
@@ -62,7 +53,7 @@ function dataFormatting() {
       link: row[position['Link to source']]?.v,
     })
   })
-  return [res, exp]
+  return res
 }
 
 const useFetch = (url) => {
@@ -95,8 +86,7 @@ const useFetch = (url) => {
           const data = textToJson(text.substr(47).slice(0, -2))
           setToStorage("data", { data: data, expiry: now + ttl, time: formattedTime })
           setPositionValue()
-          const [res, exp] = dataFormatting()
-          setToStorage("exportedData", exp)
+          const res = dataFormatting()
           dispatch(setDataRows(res))
           dispatch(setData(res))
           dispatch(setIsDataChanged(!compareObject(storage.data, data)))
@@ -108,8 +98,7 @@ const useFetch = (url) => {
           // auto catches network / connection error
           setToStorage("data", storage)
           setPositionValue()
-          const [res, exp] = dataFormatting()
-          setToStorage("exportedData", exp)
+          const res = dataFormatting()
           dispatch(setDataRows(res))
           dispatch(setData(res))
           dispatch(setIsError(true))
@@ -121,8 +110,7 @@ const useFetch = (url) => {
       console.log("Data was not fetched")
       setToStorage("data", storage)
       setPositionValue()
-      const [res, exp] = dataFormatting()
-      setToStorage("exportedData", exp)
+      const res = dataFormatting()
       dispatch(setDataRows(res))
       dispatch(setData(res))
       dispatch(setIsPending(false))
