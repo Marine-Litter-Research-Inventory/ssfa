@@ -16,7 +16,7 @@ function locationFormatter(input) {
   switch (input) {
     case "Brunei Darussalam":
       return "Brunei"
-    case "Republic of Korea":
+    case "RO Korea":
       return "South Korea"
     default:
       return input.trim() ?? "NA"
@@ -65,7 +65,7 @@ function getInfo() {
   rows.forEach(row => {
 
     const name_list = row.c[position["Location/Territory studied"]]?.v.trim().split(new RegExp('[,;]', 'g'))
-    const researchType = row.c[position["Sci/Socio"]]?.v.trim()
+    const researchType = row.c[position["Sci/Humanities"]]?.v.trim()
     const socioType = {
       legal: row.c[position["Legal/Regulatory Study"]]?.v.trim(),
       cultural: row.c[position["Social/Cultural Study"]]?.v.trim(),
@@ -77,11 +77,11 @@ function getInfo() {
     const plasticSize = row.c[position["Plastic Sizes Examined"]]?.v.trim()
     const fishingGear = row.c[position["Fishing Gear Examined"]]?.v.trim()
 
-    name_list.forEach(country => {
+    name_list?.forEach(country => {
       const name = locationFormatter(country.trim())
       officialName[name] = country.trim()
       pubNum[name] = pubNum[name] ? pubNum[name] + 1 : 1
-      researchTypeCount[name] = researchTypeCounter(researchTypeCount[name] ?? { Science: 0, Socio: 0, Both: 0 }, researchType)
+      researchTypeCount[name] = researchTypeCounter(researchTypeCount[name] ?? { Science: 0, Humanities: 0, Both: 0 }, researchType)
       socioTypeCount[name] = socioTypeCounter(socioTypeCount[name] ?? { legal: 0, cultural: 0, economic: 0, policy: 0 }, socioType)
       workLocationCount[name] = workLocationCounter(workLocationCount[name] ?? { laboratory: 0, desktop: 0 }, workLocation)
       fieldSamplingCount[name] = fieldSamplingCount[name] ?
@@ -113,38 +113,29 @@ const Tooltip = (dataTip, mapInfo) => {
     <div>
       {mapInfo ?
         <>
-          <p>{mapInfo.officialName[dataTip]}</p>
-          <p>Number of studies: {mapInfo.pubNum[dataTip]}</p>
-          <p>Number of studies by type:</p>
+          <p style={{ fontSize: '18px' }}>{mapInfo.officialName[dataTip]}</p>
+          <br />
+          <p>Total number of publicaitons ({mapInfo.pubNum[dataTip]})</p>
           <ul style={{ marginLeft: 20 }}>
-            <li>Science: {mapInfo.researchTypeCount[dataTip]?.Science}</li>
-            <li>Socio: {mapInfo.researchTypeCount[dataTip]?.Socio}</li>
-            <li>Both: {mapInfo.researchTypeCount[dataTip]?.Both}</li>
+            <li>Science only ({mapInfo.researchTypeCount[dataTip]?.Science})</li>
+            <li>Humanities only ({mapInfo.researchTypeCount[dataTip]?.Humanities})</li>
+            <li>Both ({mapInfo.researchTypeCount[dataTip]?.Both})</li>
+            <li>Laboratory-based ({mapInfo.workLocationCount[dataTip]?.laboratory})</li>
+            <li>Destop-based ({mapInfo.workLocationCount[dataTip]?.desktop})</li>
+            <li>Field sampling ({mapInfo.fieldSamplingCount[dataTip]})</li>
+            <li>Microplastic ({mapInfo.plasticSizeCount[dataTip]?.microplastic})</li>
+            <li>Macroplastic ({mapInfo.plasticSizeCount[dataTip]?.macroplastic})</li>
+            <li>Fishing gear ({mapInfo.fishingGearCount[dataTip]})</li>
+            <li>Legal/Regulatory ({mapInfo.socioTypeCount[dataTip]?.legal})</li>
+            <li>Social/Cultural ({mapInfo.socioTypeCount[dataTip]?.cultural})</li>
+            <li>Economic/Management ({mapInfo.socioTypeCount[dataTip]?.economic})</li>
+            <li>Policy Study ({mapInfo.socioTypeCount[dataTip]?.policy})</li>
           </ul>
-          <p>Among socio study:</p>
-          <ul style={{ marginLeft: 20 }}>
-            <li>Legal/Regulatory Study have {mapInfo.socioTypeCount[dataTip]?.legal}</li>
-            <li>Social/Cultural Study have {mapInfo.socioTypeCount[dataTip]?.cultural}</li>
-            <li>Economic/Management Study have {mapInfo.socioTypeCount[dataTip]?.economic}</li>
-            <li>Policy Study have {mapInfo.socioTypeCount[dataTip]?.policy}</li>
-          </ul>
-          <p>Number of studies base on work location and field sampling involvement:</p>
-          <ul style={{ marginLeft: 20 }}>
-            <li>Laboratory-based: {mapInfo.workLocationCount[dataTip]?.laboratory}</li>
-            <li>Destop-based: {mapInfo.workLocationCount[dataTip]?.desktop}</li>
-            <li>Field sampling involvement: {mapInfo.fieldSamplingCount[dataTip]}</li>
-          </ul>
-          <p>Number of studeis that focus on:</p>
-          <ul style={{ marginLeft: 20 }}>
-            <li>Microplastic: {mapInfo.plasticSizeCount[dataTip]?.microplastic}</li>
-            <li>Macroplastic: {mapInfo.plasticSizeCount[dataTip]?.macroplastic}</li>
-          </ul>
-          <p>Number of studies that focus on marine plastics from fishing gear: {mapInfo.fishingGearCount[dataTip]}</p>
         </>
         :
         null
       }
-    </div>
+    </div >
   )
 }
 

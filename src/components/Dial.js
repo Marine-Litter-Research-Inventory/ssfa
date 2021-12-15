@@ -54,7 +54,7 @@ export default function Dial({ sections }) {
           <SpeedDialAction
             key={section}
             icon={<ForwardIcon />}
-            tooltipTitle={section}
+            tooltipTitle={section.replace(/ /g, "\xa0")}
             tooltipPlacement="right"
             tooltipOpen
             onClick={() => handleActionClick(section)}
