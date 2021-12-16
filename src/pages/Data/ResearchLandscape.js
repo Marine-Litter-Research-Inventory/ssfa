@@ -4,18 +4,76 @@ import Header from 'components/StyledComponents/Header';
 import Body from 'components/StyledComponents/Body';
 import Dial from 'components/Dial';
 import HeaderRibbon from 'components/StyledComponents/HeaderRibbon';
+import DataTable from "components/Table/DataTable";
+import { getFromStorage } from 'components/utils/utils';
 
 function formatter(title, charts) {
   return { title, charts }
 }
 
-// function graphFormatter(width, height, chartType, title, data) {
-//   return { width, height, chartType, title, data }
-// }
-
 function graphFormatter(link, width, height) {
   return { width, height, link }
 }
+
+function columnFormatter(field, headerName, width) {
+  return { field, headerName, width }
+}
+
+function getDataRows() {
+  const data = getFromStorage('data');
+  const position = getFromStorage('position');
+  const rows = data.data.table.rows
+  let res = []
+
+  rows.forEach(item => {
+    let row = item.c
+    let temp = {}
+    columnOrderLong.forEach(col => {
+      temp[col.field] = row[position[col.headerName]]?.v
+    })
+    res.push(temp)
+  })
+
+  return res
+}
+
+const columnOrderLong = [
+  columnFormatter(
+    "authors",
+    "Author(s)",
+    300
+  ),
+  columnFormatter(
+    "first_author",
+    "First Author",
+    200
+  ),
+  columnFormatter(
+    "corrensponding_author",
+    "Corresponding Author",
+    200
+  ),
+  columnFormatter(
+    "research_topics",
+    "Research Topics",
+    200
+  ),
+  columnFormatter(
+    "funding_information",
+    "Funding Information",
+    500
+  ),
+  columnFormatter(
+    "id",
+    "ID",
+    80
+  ),
+  columnFormatter(
+    "link",
+    "Link to source",
+    80
+  ),
+]
 
 const RL1 = formatter(
   ["RL1. Research profile of the region", "RL1"],
@@ -134,6 +192,8 @@ const Charts = (props) => {
 }
 
 export default function Humanities() {
+  const [dataRows] = React.useState(getDataRows())
+
   const sections = [
     "RL3. Overview of plastic polymers & plastic shapes found",
     "RL2. On language of publicaitons",
@@ -181,7 +241,11 @@ export default function Humanities() {
           variant="h6"
           color="secondary"
         />
-
+        <br /><br />
+        <DataTable
+          dataRows={dataRows}
+          columnOrderLong={columnOrderLong}
+        />
       </Container>
     </div>
   )
