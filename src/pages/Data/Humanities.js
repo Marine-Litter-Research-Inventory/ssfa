@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import Header from 'components/StyledComponents/Header';
 import Body from 'components/StyledComponents/Body';
 import HeaderRibbon from 'components/StyledComponents/HeaderRibbon';
@@ -10,10 +10,6 @@ import { getFromStorage } from 'components/utils/utils';
 function formatter(title, charts) {
   return { title, charts }
 }
-
-// function graphFormatter(width, height, chartType, title, data) {
-//   return { width, height, chartType, title, data }
-// }
 
 function graphFormatter(link, width, height) {
   return { width, height, link }
@@ -37,6 +33,7 @@ function getDataRows() {
         id: row[position["ID"]]?.v,
         research_topics: row[position['Research Topics']]?.v,
         aim: row[position["Aim of Research"]]?.v,
+        link: row[position['Link to source']]?.v,
       })
   })
 
@@ -51,19 +48,24 @@ const sections = [
 
 const columnOrderLong = [
   columnFormatter(
+    "research_topics",
+    "Research topics",
+    300
+  ),
+  columnFormatter(
+    "aim",
+    "Aim of Research",
+    700
+  ),
+  columnFormatter(
     "id",
     "ID",
     100
   ),
   columnFormatter(
-    "aim",
-    "Aim of Research",
-    800
-  ),
-  columnFormatter(
-    "research_topics",
-    "Research topics",
-    300
+    "link",
+    "Link",
+    80
   ),
 ]
 
@@ -118,6 +120,23 @@ const H2 = formatter(
     ),
   ]
 )
+
+const filters = [
+  "Laws, administrative measures",
+  "Legal or regulatory analysis",
+  "Action Plans",
+  "Compliance and implementation",
+  "Human health/food safety",
+  "Communication and coverage of marine plastic",
+  "Citizen science",
+  "Re-use, recycle and other mitigation measures",
+  "Other market-based measures (EPR)",
+  "Policy",
+  "Social perceptions/Social behavioural studies",
+  "Survey and monitoring/pollution status",
+  "Research framework and coordination",
+  "Economic loss and cost",
+]
 
 const Charts = (props) => {
 
@@ -182,12 +201,28 @@ export default function Humanities() {
           variant="h6"
           color="secondary"
         />
+        <Body>
+          This table displays the aims of research and research findings of each humanities publication (ID). It has the same functions as the main table in "CUSTOM DATA-SUBSET".
+          <br /><br />
+          You can search for the following relevant research topics in these humanities publications, using the "FILTERS" function:
+        </Body>
+        <Grid
+          container
+          spacing={2}
+          alignItems="center"
+        >
+          {filters.map((filter, idx) => (
+            <Grid key={idx} item xs={11} sm={6} md={4}>
+              <li>{filter}</li>
+            </Grid>
+          ))}
+        </Grid>
         <br /><br />
         <DataTable
           dataRows={dataRows}
           columnOrderLong={columnOrderLong}
         />
       </Container>
-    </div>
+    </div >
   )
 }

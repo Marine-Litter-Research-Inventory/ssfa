@@ -48,11 +48,6 @@ const sections = [
 
 const columnOrderLong = [
   columnFormatter(
-    "id",
-    "ID",
-    80
-  ),
-  columnFormatter(
     "field_sampling_compartment",
     "Field Sampling_Compartment",
     300
@@ -116,6 +111,16 @@ const columnOrderLong = [
     "biota_mean_abundance_weight",
     "Biota_Mean Abundance_Weight",
     300
+  ),
+  columnFormatter(
+    "id",
+    "ID",
+    80
+  ),
+  columnFormatter(
+    "link",
+    "Link to source",
+    80
   ),
 ]
 

@@ -9,7 +9,7 @@ export default function HeaderRibbon({ text, color, ...props }) {
     color: theme.palette[color].contrastText,
     minHeight: 50,
     maxWidth: "50%",
-    borderRadius: "0 0.7rem 0.7rem 0",
+    // borderRadius: "0 0.7rem 0.7rem 0",
     alignItems: "center",
     display: "flex",
     padding: "0.2rem 1rem",

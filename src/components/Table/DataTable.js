@@ -1,22 +1,50 @@
-import { Box, Paper } from '@mui/material';
+import { Box, Link, Paper } from '@mui/material';
 import { DataGrid, GridToolbarColumnsButton, GridToolbarExport, GridToolbarFilterButton } from '@mui/x-data-grid';
 import React from 'react';
+import LinkIcon from '@mui/icons-material/Link';
 
 const CustomCell = (props) => {
-  return (
-    <div
-      style={{
-        width: props.width - 20,
-        padding: 10,
-        alignItems: 'center',
-        display: 'flex',
-        textAlign: "left",
-        borderBottom: '1px solid',
-      }}
-    >
-      {props.value}
-    </div>
-  )
+  // console.log(props)
+  const Wrapper = ({ children }) => {
+    return (
+      <div
+        style={{
+          width: props.width - 20,
+          padding: 10,
+          alignItems: 'center',
+          // justifyContent: 'center',
+          display: 'flex',
+          textAlign: "left",
+          borderBottom: '1px solid',
+        }}
+      >
+        {children}
+      </div>
+    )
+  }
+
+  const CustomLink = ({ href }) => {
+    return (
+      <Wrapper>
+        <Link href={href} target="_blank" rel="noreferrer noopener">
+          <LinkIcon color="secondary" />
+        </Link>
+      </Wrapper>
+    )
+  }
+
+  switch (props.field) {
+    case 'link':
+      return (
+        <CustomLink href={props.value} />
+      )
+    default:
+      return (
+        <Wrapper>
+          {props.value}
+        </Wrapper>
+      )
+  }
 }
 
 const QuickSearchToolbar = (props) => {

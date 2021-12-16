@@ -49,7 +49,7 @@ const SR2 = formatter(
     ),
     graphFormatter(
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=95783846&format=interactive",
-      "80%",
+      "100%",
       420
     ),
     graphFormatter(

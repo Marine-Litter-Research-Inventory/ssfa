@@ -116,7 +116,7 @@ const Tooltip = (dataTip, mapInfo) => {
           <p style={{ fontSize: '18px' }}>{mapInfo.officialName[dataTip]}</p>
           <br />
           <p>Total number of publications ({mapInfo.pubNum[dataTip]})</p>
-          <ul style={{ marginLeft: 20 }}>
+          <ul style={{ marginLeft: 40 }}>
             <li>Science only ({mapInfo.researchTypeCount[dataTip]?.Science})</li>
             <li>Humanities only ({mapInfo.researchTypeCount[dataTip]?.Humanities})</li>
             <li>Both ({mapInfo.researchTypeCount[dataTip]?.Both})</li>

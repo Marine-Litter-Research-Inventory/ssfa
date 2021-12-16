@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from "@mui/material";
+import { Container, Link } from "@mui/material";
 import Header from 'components/StyledComponents/Header';
 import Body from 'components/StyledComponents/Body';
 import HeaderRibbon from 'components/StyledComponents/HeaderRibbon';
@@ -38,11 +38,19 @@ export default function Methodology() {
           Website Development
         </SubHeader>
         <Body variant="body1" align="justify">
-          This website is developed using the following open source library:
-          <li>React.js</li>
-          <li>Material UI</li>
-          <br />
+          This website is developed using the following two open source library: React.js and Material UI.
+          <br /><br />
           All the data is queried directly from our inventory on Google Sheet. The data is then transformed into a format that is easily accessible and usable by the website. This approach simplified the development and maintenance needed and facilitates the migration of the dataset or the visualisation to a different platform. The website content is dynamic and is refreshed everyday.
+          <br /><br />
+          The website codebase is readily available publicly on&nbsp;
+          <Link
+            color="secondary"
+            href="https://github.com/Marine-Litter-Research-Inventory"
+            target="_blank"
+            rel="noreferrer noopener">
+            Github
+          </Link>
+          .
         </Body>
         <HeaderRibbon
           text="Guidance to the Research Inventory metadata fields"

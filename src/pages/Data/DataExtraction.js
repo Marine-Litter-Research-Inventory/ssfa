@@ -307,8 +307,8 @@ export default function DataExtraction() {
         >
           Explore the data compiled on research within, and about, marine plastic in Southeast and East Asia.
           <br /><br />
+          <li>Drag and drop the columns to change the order (before hiding the columns to avoid the table from being reset).</li>
           <li>Select columns to show or hide, using the side bar.</li>
-          <li>Drag and drop the columns to change the order.</li>
           <li>Sort the rows by clicking on the column headers.</li>
           <li>If you would like to access the complete inventory, click this&nbsp;
             <Link
