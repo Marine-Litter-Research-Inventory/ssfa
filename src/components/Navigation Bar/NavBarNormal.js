@@ -45,12 +45,8 @@ const DataExtends = ({ anchorEl, open, onClose, dataOptions }) => {
 
 export default function NavBarNormal({ lists, dataOptions }) {
   const location = useLocation()
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const open = Boolean(anchorEl)
-
-  const handleClick = (event) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget)
-  }
+  const dataRef = React.useRef()
+  const [open, setOpen] = React.useState(false)
 
   return (
     <>
@@ -81,6 +77,7 @@ export default function NavBarNormal({ lists, dataOptions }) {
           <React.Fragment key={idx}>
             <Button
               key={idx}
+              ref={dataRef}
               color="quaternary"
               component={RouterLink}
               to={list.route}
@@ -90,15 +87,15 @@ export default function NavBarNormal({ lists, dataOptions }) {
                 color: list.route === location.pathname ? "white" : "black",
               }}
               variant={list.route === location.pathname ? "contained" : "text"}
-              onClick={list.route === "/data" ? handleClick : null}
+              onMouseEnter={() => setOpen(!open)}
             >
               {list.text}
             </Button>
             <DataExtends
-              anchorEl={anchorEl}
+              anchorEl={dataRef.current}
               open={open}
+              onClose={() => setOpen(false)}
               dataOptions={dataOptions}
-              onClose={() => setAnchorEl(null)}
             />
           </React.Fragment>
           :
@@ -113,7 +110,6 @@ export default function NavBarNormal({ lists, dataOptions }) {
               color: list.route === location.pathname ? "white" : "black",
             }}
             variant={list.route === location.pathname ? "contained" : "text"}
-            onClick={list.route === "/data" ? handleClick : null}
           >
             {list.text}
           </Button>
