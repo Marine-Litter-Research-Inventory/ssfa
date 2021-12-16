@@ -201,22 +201,25 @@ export default function Humanities() {
           variant="h6"
           color="secondary"
         />
-        <Body>
+        <Body component={"div"}>
           This table displays the aims of research and research findings of each humanities publication (ID). It has the same functions as the main table in "CUSTOM DATA-SUBSET".
           <br /><br />
           You can search for the following relevant research topics in these humanities publications, using the "FILTERS" function:
+          <br /><br />
+          <Grid
+            container
+            spacing={2}
+            alignItems="center"
+          >
+            {filters.map((filter, idx) => (
+              <Grid key={idx} item xs={11} sm={6} md={4}>
+                <li>{filter}</li>
+              </Grid>
+            ))}
+          </Grid>
+          <br /><br />
+          You can export the selected publications and information using the "EXPORT" icon.
         </Body>
-        <Grid
-          container
-          spacing={2}
-          alignItems="center"
-        >
-          {filters.map((filter, idx) => (
-            <Grid key={idx} item xs={11} sm={6} md={4}>
-              <li>{filter}</li>
-            </Grid>
-          ))}
-        </Grid>
         <br /><br />
         <DataTable
           dataRows={dataRows}
