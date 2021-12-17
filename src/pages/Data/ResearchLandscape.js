@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import Header from 'components/StyledComponents/Header';
 import Body from 'components/StyledComponents/Body';
 import Dial from 'components/Dial';
@@ -73,6 +73,49 @@ const columnOrderLong = [
     "Link to source",
     80
   ),
+]
+
+const filters1 = [
+  "Survey and monitoring/pollution status",
+  " ",
+  "Contribution from rivers",
+  "Contribution from fisheries/ALDFG",
+  "Discharge from offshore infrastructures and shipping",
+  "Port reception facilities",
+  "Fibreglass-reinforced plastic vessels",
+  "Hull scraping and marine coating",
+  "Land-based/upstream research/waste management",
+  "Differentiation between plastic sources",
+  "Movement of plastics in water bodies",
+  "Fragmentation and degradation",
+  "Accumulation zones and hotspots",
+  " ",
+  "Ingestion of plastic in the wild",
+  "Branchial uptake of plastic in the wild",
+  "Entanglement by plastic in the wild",
+  "Microbial assemblages",
+  "Experimental studies of physicochemical impacts",
+  "Impact on endangered species",
+]
+
+const filters2 = [
+  "Trophic transfer of plastic",
+  "Marine plastics as pathways for introduction of alien/non-native/invasive species",
+  " ",
+  "Organic and inorganic pollutants from marine plastic debris",
+  "Adsorption-desorption of chemicals/pollutants",
+  "Plastics as transport vector/medium",
+  " ",
+  "Guidelines, standards and manuals for survey, monitoring and assessment",
+  "Data comparability and standardization",
+  " ",
+  "Methodologies and technologies for research on marine macroplastic",
+  "Methodologies and technologies for research on marine microplastic",
+  "New' or 'emerging' technologies for marine plastic",
+  "Methodologies and technologies for marine plastic removal and clean-up",
+  "Research framework and coordination",
+  "Plastic data repositories",
+  "Citizen science",
 ]
 
 const RL1 = formatter(
@@ -241,6 +284,31 @@ export default function Humanities() {
           variant="h6"
           color="secondary"
         />
+        <Body>
+          This table displays information relating to authors, research institutions, funding information and research topics  of each publication. The table allows for exploration of the information using the filter and sort functions, at the top left corner. The webpage link and inventory ID of each article can be found in the last column, which can be used as a reference number to look for the article in the main inventory.
+          <br /><br />
+          Using the filter function, you can search for any of the following research topics:
+        </Body>
+        <Grid
+          container
+          spacing={2}
+          alignItems="center"
+        // justifyContent="center"
+        >
+          <Grid item xs={11} sm={6}>
+            {filters1.map((filter, idx) => (
+              filter !== " " ?
+                <li style={{ margin: "0.5rem 0" }} key={idx}>{filter}</li>
+                : <br />
+            ))}
+          </Grid>
+          <Grid item xs={11} sm={6}>
+            {filters2.map((filter, idx) => (
+              filter !== " " ?
+                <li style={{ margin: "0.5rem 0" }} key={idx}>{filter}</li>
+                : <br />))}
+          </Grid>
+        </Grid>
         <br /><br />
         <DataTable
           dataRows={dataRows}

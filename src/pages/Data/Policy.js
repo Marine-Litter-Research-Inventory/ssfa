@@ -206,7 +206,9 @@ export default function Policy() {
           variant="h6"
           color="secondary"
         />
-        <br /><br />
+        <Body>
+          This table displays information relating to reported counts and weights of plastics sampled in various field sampling compartments (e.g. water surface, seabed sediment), including their units of measure. The table allows for exploration of the information using the filter and sort functions, at the top left corner. The webpage link and inventory ID of each article can be found in the last column, which can be used as a reference number to look for the article in the main inventory.
+        </Body>
         <DataTable
           dataRows={dataRows}
           columnOrderLong={columnOrderLong}

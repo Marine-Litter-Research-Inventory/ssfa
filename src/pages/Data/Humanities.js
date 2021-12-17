@@ -6,6 +6,7 @@ import HeaderRibbon from 'components/StyledComponents/HeaderRibbon';
 import Dial from 'components/Dial';
 import DataTable from "components/Table/DataTable";
 import { getFromStorage } from 'components/utils/utils';
+import StyledLink from 'components/StyledComponents/StyledLink';
 
 function formatter(title, charts) {
   return { title, charts }
@@ -183,7 +184,11 @@ export default function Humanities() {
           color="secondary"
         />
         <Body>
-          This section analyses research topics examined in humanities publication. Refer to [LINK] for a list of the research topics and further details on the metadata fields and methodology.
+          This section analyses research topics examined in humanities publication. Refer to&nbsp;
+          <StyledLink to="/data/methodology-and-ontology">
+            Methodology and Ontology
+          </StyledLink>
+          &nbsp;for a list of the research topics and further details on the metadata fields and methodology.
         </Body>
         <Charts charts={H1.charts} />
 
@@ -217,14 +222,13 @@ export default function Humanities() {
               </Grid>
             ))}
           </Grid>
-          <br /><br />
-          You can export the selected publications and information using the "EXPORT" icon.
         </Body>
-        <br /><br />
         <DataTable
           dataRows={dataRows}
           columnOrderLong={columnOrderLong}
         />
+        You can export the selected publications and information using the "EXPORT" icon.
+        <br /><br />
       </Container>
     </div >
   )
