@@ -142,7 +142,7 @@ const CustomCell = (props) => {
         <Highlighter
           searchWords={searchKeywords}
           autoEscape={true}
-          textToHighlight={textToHighlight}
+          textToHighlight={textToHighlight ?? ""}
           highlightStyle={{ backgroundColor: '#c8a464' }}
         />
       </Wrapper>
