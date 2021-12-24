@@ -1,9 +1,7 @@
 import React from 'react';
-import { Container, Button } from '@mui/material';
+import { Container, Button, Link } from '@mui/material';
 import { styled } from '@mui/system';
 import { Link as RouterLink } from 'react-router-dom';
-import { CSVLink } from 'react-csv';
-import { getFromStorage } from 'components/utils/utils';
 import WaveUpper from 'components/StyledComponents/WaveUpper';
 import WaveLower from 'components/StyledComponents/WaveLower';
 import Header from 'components/StyledComponents/Header';
@@ -16,25 +14,7 @@ const Wrapper = styled("div")(({ theme }) => ({
   marginBottom: '6rem',
 }))
 
-function dataFormatting() {
-  let data = getFromStorage('data')
-  let position = getFromStorage('position')
-  let rows = data.data.table.rows
-  let exp = []
-  rows.forEach(item => {
-    let row = item.c
-    let temp = {}
-    for (const key in position) {
-      temp[key] = row[position[key]]?.v
-    }
-    exp.push(temp)
-  })
-  return exp
-}
-
 export default function Home() {
-  const [exportedData] = React.useState(dataFormatting())
-
   return (
     <div>
       <Header variant='h2'>
@@ -63,7 +43,7 @@ export default function Home() {
         <WaveLower />
       </Wrapper>
       <Container maxWidth="md">
-        <Body>
+        <Body align="justify">
           <strong>This online platform for the Regional Research Inventory (RRI 2.0) </strong>
           seeks to increase the accessibility of RRI 2.0 to an audience who may be unfamiliar with the use of this type of database. It includes visual graphs and analytics of the data extracted from the research publications which were developed with the aim of answering the 'so what' question of the research landscape of the findings. As a result, these visual displays can only represent the data captured from publications; they are based on the findings of studies that led to these publications. Studies that did not lead to publications that are available on the internet could not be included. Importantly, this website has been developed as an evolutive tool. It is entirely developed with free software and open-source codes and is designed to be regularly updated and enriched.
         </Body>
@@ -80,7 +60,7 @@ export default function Home() {
           color="secondary"
           variant="h6"
         />
-        <Body>
+        <Body align="justify">
           RRI 2.0 includes all the published research material that could be found online by the regional team (see 'About') on pollution from marine plastics in the seas of East Asia and responses to it in all fields of research.  These therefore include scientific publications as well as research publications from humanities (ie, law, policy, political science, social science and economics). In addition to research publications in the English language, the regional team actively looked for publications in local languages and extracted them into the inventory, with the support of local members of the team.
         </Body>
         <HeaderRibbon
@@ -88,22 +68,18 @@ export default function Home() {
           color="secondary"
           variant="h6"
         />
-        <Body>
+        <Body align="justify">
           For each of the publication captured, data has been extracted systematically into more than 80 metadata fields, as set out in the methodology. Further details of the research methodology are available in the &nbsp;
           <StyledLink to="/data/methodology-and-ontology">
             Methodology and Ontology
-          </StyledLink>
-          &nbsp;section of&nbsp;
-          <StyledLink to="/data">
-            Data and Analytics.
-          </StyledLink>
+          </StyledLink>.
         </Body>
         <HeaderRibbon
           text="A regional team effort"
           color="secondary"
           variant="h6"
         />
-        <Body>
+        <Body align="justify">
           RRI 2.0 could not have been developed without the research energy of regional researchers focused on the protection of the marine environment and their goodwill to cooperate in order to improve the status of the marine environment in general, including from marine plastics. The regional team hopes that RRI 2.0 can be further developed and leveraged for policy-making purposes with continuing regional cooperation and partnership between research institutions.
         </Body>
         <HeaderRibbon
@@ -111,20 +87,17 @@ export default function Home() {
           color="secondary"
           variant="h6"
         />
-        <Body>
+        <Body align="justify">
           RRI 2.0 builds on the work conducted by the marine plastic policy team of NUS since 2018 which led to a first version of the research inventory in early 2020. It also relied on the regional research network developed in parallel. These two inventories have been developed as deliverables of a project supported by the United Nations Environment Programme (UNEP), the Coordinating Body on the Seas of East Asia (COBSEA) and the Global Partnership on Marine Litter (GPML) and with funding from the SEA circular project supported by the Government of Sweden. Part of the funding required was also provided by complementary research funding to members of the teams from the NUS Centre for International Law (CIL) and the Tropical Marine Science Institute (TMSI).
         </Body>
-        <strong>The full inventory RRI 2.0</strong> can be downloaded&nbsp;
-        <CSVLink
-          data={exportedData}
-          filename={"Masterlist of Literature Articles.csv"}
-          style={{
-            color: "#9c4a55",
-            fontWeight: 'bold',
-          }}
-        >
-          here.
-        </CSVLink>
+        <strong>The  RRI 2.0</strong> can be accessed&nbsp;
+        <Link
+          color="secondary"
+          href="https://docs.google.com/spreadsheets/d/1yRLGaQk3-9UlopftPr5e8F-X3pKkjwLlZWcTwai6_Ds/edit?usp=sharing"
+          target="_blank"
+          rel="noreferrer noopener">
+          here
+        </Link>.
         <br /><br />
       </Container>
     </div >

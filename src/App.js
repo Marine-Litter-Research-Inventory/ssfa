@@ -14,7 +14,7 @@ import {
 } from "components/utils/utils";
 
 import Loading from "pages/Loading"
-import Home from 'pages/Home/Home';
+import Home from 'pages/Home';
 import About from 'pages/About';
 import NotFound from 'pages/NotFound';
 import Map from 'pages/Map';

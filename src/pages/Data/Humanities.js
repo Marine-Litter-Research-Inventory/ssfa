@@ -3,17 +3,18 @@ import { Container, Grid } from '@mui/material';
 import Header from 'components/StyledComponents/Header';
 import Body from 'components/StyledComponents/Body';
 import HeaderRibbon from 'components/StyledComponents/HeaderRibbon';
-import Dial from 'components/Dial';
+import SideDrawer from "components/Drawer/SideDrawer";
 import DataTable from "components/Table/DataTable";
 import { getFromStorage } from 'components/utils/utils';
 import StyledLink from 'components/StyledComponents/StyledLink';
+import DefaultTableInstruction from 'components/Table/DefaultTableInstruction';
 
 function formatter(title, charts) {
   return { title, charts }
 }
 
-function graphFormatter(link, width, height) {
-  return { width, height, link }
+function graphFormatter(link, width, height, title) {
+  return { width, height, link, title }
 }
 
 function columnFormatter(field, headerName, width) {
@@ -41,12 +42,6 @@ function getDataRows() {
   return res
 }
 
-const sections = [
-  "H3. Explore different research topics through the aims of research",
-  "H2. Dive into research topics per country",
-  "H1. Profile of humanities research",
-]
-
 const columnOrderLong = [
   columnFormatter(
     "research_topics",
@@ -71,55 +66,68 @@ const columnOrderLong = [
 ]
 
 const H1 = formatter(
-  ["H1. Profile of humanities research", "H1"],
+  "H1. Profile of humanities research",
   [
     graphFormatter(
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=495677648&format=interactive",
       "100%",
       360,
+      "[H1.A] General research topics"
     ),
     graphFormatter(
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=1597143242&format=interactive",
       "100%",
       360,
+      "[H1.B] Specific research topics"
     ),
     graphFormatter(
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=918480549&format=interactive",
       "100%",
       360,
+      "[H1.C] General research topics by country/territory"
     ),
     graphFormatter(
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=564401057&format=interactive",
       "100%",
       360,
+      "[H1.D] General research topics by water body"
     ),
   ]
 )
 
 const H2 = formatter(
-  ["H2. Dive into research topics per country", "H2"],
+  "H2. Dive into research topics per country",
   [
     graphFormatter(
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=1662269792&format=interactive",
       "100%",
-      400
+      400,
+      "[H2.A] Fisheries & aquaculture-related"
     ),
     graphFormatter(
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=560123524&format=interactive",
       "100%",
-      400
+      400,
+      "[H2.B] Policy, legal and regulatory research"
     ),
     graphFormatter(
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=1862835104&format=interactive",
       "100%",
-      400
+      400,
+      "[H2.C] Social and behaviour research"
     ),
     graphFormatter(
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=1060677156&format=interactive",
       "100%",
-      400
+      400,
+      "[H2.D] Economic research"
     ),
   ]
+)
+
+const H3 = formatter(
+  "H3. Aims of research for research topics",
+  []
 )
 
 const filters = [
@@ -144,7 +152,7 @@ const Charts = (props) => {
   return (
     <div id={props.id}>
       {props.charts.map((chart, idx) => (
-        <div key={idx} style={{ margin: 20, justifyContent: 'center', display: 'flex' }}>
+        <div id={chart.title} key={idx} style={{ margin: 20, justifyContent: 'center', display: 'flex' }}>
           <iframe
             title={`${props?.text} chart ${idx}`}
             src={chart.link}
@@ -163,58 +171,66 @@ const Charts = (props) => {
 }
 
 export default function Humanities() {
-
   const [dataRows] = React.useState(getDataRows())
+
+  const sections = [
+    H1,
+    H2,
+    H3
+  ]
 
   return (
     <div>
-      <Dial sections={sections} />
+      <SideDrawer lists={sections} />
       <Container>
         <Header variant="h2" align="center">
           Research Humanities
         </Header>
         <Body sx={{ backgroundColor: theme => theme.palette.primary.main }}>
-          Explore charts and graphs on the profile of research conducted on marine plastics in the seas of Southeast and East Asia, including research institutions, researchers and their respective areas of research.
+          Explore charts and graphs developed to display the characteristics of humanities research publiublications included in RRI 2.0 in the legal, policy, social, economic and cultural fields of research.
         </Body>
 
         <HeaderRibbon
-          id={H1.title[1]}
-          text={H1.title[0]}
+          id={H1.title}
+          text={H1.title}
           variant="h6"
           color="secondary"
         />
         <Body>
-          This section analyses research topics examined in humanities publication. Refer to&nbsp;
+          This section analyses research topics examined in humanities publication. Visit the Guidance to the Research Inventory metadata fields in&nbsp;
           <StyledLink to="/data/methodology-and-ontology">
             Methodology and Ontology
           </StyledLink>
-          &nbsp;for a list of the research topics and further details on the metadata fields and methodology.
+          &nbsp;for more information on each research topic.
         </Body>
         <Charts charts={H1.charts} />
 
         <HeaderRibbon
-          id={H2.title[1]}
-          text={H2.title[0]}
+          id={H2.title}
+          text={H2.title}
           variant="h6"
           color="secondary"
         />
         <Charts charts={H2.charts} />
 
         <HeaderRibbon
-          id="H3"
+          id="H3. Explore different research topics through the aims of research"
           text="H3. Explore different research topics through the aims of research"
           variant="h6"
           color="secondary"
         />
         <Body component={"div"}>
-          This table displays the aims of research and research findings of each humanities publication (ID). It has the same functions as the main table in "CUSTOM DATA-SUBSET".
-          <br /><br />
-          You can search for the following relevant research topics in these humanities publications, using the "FILTERS" function:
+          <DefaultTableInstruction />
+          &nbsp;You can search for the following relevant research topics in these humanities publications, using the "FILTERS" function:
           <br /><br />
           <Grid
             container
             spacing={2}
             alignItems="center"
+            sx={{
+              marginLeft: "1rem",
+              fontSize: "0.95rem"
+            }}
           >
             {filters.map((filter, idx) => (
               <Grid key={idx} item xs={11} sm={6} md={4}>
@@ -227,7 +243,6 @@ export default function Humanities() {
           dataRows={dataRows}
           columnOrderLong={columnOrderLong}
         />
-        You can export the selected publications and information using the "EXPORT" icon.
         <br /><br />
       </Container>
     </div >

@@ -13,10 +13,6 @@ import {
   GridToolbarExport,
   GridToolbarColumnsButton,
 } from '@mui/x-data-grid';
-import { CSVLink } from "react-csv";
-import {
-  getFromStorage,
-} from 'components/utils/utils';
 import {
   setDataRows,
   setSearchDisplay,
@@ -48,22 +44,7 @@ import LinkIcon from '@mui/icons-material/Link';
 
 import Header from 'components/StyledComponents/Header';
 import Body from 'components/StyledComponents/Body';
-
-function dataFormatting() {
-  let data = getFromStorage('data')
-  let position = getFromStorage('position')
-  let rows = data.data.table.rows
-  let exp = []
-  rows.forEach(item => {
-    let row = item.c
-    let temp = {}
-    for (const key in position) {
-      temp[key] = row[position[key]]?.v
-    }
-    exp.push(temp)
-  })
-  return exp
-}
+import CustomDataInstruction from 'components/Table/CustomDataInstruction';
 
 function escapeRegExp(value) {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
@@ -258,11 +239,6 @@ const ColumnOrganizer = (props) => {
             <SortableItem key={columnOrder[idx]} index={idx} data={columnOrder} />
           ))}
         </SortableContext>
-        {/* <SortableContext items={test} strategy={verticalListSortingStrategy}>
-          {test.map((title, idx) => (
-            <SortableItem key={test[idx].headerName} index={idx} data={test} />
-          ))}
-        </SortableContext> */}
         <DragOverlay>
           <Item />
         </DragOverlay>
@@ -273,13 +249,11 @@ const ColumnOrganizer = (props) => {
 
 // Main program start here
 export default function DataExtraction() {
-  const [exportedData] = React.useState(dataFormatting())
   const dispatch = useDispatch()
   const {
     columnOrderLong,
     columnHeaders,
     data,
-    databaseLink,
     dataRows,
     searchKeywords,
     searchDisplay,
@@ -301,44 +275,12 @@ export default function DataExtraction() {
       <Header variant='h2' align='center'>
         Custom Data-Subset
       </Header>
-      <Container maxWidth="md">
+      <Container>
         <Body variant='body1'
           sx={{ backgroundColor: theme => theme.palette.primary.main, }}
         >
-          Explore the data compiled on research within, and about, marine plastic in Southeast and East Asia.
-          <br /><br />
-          <li>Drag and drop the columns to change the order (before hiding the columns to avoid the table from being reset).</li>
-          <li>Select columns to show or hide, using the side bar.</li>
-          <li>Sort the rows by clicking on the column headers.</li>
-          <li>If you would like to access the complete inventory, click this&nbsp;
-            <Link
-              href={databaseLink}
-              target="_blank"
-              rel="noreferrer noopener"
-              sx={{
-                color: theme => theme.palette.secondary.main,
-                fontWeight: 'bold',
-              }}
-            >
-              link
-            </Link>.
-          </li>
-          <br />
-          Alternatively, click&nbsp;
-          <CSVLink
-            data={exportedData}
-            filename={"Masterlist of Literature Articles.csv"}
-            style={{
-              color: "#9c4a55",
-              fontWeight: 'bold',
-            }}
-          >
-            here
-          </CSVLink>
-          &nbsp;to download the complete inventory in CSV.
+          <CustomDataInstruction />
         </Body>
-      </Container>
-      <Container>
         <Grid container spacing={2}>
           <Hidden smDown>
             <Grid item sm={2}>

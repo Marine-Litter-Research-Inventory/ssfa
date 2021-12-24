@@ -4,45 +4,54 @@ import { styled } from '@mui/system';
 import { Link } from "react-router-dom";
 import Header from "components/StyledComponents/Header";
 import Body from "components/StyledComponents/Body";
+import StyledLink from 'components/StyledComponents/StyledLink';
 
-function formatter(title, route, description) {
-  return { title, route, description }
+function formatter(title, route, description, link) {
+  return { title, route, description, link }
 }
 
 const Tiles = [
   formatter(
     "Custom Data-Subset",
     "/data/custom-data-subset",
-    "Search and filter through a sub-section of the data contained in the inventory that best responds to your interest"
+    "Search and filter through a sub-section of the data contained in the inventory that best responds to your interest",
+    "https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Slide1.png?raw=true"
   ),
   formatter(
     "Research Landscape",
     "/data/research-landscape",
-    "Explore charts and graphs on the profile of research conducted on marine plastics in the seas of Southeast and East Asia"
+    "Explore charts and graphs on the profile of research conducted on marine plastics in the seas of Southeast and East Asia",
+    "https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Slide2.png?raw=true"
   ),
   formatter(
     "Methodology and Ontology",
     "/data/methodology-and-ontology",
-    "Consult the methodology and database ontology adopted to develop the research inventory"
+    "Consult the methodology and database ontology adopted to develop the research inventory",
+    "https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Slide3.png?raw=true"
   ),
   formatter(
     "Scientific Research",
     "/data/scientific-research",
-    "Explore charts and graphs on the characteristics of scientific research publications"
+    "Explore charts and graphs on the characteristics of scientific research publications",
+    "https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Slide4.png?raw=true"
   ),
   formatter(
     "Research in Humanities",
     "/data/research-in-humanities",
-    "Explore charts and graphs on the characteristics of research publications in the legal, policy, socio-economic and cultural fields of research"
+    "Explore charts and graphs on the characteristics of research publications in the legal, policy, socio-economic and cultural fields of research",
+    "https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Slide5.png?raw=true"
   ),
   formatter(
     "Information for Policy-Making",
     "/data/information-for-policy-making",
-    "Explore charts and graphs on insight that may be gained from the Research Inventory for  policy- making purposes"
+    "Explore charts and graphs on insight that may be gained from the Research Inventory for  policy- making purposes",
+    "https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Slide6.png?raw=true"
   )
 ]
 
-const Tile = ({ title, description, LinkComponent, to }) => {
+const Tile = ({ title, description, LinkComponent, to, link, idx }) => {
+
+  const [isLoading, setIsLoading] = React.useState(true)
 
   const Title = styled(Typography)(({ theme }) => ({
     fontWeight: 'bold',
@@ -61,13 +70,23 @@ const Tile = ({ title, description, LinkComponent, to }) => {
         to={to}
         style={{ margin: "auto", display: "block" }}
       >
-        <Skeleton variant="rectangular">
-          <img
-            src="https://dummyimage.com/600x400/000/fff"
-            alt="Thumbnail"
-            width="100%"
-          />
-        </Skeleton>
+        {
+          isLoading ?
+            <Skeleton variant="rectangular">
+              <img
+                src={link}
+                alt={"Thumbnail" + idx}
+                width="100%"
+                onLoad={() => setIsLoading(false)}
+              />
+            </Skeleton>
+            :
+            <img
+              src={link}
+              alt={"Thumbnail" + idx}
+              width="100%"
+            />
+        }
       </ButtonBase>
       <Title
         variant="h6"
@@ -99,10 +118,12 @@ const Navigation = () => {
       {Tiles.map((tile, idx) => (
         <Grid item xs={5} sm={4} key={idx}>
           <Tile
+            idx={idx}
             title={tile.title}
             LinkComponent={Link}
             to={tile.route}
             description={tile.description}
+            link={tile.link}
           />
         </Grid>
       ))}
@@ -119,9 +140,11 @@ export default function Data() {
           Data & Analytics
         </Header>
         <Body variant='body1' align="justify" sx={{ backgroundColor: theme => theme.palette.primary.main }}>
-          Explore the inventory of research that have been conducted on pollution from marine plastics in the seas of Southeast and East Asia, and analytical data that were generated from the inventory. Use the tiles below to navigate to a section to start.
+          The tiles below provide explore the inventory of research that have been conducted on pollution from marine plastics in the seas of Southeast and East Asia, including charts and graphs that were generated to visualise the data included in the Research Inventory.
           <br /><br />
-          The data represented in the research inventory is constantly evolving. Your participation is essential to make this resource more accurate and comprehensive. You can do that by providing feedback on existing data, or any other queries or suggestions.
+          The data included in the research inventory is constantly evolving. Your participation is essential to making this resource more accurate, comprehensive and useful. You can do that by providing
+          <StyledLink to="/feedback"> feedback </StyledLink>
+          on existing data, or sending any other queries or suggestions.
         </Body>
         <Navigation />
       </Container>

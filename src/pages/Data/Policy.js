@@ -3,16 +3,19 @@ import { Container } from '@mui/material';
 import Header from 'components/StyledComponents/Header';
 import Body from 'components/StyledComponents/Body';
 import HeaderRibbon from 'components/StyledComponents/HeaderRibbon';
-import Dial from 'components/Dial';
+
 import DataTable from "components/Table/DataTable";
 import { getFromStorage } from 'components/utils/utils';
+import StyledLink from 'components/StyledComponents/StyledLink';
+import SideDrawer from 'components/Drawer/SideDrawer';
+import DefaultTableInstruction from 'components/Table/DefaultTableInstruction';
 
 function formatter(title, charts) {
   return { title, charts }
 }
 
-function graphFormatter(link, width, height) {
-  return { width, height, link }
+function graphFormatter(link, width, height, title) {
+  return { width, height, link, title }
 }
 
 function columnFormatter(field, headerName, width) {
@@ -39,12 +42,6 @@ function getDataRows() {
 
   return res
 }
-
-const sections = [
-  "PM3. Sampling and units recording",
-  "PM2. Adoption of GESAMP Guidelines",
-  "PM1. Sources of marine plastics",
-]
 
 const columnOrderLong = [
   columnFormatter(
@@ -125,23 +122,54 @@ const columnOrderLong = [
 ]
 
 const PM1 = formatter(
-  ["PM1. Sources of marine plastics", "PM1"],
+  "PM1. Sources of marine plastics",
   [
     graphFormatter(
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=1748871634&format=interactive",
       "100%",
       400,
+      "[PM1.A] General sources of marine plastics studied"
     ),
   ]
 )
 
 const PM2 = formatter(
-  ["PM2. Adoption of GESAMP Guidelines", "PM2"],
+  "PM2. Adoption of GESAMP Guidelines",
   [
     graphFormatter(
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=1228393788&format=interactive",
       "100%",
-      400
+      400,
+      "[PM2.A] Adopted GESAMP plastic sizes by countries/territories"
+    ),
+  ]
+)
+
+const PM3 = formatter(
+  "PM3. Sampling and units recording",
+  []
+)
+
+const PM4 = formatter(
+  "PM4. Biota studied",
+  [
+    graphFormatter(
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=821300668&format=interactive",
+      "100%",
+      400,
+      "[PM4.A] Biota studied, by water body"
+    ),
+  ]
+
+)
+const PM5 = formatter(
+  "PM5. Fisheries and aquaculture",
+  [
+    graphFormatter(
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=1748863372&format=interactive",
+      "100%",
+      400,
+      "[PM5.A] Fisheries and aquaculture as sources of marine plastics"
     ),
   ]
 )
@@ -151,7 +179,7 @@ const Charts = (props) => {
   return (
     <div id={props.id}>
       {props.charts.map((chart, idx) => (
-        <div key={idx} style={{ margin: 20, justifyContent: 'center', display: 'flex' }}>
+        <div id={chart.title} key={idx} style={{ margin: 20, justifyContent: 'center', display: 'flex' }}>
           <iframe
             title={`${props?.text} chart ${idx}`}
             src={chart.link}
@@ -170,49 +198,77 @@ const Charts = (props) => {
 }
 
 export default function Policy() {
-
   const [dataRows] = React.useState(getDataRows())
+
+  const sections = [
+    PM1,
+    PM2,
+    PM3,
+    PM4,
+    PM5
+  ]
 
   return (
     <div>
-      <Dial sections={sections} />
+      <SideDrawer lists={sections} />
       <Container>
         <Header variant="h2" align="center">
           Information for Policy-Making
         </Header>
         <Body sx={{ backgroundColor: theme => theme.palette.primary.main }}>
-          Explore charts and graphs on insight that may be gained from the data captured in RRI 2.0 for policy-making purposes. This section brings together findings from publications in science and humanities, including from the graphs above. Refer to the Factsheet on Marine Plastic Research 101 for Policy-Makers for further guidance on the use of this data.
+          Explore charts and graphs on insight that may be gained from the data captured in RRI 2.0 for policy-making purposes. This section brings together findings from publications in science and humanities, including from the graphs above. Refer to the&nbsp;
+          <StyledLink to="/factsheets">
+            Factsheet
+          </StyledLink>
+          &nbsp;on Marine Plastic Research 101 for Policy-Makers for further guidance on the use of this data.
         </Body>
 
         <HeaderRibbon
-          id={PM1.title[1]}
-          text={PM1.title[0]}
+          id={PM1.title}
+          text={PM1.title}
           variant="h6"
           color="secondary"
         />
         <Charts charts={PM1.charts} />
 
         <HeaderRibbon
-          id={PM2.title[1]}
-          text={PM2.title[0]}
+          id={PM2.title}
+          text={PM2.title}
           variant="h6"
           color="secondary"
         />
         <Charts charts={PM2.charts} />
 
         <HeaderRibbon
-          id="PM3"
+          id="PM3. Sampling and units recording"
           text="PM3. Sampling and units recording"
           variant="h6"
           color="secondary"
         />
-        <Body>
-          This table displays information relating to reported counts and weights of plastics sampled in various field sampling compartments (e.g. water surface, seabed sediment), including their units of measure. The table allows for exploration of the information using the filter and sort functions, at the top left corner. The webpage link and inventory ID of each article can be found in the last column, which can be used as a reference number to look for the article in the main inventory.
+        <Body align="justify">
+          <DefaultTableInstruction />
         </Body>
         <DataTable
           dataRows={dataRows}
           columnOrderLong={columnOrderLong}
         />
+
+        <HeaderRibbon
+          id={PM4.title}
+          text={PM4.title}
+          variant="h6"
+          color="secondary"
+        />
+        <Charts charts={PM4.charts} />
+
+        <HeaderRibbon
+          id={PM5.title}
+          text={PM5.title}
+          variant="h6"
+          color="secondary"
+        />
+        <Charts charts={PM5.charts} />
+
       </Container>
     </div>
   )
