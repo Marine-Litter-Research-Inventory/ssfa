@@ -324,8 +324,9 @@ export default function ResearchLandscape() {
             spacing={2}
             alignItems="center"
             sx={{
-              marginLeft: "1rem",
-              fontSize: "0.95rem"
+              paddingLeft: "2rem",
+              fontSize: "0.85rem",
+              border: theme => "1px solid" + theme.palette.tertiary.main,
             }}
           >
             <Grid item xs={11} sm={6} md={4}>

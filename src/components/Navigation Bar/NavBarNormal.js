@@ -1,45 +1,47 @@
 import React from "react";
 import {
   Button, Typography,
-  Popover,
+  Popper,
+  ClickAwayListener,
+  Box,
 } from '@mui/material';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
-const DataExtends = ({ anchorEl, open, onClose, dataOptions }) => {
+const DataExtends = ({ anchorEl, open, setOpen, dataOptions }) => {
   const location = useLocation()
 
   return (
-    <Popover
-      anchorEl={anchorEl}
-      open={open}
-      onClose={onClose}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'center',
-      }}
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'center',
-      }}
-    >
-      {dataOptions.map((list, idx) => (
-        <Button
-          key={idx}
-          color="quaternary"
-          component={RouterLink}
-          to={list.route}
+    <ClickAwayListener onClickAway={() => setOpen(false)}>
+      <Popper
+        anchorEl={anchorEl}
+        open={open}
+      >
+        <Box
           sx={{
-            textAlign: 'center',
-            fontWeight: 'bold',
-            display: "block",
-            color: list.route === location.pathname ? "white" : "black",
+            backgroundColor: theme => theme.palette.secondary.main,
+            marginTop: "1rem"
           }}
-          variant={list.route === location.pathname ? "contained" : "text"}
         >
-          {list.text}
-        </Button>
-      ))}
-    </Popover>
+          {dataOptions.map((list, idx) => (
+            <Button
+              key={idx}
+              color="quaternary"
+              component={RouterLink}
+              to={list.route}
+              sx={{
+                textAlign: 'center',
+                fontWeight: 'bold',
+                display: "block",
+                color: "white",
+              }}
+              variant={list.route === location.pathname ? "contained" : "text"}
+            >
+              {list.text}
+            </Button>
+          ))}
+        </Box>
+      </Popper>
+    </ClickAwayListener>
   )
 }
 
@@ -76,7 +78,6 @@ export default function NavBarNormal({ lists, dataOptions }) {
         list.route === "/data" ?
           <React.Fragment key={idx}>
             <Button
-              key={idx}
               ref={dataRef}
               color="quaternary"
               component={RouterLink}
@@ -87,14 +88,14 @@ export default function NavBarNormal({ lists, dataOptions }) {
                 color: list.route === location.pathname ? "white" : "black",
               }}
               variant={list.route === location.pathname ? "contained" : "text"}
-              onMouseEnter={() => setOpen(!open)}
+              onMouseEnter={() => setOpen(true)}
             >
               {list.text}
             </Button>
             <DataExtends
               anchorEl={dataRef.current}
               open={open}
-              onClose={() => setOpen(false)}
+              setOpen={setOpen}
               dataOptions={dataOptions}
             />
           </React.Fragment>

@@ -1,87 +1,109 @@
 import React, { useState } from "react";
 import {
-  IconButton, Drawer, List, Typography,
-  Accordion, AccordionSummary, AccordionDetails,
+  IconButton, Drawer, Typography,
+  List, ListItemText, ListItem,
+  Collapse
 } from '@mui/material';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-import { styled } from '@mui/system';
 import { ListItemButton } from '@mui/material';
 
 // Icons
 import MenuIcon from '@mui/icons-material/Menu';
-import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
 const Collapsible = ({ title, dataOptions }) => {
   const location = useLocation()
-
-  const StyledAccordion = styled(Accordion)(({ theme }) => ({
-    backgroundColor: theme.palette.primary.main,
-  }))
-
-  const StyledAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-  }))
+  const [open, setOpen] = React.useState(false);
 
   return (
-    <StyledAccordion disableGutters>
-      <StyledAccordionSummary
-        expandIcon={<ExpandMoreOutlinedIcon />}
+    <>
+      <ListItem
+        disablePadding
+        sx={{
+          backgroundColor: theme => (location.pathname === "/data" ? theme.palette.quaternary.main : "inherit"),
+          "&:hover": {
+            backgroundColor: theme => (location.pathname === "/data" ? theme.palette.quaternary.main : "inherit")
+          }
+        }}
       >
-        <Typography
-          sx={{ width: "100%", fontWeight: 'bold' }}
+        <IconButton onClick={() => setOpen(!open)}>
+          {
+            open ?
+              <ArrowDropUpIcon
+                fontSize="large"
+                sx={{ color: theme => theme.palette.secondary.main }}
+              />
+              :
+              <ArrowDropDownIcon
+                fontSize="large"
+                sx={{ color: theme => theme.palette.secondary.main }}
+              />
+          }
+        </IconButton>
+        <ListItemButton
+          component={RouterLink}
+          to="/data"
+          sx={{
+            paddingLeft: "5rem",
+          }}
         >
-          {title}
-        </Typography>
-      </StyledAccordionSummary>
-      <AccordionDetails>
-        {dataOptions.map((list, idx) => (
-          <CustomizedItem
-            key={idx}
-            text={list.text}
-            route={list.route}
-            location={location}
-            activeColor={"quaternary"}
-            neutralColor={"secondary"}
-          >
-            {list.text}
-          </CustomizedItem>
-        ))}
-      </AccordionDetails>
-    </StyledAccordion>
+          <ListItemText primary={title} />
+        </ListItemButton>
+      </ListItem>
+      <Collapse in={open}>
+        <List
+          sx={{
+            color: theme => theme.palette.secondary.contrastText,
+            backgroundColor: theme => theme.palette.secondary.main
+          }}
+        >
+          {dataOptions.map((option, idx) => (
+            <ListItemButton
+              key={idx}
+              color="secondary"
+              component={RouterLink}
+              to={option.route}
+              sx={{
+                textAlign: 'center',
+                backgroundColor: theme => (location.pathname === option.route ? theme.palette.quaternary.main : "inherit"),
+                "&:hover": {
+                  backgroundColor: theme => (location.pathname === option.route ? theme.palette.quaternary.main : "inherit")
+                }
+              }}
+            >
+              <ListItemText primary={option.text} />
+            </ListItemButton>
+          ))}
+        </List>
+      </Collapse>
+    </>
   )
 }
 
-const StyledList = styled(List)(({ theme }) => ({
-  width: '100%',
-  backgroundColor: theme.palette.primary.main,
-}))
-
-const CustomizedItem = ({ route, text, location, activeColor, neutralColor }) => {
-
-  const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
-    backgroundColor: route === location.pathname ?
-      theme.palette[activeColor].main : theme.palette[neutralColor].main,
-    justifyContent: 'center',
-    fontWeight: 'bold',
-    textAlign: 'center'
-  }))
+const CustomizedItem = ({ route, text }) => {
+  const location = useLocation()
 
   return (
-    <StyledListItemButton
+    <ListItemButton
       component={RouterLink}
       alignItems="center"
       to={route}
+      sx={{
+        justifyContent: 'center',
+        backgroundColor: theme => (location.pathname === route ? theme.palette.quaternary.main : "inherit"),
+        "&:hover": {
+          backgroundColor: theme => (location.pathname === route ? theme.palette.quaternary.main : "inherit")
+        }
+      }}
     >
       {text}
-    </StyledListItemButton>
+    </ListItemButton>
   )
 }
 
 export default function NavBarMobile({ lists, dataOptions }) {
   const [state, setState] = useState(false)
-  const location = useLocation();
 
   return (
     <>
@@ -110,26 +132,26 @@ export default function NavBarMobile({ lists, dataOptions }) {
         anchor='top'
         open={state}
         onClose={() => setState(false)}
+        sx={{
+          "& .MuiPaper-root": {
+            backgroundColor: theme => theme.palette.primary.main
+          }
+        }}
       >
-        <StyledList>
-          {lists.map((list, index) => (
-            list.route !== "/data" ?
-              <CustomizedItem
-                key={index}
-                text={list.text}
-                route={list.route}
-                location={location}
-                activeColor={"quaternary"}
-                neutralColor={"primary"}
-              />
-              :
-              <Collapsible
-                key={index}
-                title={list.text}
-                dataOptions={dataOptions}
-              />
-          ))}
-        </StyledList>
+        {lists.map((list, index) => (
+          list.route !== "/data" ?
+            <CustomizedItem
+              key={index}
+              text={list.text}
+              route={list.route}
+            />
+            :
+            <Collapsible
+              key={index}
+              title={list.text}
+              dataOptions={dataOptions}
+            />
+        ))}
       </Drawer>
     </>
   )

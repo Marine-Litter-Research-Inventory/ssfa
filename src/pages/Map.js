@@ -7,16 +7,6 @@ import Body from "components/StyledComponents/Body";
 
 import MapGenerator from 'components/Map/MapGenerator';
 
-const lists = [
-  "Total number of publications",
-  "Science-only, Humanities-only, and Science and humanitites publications",
-  "Laboratory-based, and Field sampling-based publications",
-  "Microplastics, and Macroplastics publications",
-  "Fishing gear-related publications",
-  "Legal/Regulatory, Social/Cultural, Economic/Management, and Policy publications",
-  "Top five research topics mentioned",
-]
-
 export default function Map({ isDataChanged = false }) {
 
   return (
@@ -26,21 +16,10 @@ export default function Map({ isDataChanged = false }) {
           Map
         </Header>
         <Body component="div" variant='body1' sx={{ backgroundColor: theme => theme.palette.primary.main }}>
-          This interactive map provides a visual representation of the geographic extent of the research inventory as well as an extract of data analysis. When hovering a country/territory, the following information is provided in relation to that country/territory:
+          This interactive map provides a visual representation of the geographic extent of the research inventory as well as an extract of data analysis. When clicking on a country/territory, the following information is provided in relation to that country/territory:
           <br /><br />
-          {lists.map((list, idx) => (
-            <li
-              key={idx}
-              style={{
-                listStyle: "square",
-                marginLeft: "2rem",
-                marginBottom: "0.5rem",
-              }}
-            >
-              {list}
-            </li>
-          ))}
-          <br />
+          First, the total number of publications in RRI 2.0; Second, the number of publications on sub-topics is included: Science-only, Humanities-only, Both (i.e. Science and Humanities), Laboratory-based, Desktop-based, Field sampling, Microplastic, Macroplastic, Fishing gear, Legal/Regulatory, Social/Cultural, Economic/Management, Policy Study.
+          <br /><br />
           The inventory RRI 2.0 can be accessed&nbsp;
           <Link
             color="secondary"
