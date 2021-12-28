@@ -214,8 +214,8 @@ export default function Humanities() {
         <Charts charts={H2.charts} />
 
         <HeaderRibbon
-          id="H3. Explore different research topics through the aims of research"
-          text="H3. Explore different research topics through the aims of research"
+          id={H3.title}
+          text={H3.title}
           variant="h6"
           color="secondary"
         />

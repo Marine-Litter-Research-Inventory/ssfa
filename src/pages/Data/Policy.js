@@ -240,8 +240,8 @@ export default function Policy() {
         <Charts charts={PM2.charts} />
 
         <HeaderRibbon
-          id="PM3. Sampling and units recording"
-          text="PM3. Sampling and units recording"
+          id={PM3.title}
+          text={PM3.title}
           variant="h6"
           color="secondary"
         />
