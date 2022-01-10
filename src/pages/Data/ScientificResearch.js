@@ -59,8 +59,8 @@ const SR2 = formatter(
       "[SR2.D] General research topics within microplastic publications"
     ),
     graphFormatter(
-      "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=1048511901&format=interactive",
-      "80%",
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLlU4Iouaz_ID544mtfTINHRHfP-ELytQ_72AATJfhq95PBNYtWsK-cteZ8JhTexBhUg9cQ9YL47fN/pubchart?oid=427375937&format=interactive",
+      "90%",
       420,
       "[SR2.E] Ecological and environmental impacts"
     ),

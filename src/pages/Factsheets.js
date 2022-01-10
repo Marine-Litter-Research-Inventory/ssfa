@@ -135,8 +135,7 @@ export default function Factsheets() {
       </Header>
       <Container maxWidth='md'>
         <Body align="justify" sx={{ backgroundColor: theme => theme.palette.primary.main, }}>
-          The fact sheets below have been developed to provide a summary of  the data captured in the research inventory and derive knowledge that can inform policy-making as well as new research. They are designed to be updated with new data as they becomes available. The topics covered in this first set of fact-sheets have been chosen on the basis of the information available and their topical nature.  New topics are to be included in the future as possible and useful.
-        </Body>
+          The fact sheets below have been developed to provide a summary of  the data captured in the research inventory and derive knowledge that can inform policy-making as well as new research. They are designed to be updated as new data become available. New topics are to be included in the future as possible and useful.        </Body>
         <Masonry
           breakpointCols={breakpointColumnsObj}
           className="my-masonry-grid"
