@@ -131,37 +131,51 @@ const filters1 = [
   "Movement of plastics in water bodies",
   "Fragmentation and degradation",
   "Accumulation zones and hotspots",
-]
-
-const filters2 = [
   " ",
   "Ingestion of plastic in the wild",
   "Branchial uptake of plastic in the wild",
   "Entanglement by plastic in the wild",
   "Microbial assemblages",
+]
+
+const filters2 = [
   "Experimental studies of physicochemical impacts",
   "Impact on endangered species",
   "Trophic transfer of plastic",
   "Marine plastics as pathways for introduction of alien/non-native/invasive species",
   " ",
-  "Organic and inorganic pollutants from marine plastic debris",
+  "POP/heavy metal as pollutants from marine plastic debris",
   "Adsorption-desorption of chemicals/pollutants",
   "Plastics as transport vector/medium",
+  " ",
+  "Human health/ food safety",
+  "Economic loss and cost",
+  "Social and cultural non-monetary cost and loss",
+  "Other socio-economic topics",
+  " ",
+  "Guidelines, standards and manuals for survey, monitoring and assessment",
+  "Data comparability and standardization	•	Methodologies and technologies for research on marine macroplastic",
 ]
 
 const filters3 = [
-  " ",
-  "Guidelines, standards and manuals for survey, monitoring and assessment",
-  "Data comparability and standardization",
-  " ",
-  "Methodologies and technologies for research on marine macroplastic",
   "Methodologies and technologies for research on marine microplastic",
   "New' or 'emerging' technologies for marine plastic",
   "Methodologies and technologies for marine plastic removal and clean-up",
   "Research framework and coordination",
   "Plastic data repositories",
+  " ",
+  "Legal and regulatory analysis",
+  "Action Plans",
+  "Compliance and implementation",
+  " ",
+  "Re-use, recycle and other mitigation measures",
+  "Other market-based measures",
+  "Social perceptions/Social behavioural studies",
+  "Policy",
+  " ",
   "Citizen science",
-
+  "Communication and coverage of marine plastic",
+  "Language and cultural barrier",
 ]
 
 
@@ -198,7 +212,7 @@ export default function Methodology() {
           align="justify"
           sx={{ backgroundColor: theme => theme.palette.primary.main }}
         >
-          This section provides information on the development of the inventory RRI 2.0 and this website. The inventory and metadata can be found&nbsp;
+          This section provides information on the development of RRI 2.0 and this website. The inventory and metadata can be found&nbsp;
           <Link
             color="secondary"
             href="https://docs.google.com/spreadsheets/d/1yRLGaQk3-9UlopftPr5e8F-X3pKkjwLlZWcTwai6_Ds/edit?usp=sharing"
@@ -215,8 +229,9 @@ export default function Methodology() {
         <SubHeader variant="h6">
           Identification of relevant publications and data extraction
         </SubHeader>
+
         <Body variant="body1" align="justify">
-          The identification of relevant publications and data extraction has been carried out by the Singapore-based core team and the extended regional team, according to the area of expertise of each researcher.  Target publications for inclusions are those that relate to any aspect of pollution from marine plastics in Southeast and East Asia until July 2021; not including publications that would relate solely to the production of plastic material and products or the upstream management of waste. The RRI 2.0 build on the publications already captured in the previous version of the inventory&nbsp;
+          The identification of relevant publications and data extraction has been carried out by the Singapore-based core team and the extended regional team, according to the area of expertise of each researcher.  Target publications for inclusions are those that relate to any aspect of pollution from marine plastics in Southeast and East Asia until July 2021; not including publications that would relate solely to the production of plastic material and products or the upstream management of waste. The RRI 2.0 builds on the publications already captured in the previous version of the inventory&nbsp;
           <Link
             color="secondary"
             href="https://docs.google.com/spreadsheets/d/1r4aCVQeCS1cj_Rhip82yVTNNnxkWDgFwbEIHCR_oASk/edit#gid=0"
@@ -225,7 +240,7 @@ export default function Methodology() {
             here
           </Link>.
           <br /><br />
-          In RRI 2.0, the inventory was updated to include more recent publications, and publications in non-english languages. The search for publications was limited to contents which could be found online (even if only the abstract). Various keywords were used in numerous search engines, including Google Scholar, ScienceDirect, Scopus, and ProQuest (see guidance below). Domestic academic collections accessible to the regional team were also consulted - this enabled the inclusion of relevant research (such as dissertations) conducted in the region. Japanese-language papers could not be searched due to the lack of a Japanese researcher in the regional team. It is hoped that the regional team can be enlarged to new researchers from Japan and Korea in order to complete the database, make it more representative and improve the accessibility of the papers.
+          In RRI 2.0, the inventory was updated to include more recent publications, and publications in non-English languages. The search for publications was limited to contents which could be found online (even if only the abstract). Various keywords were used in numerous search engines, including Google Scholar, ScienceDirect, Scopus, and ProQuest (see guidance below). Domestic academic collections accessible to the regional team were also consulted - this enabled the inclusion of relevant research (such as dissertations) conducted in the region. Japanese-language papers could not be searched due to the lack of a Japanese researcher in the regional team. It is hoped that the regional team can be enlarged to new researchers from Japan and Korea in order to complete the database, make it more representative and improve the accessibility of the papers.
           <br /><br />
           RRI 2.0 includes non peer-reviewed publications provided that they contain primary research content and/or verifiable data presented with rigour so that the metadata fields could be filled reliably. In countries where there has been less peer-reviewed publications released, non-peer publications can be particularly useful substitutes. Furthermore, not all sampling reports lend themselves to a research publication whilst being fully relevant to and useful in the context of this database. Of note in this context, most of the non-English papers that could be found were peer-reviewed.
         </Body>
@@ -233,9 +248,9 @@ export default function Methodology() {
           Website Development
         </SubHeader>
         <Body variant="body1" align="justify">
-          This website is developed using the following two open source library: React.js and Material UI.
+          This website is developed using two open-source libraries: React.js and Material UI.
           <br /><br />
-          All the data is queried directly from our inventory on Google Sheet. The data is then transformed into a format that is easily accessible and usable by the website. This approach simplified the development and maintenance needed and facilitates the migration of the dataset or the visualisation to a different platform. The website content is dynamic and is refreshed everyday.
+          All the data is queried directly from the database inventory on Google Sheet. The data is then transformed into a format that is easily accessible and usable by the website. This approach simplifies the development and maintenance needed and facilitates the migration of the dataset or the visualisation to a different platform. The website content is dynamic and is refreshed everyday.
           <br /><br />
           The website codebase is readily available publicly on&nbsp;
           <Link

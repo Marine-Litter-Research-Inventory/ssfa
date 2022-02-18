@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Container, Paper } from '@mui/material';
+import { Typography, Container, Paper, Button } from '@mui/material';
 import { styled } from '@mui/system';
 import Header from 'components/StyledComponents/Header';
 import Body from 'components/StyledComponents/Body';
@@ -67,11 +67,14 @@ function factsheetFormatter(title, description, link) {
 const factsheets = [
   factsheetFormatter(
     "Marine plastic research 101",
-    "Introduction to marine plastic research in the region, plastics sizes used as reference, understanding of sources and pathways, limitations in the knowledge that can be derived from publications and shaping hypotheses."
+    "Introduction to marine plastic research in the region, plastics sizes used as reference, understanding of sources and pathways, limitations in the knowledge that can be derived from publications and shaping hypotheses.",
+    "https://nbviewer.org/github/Marine-Litter-Research-Inventory/pdf/blob/main/Research%20101%20Factsheet.pdf"
+
   ),
   factsheetFormatter(
     "Marine microplastics",
-    "Research effort, methodology and findings in the sampling and understanding of abundance and distribution of microplastics in the marine environment. Societal concerns and responses are also included."
+    "Research effort, methodology and findings in the sampling and understanding of abundance and distribution of microplastics in the marine environment. Societal concerns and responses are also included.",
+    "https://nbviewer.org/github/Marine-Litter-Research-Inventory/pdf/blob/main/Marine%20microplastics%20Factsheet%20%28NJ%29.pdf"
   )
 ]
 
@@ -82,6 +85,7 @@ const CustomizePaper = ({ title, description, link }) => {
     color: "white",
     margin: "0.5rem",
     padding: 20,
+    textAlign: "center",
   }))
 
   const PaperTitle = ({ title }) => {
@@ -105,6 +109,7 @@ const CustomizePaper = ({ title, description, link }) => {
         variant="subtitle2"
         style={{
           marginBottom: "1rem",
+          textAlign: 'center',
         }}
       >
         {description}
@@ -116,6 +121,13 @@ const CustomizePaper = ({ title, description, link }) => {
     <StyledPaper>
       <PaperTitle title={title} />
       <PaperDescription description={description} />
+      <Button
+        onClick={() => window.open(link, '_blank')}
+        variant="contained"
+        color="secondary"
+      >
+        View it here
+      </Button>
       {/* <Skeleton variant="rectangular" width="100%" height="300px" /> */}
     </StyledPaper >
   )
@@ -135,7 +147,8 @@ export default function Factsheets() {
       </Header>
       <Container maxWidth='md'>
         <Body align="justify" sx={{ backgroundColor: theme => theme.palette.primary.main, }}>
-          The fact sheets below have been developed to provide a summary of  the data captured in the research inventory and derive knowledge that can inform policy-making as well as new research. They are designed to be updated as new data become available. New topics are to be included in the future as possible and useful.        </Body>
+          The fact sheets below have been developed to provide a summary of the data captured in the RRI 2.0 and derive knowledge that can inform policy-making as well as new research. They are designed to be updated as new data become available. New topics are to be included in the future as possible and useful.
+        </Body>
         <Masonry
           breakpointCols={breakpointColumnsObj}
           className="my-masonry-grid"

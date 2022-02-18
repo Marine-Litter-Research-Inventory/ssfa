@@ -14,19 +14,19 @@ const Tiles = [
   formatter(
     "Custom Data-Subset",
     "/data/custom-data-subset",
-    "Search and filter through a sub-section of the data contained in the inventory that best responds to your interest",
+    "Search and filter through a sub-section of the data contained in RRI 2.0 which best respond to your interest",
     "https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Slide1.png?raw=true"
   ),
   formatter(
     "Research Landscape",
     "/data/research-landscape",
-    "Explore charts and graphs on the profile of research conducted on marine plastics in the seas of Southeast and East Asia",
+    "Explore charts and graphs on the profile of research conducted on marine plastics in the seas of Southeast and East Asia, including research areas and capability",
     "https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Slide2.png?raw=true"
   ),
   formatter(
     "Methodology and Ontology",
     "/data/methodology-and-ontology",
-    "Consult the methodology and database ontology adopted to develop the research inventory",
+    "Consult the methodology and database ontology adopted to develop RRI 2.0",
     "https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Slide3.png?raw=true"
   ),
   formatter(
@@ -44,7 +44,7 @@ const Tiles = [
   formatter(
     "Information for Policy-Making",
     "/data/information-for-policy-making",
-    "Explore charts and graphs on insight that may be gained from the Research Inventory for  policy- making purposes",
+    "Explore charts and graphs on insight that may be gained from RRI 2.0 for policy- making purposes",
     "https://github.com/Marine-Litter-Research-Inventory/image/blob/main/resources/Slide6.png?raw=true"
   )
 ]
@@ -140,9 +140,9 @@ export default function Data() {
           Data & Analytics
         </Header>
         <Body variant='body1' align="justify" sx={{ backgroundColor: theme => theme.palette.primary.main }}>
-          The tiles below provide explore the inventory of research that have been conducted on pollution from marine plastics in the seas of Southeast and East Asia, including charts and graphs that were generated to visualise the data included in the Research Inventory.
+          Click on the tiles below to explore the RRI 2.0, featuring charts and graphs that were generated to visualise the data.
           <br /><br />
-          The data included in the research inventory is constantly evolving. Your participation is essential to making this resource more accurate, comprehensive and useful. You can do that by providing
+          The data included in RRI 2.0 are constantly evolving. Your participation is essential to making this resource more accurate, comprehensive and useful. You can do that by providing
           <StyledLink to="/feedback"> feedback </StyledLink>
           on existing data, or sending any other queries or suggestions.
         </Body>
