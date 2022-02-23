@@ -2,6 +2,8 @@ import React from 'react';
 import { Container, Button, Link } from '@mui/material';
 import { styled } from '@mui/system';
 import { Link as RouterLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import WaveUpper from 'components/StyledComponents/WaveUpper';
 import WaveLower from 'components/StyledComponents/WaveLower';
 import Header from 'components/StyledComponents/Header';
@@ -9,12 +11,16 @@ import Body from 'components/StyledComponents/Body';
 import HeaderRibbon from 'components/StyledComponents/HeaderRibbon';
 import StyledLink from 'components/StyledComponents/StyledLink';
 
+
 const Wrapper = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   marginBottom: '6rem',
 }))
 
 export default function Home() {
+
+  const { databaseLink } = useSelector(state => state.dataExtraction)
+
   return (
     <div>
       <Header variant='h2'>
@@ -83,7 +89,7 @@ export default function Home() {
         <strong>The  RRI 2.0</strong> can be accessed&nbsp;
         <Link
           color="secondary"
-          href="https://docs.google.com/spreadsheets/d/1yRLGaQk3-9UlopftPr5e8F-X3pKkjwLlZWcTwai6_Ds/edit?usp=sharing"
+          href={databaseLink}
           target="_blank"
           rel="noreferrer noopener">
           here

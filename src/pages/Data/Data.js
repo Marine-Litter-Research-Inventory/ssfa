@@ -1,7 +1,9 @@
 import React from 'react';
-import { Typography, Grid, ButtonBase, Skeleton, Container } from '@mui/material';
+import { Typography, Grid, ButtonBase, Skeleton, Container, Link } from '@mui/material';
 import { styled } from '@mui/system';
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+import { useSelector } from 'react-redux';
+
 import Header from "components/StyledComponents/Header";
 import Body from "components/StyledComponents/Body";
 import StyledLink from 'components/StyledComponents/StyledLink';
@@ -120,7 +122,7 @@ const Navigation = () => {
           <Tile
             idx={idx}
             title={tile.title}
-            LinkComponent={Link}
+            LinkComponent={RouterLink}
             to={tile.route}
             description={tile.description}
             link={tile.link}
@@ -132,6 +134,7 @@ const Navigation = () => {
 }
 
 export default function Data() {
+  const { databaseLink } = useSelector(state => state.dataExtraction)
 
   return (
     <div>
@@ -145,6 +148,15 @@ export default function Data() {
           The data included in RRI 2.0 are constantly evolving. Your participation is essential to making this resource more accurate, comprehensive and useful. You can do that by providing
           <StyledLink to="/feedback"> feedback </StyledLink>
           on existing data, or sending any other queries or suggestions.
+          <br /><br />
+          The  RRI 2.0 can be accessed&nbsp;
+          <Link
+            color="secondary"
+            href={databaseLink}
+            target="_blank"
+            rel="noreferrer noopener">
+            here
+          </Link>.
         </Body>
         <Navigation />
       </Container>

@@ -1,7 +1,7 @@
 import { Link } from '@mui/material';
 import StyledLink from 'components/StyledComponents/StyledLink';
 import React from 'react';
-
+import { useSelector } from 'react-redux';
 import { getFromStorage } from 'components/utils/utils';
 import { CSVLink } from "react-csv";
 
@@ -32,6 +32,7 @@ const lists = [
 export default function CustomDataInstruction() {
 
   const exportedData = React.useMemo(() => dataFormatting(), [])
+  const { databaseLink } = useSelector(state => state.dataExtraction)
 
   return (
     <>
@@ -44,7 +45,7 @@ export default function CustomDataInstruction() {
       }
       The inventory RRI 2.0 can be accessed&nbsp;
       <Link
-        href="https://docs.google.com/spreadsheets/d/1yRLGaQk3-9UlopftPr5e8F-X3pKkjwLlZWcTwai6_Ds/edit?usp=sharing"
+        href={databaseLink}
         target="_blank"
         rel="noreferrer noopener"
         sx={{

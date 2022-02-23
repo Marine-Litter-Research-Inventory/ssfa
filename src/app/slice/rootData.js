@@ -5,7 +5,7 @@ import { getFromStorage } from "components/utils/utils";
 const rootData = createSlice({
   name: "rootData",
   initialState: {
-    databaseLink: 'https://docs.google.com/spreadsheets/d/1yRLGaQk3-9UlopftPr5e8F-X3pKkjwLlZWcTwai6_Ds/gviz/tq?tqx=out:json&sheet=published',
+    databaseLink: 'https://docs.google.com/spreadsheets/d/1yRLGaQk3-9UlopftPr5e8F-X3pKkjwLlZWcTwai6_Ds/gviz/tq?tqx=out:json',
     errorInfo: null,
     isDataChanged: false,
     isError: false,

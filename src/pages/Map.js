@@ -1,13 +1,14 @@
 // import React, { useEffect, useState } from "react";
 import React from 'react';
 import { Container, Link } from '@mui/material';
-
+import { useSelector } from 'react-redux';
 import Header from "components/StyledComponents/Header";
 import Body from "components/StyledComponents/Body";
 
 import MapGenerator from 'components/Map/MapGenerator';
 
 export default function Map({ isDataChanged = false }) {
+  const { databaseLink } = useSelector(state => state.dataExtraction)
 
   return (
     <>
@@ -23,7 +24,7 @@ export default function Map({ isDataChanged = false }) {
           The RRI 2.0 can be accessed&nbsp;
           <Link
             color="secondary"
-            href="https://docs.google.com/spreadsheets/d/1yRLGaQk3-9UlopftPr5e8F-X3pKkjwLlZWcTwai6_Ds/edit?usp=sharing"
+            href={databaseLink}
             target="_blank"
             rel="noreferrer noopener">
             here

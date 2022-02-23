@@ -106,7 +106,7 @@ const dataExtractionSlice = createSlice({
     columnOrderLong: initColumnsHeader,
     columnOrder: initColumnsOrder,
     data: [],
-    databaseLink: "https://docs.google.com/spreadsheets/d/1yRLGaQk3-9UlopftPr5e8F-X3pKkjwLlZWcTwai6_Ds/edit#gid=177125452",
+    databaseLink: "https://tinyurl.com/RRI2-Masterlist",
     dataRows: [],
     searchDisplay: "",
     searchKeywords: [""],
